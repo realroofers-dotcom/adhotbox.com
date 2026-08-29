@@ -1,0 +1,214 @@
+<!-- BUILT 2026-08-29 13:37 ET -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your desk — AdHotBox</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0C1220;--paper:#fff;--wash:#F2F4F8;--rule:#D5DAE4;--muted:#5A6478;
+  --hot:#FF4A00;--navy:#00208B;--good:#0A7A3C;--bad:#8F1D24;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--wash);color:var(--ink);
+  font:400 16px/1.6 Rubik,system-ui,sans-serif}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:900;letter-spacing:-.018em;line-height:1.12;margin:0}
+p{margin:0 0 1em}
+.eyebrow{font:900 10.5px/1 Rubik;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--hot);margin:0 0 8px}
+
+header{background:var(--ink);color:#fff;padding:30px 0 34px}
+header .mark{font:900 19px/1 Rubik;letter-spacing:-.02em;display:block;margin-bottom:16px}
+header .mark i{font-style:normal;color:var(--hot)}
+header h1{font-size:clamp(24px,4.6vw,36px)}
+header .sub{color:#B9C2D6;font-size:15px;margin-top:8px}
+
+section{padding:26px 0}
+.card{background:#fff;border:1px solid var(--rule);border-radius:5px;padding:18px 20px;margin:0 0 14px}
+
+.keyrow{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+.keyrow input{flex:1;min-width:220px;font:14px var(--mono);padding:11px 13px;
+  border:1px solid var(--rule);border-radius:4px}
+button{font:600 14px Rubik;border:1px solid var(--rule);background:#fff;
+  padding:10px 16px;border-radius:4px;cursor:pointer}
+button:hover{border-color:var(--navy);color:var(--navy)}
+button.k{background:var(--ink);border-color:var(--ink);color:#fff}
+button.y{background:var(--good);border-color:var(--good);color:#fff}
+button.n{background:#fff;border-color:#E0C4C6;color:var(--bad)}
+button.n:hover{background:var(--bad);color:#fff;border-color:var(--bad)}
+button.sm{font-size:13px;padding:8px 13px}
+
+.stats{display:grid;gap:2px;background:var(--rule);border:1px solid var(--rule);margin:0 0 18px}
+@media(min-width:660px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stats div{background:#fff;padding:15px 16px}
+.stats .n{font:900 24px/1 var(--mono)}
+.stats .l{font:600 10.5px/1 Rubik;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--muted);margin-top:6px}
+
+.ad{background:#fff;border:1px solid var(--rule);border-radius:5px;padding:16px 18px;margin:0 0 11px}
+.ad.decided{opacity:.62}
+.ad .top{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:6px}
+.ad .adv{font:900 15px Rubik}
+.ad .cat{font:600 10px var(--mono);letter-spacing:.1em;text-transform:uppercase;
+  background:var(--wash);border:1px solid var(--rule);border-radius:3px;padding:2px 7px;color:var(--muted)}
+.ad .rate{margin-left:auto;font:600 12.5px var(--mono);color:var(--muted)}
+.ad h3{font-size:17px;margin-bottom:5px}
+.ad p{font-size:14.5px;color:#39415A;margin:0 0 10px}
+.ad .link{font:12px var(--mono);color:var(--muted);word-break:break-all;margin:0 0 12px}
+.ad .acts{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ad .verdict{font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase}
+.ad .verdict.accept{color:var(--good)}
+.ad .verdict.deny{color:var(--bad)}
+
+.toggle{display:flex;gap:12px;align-items:center;flex-wrap:wrap;
+  background:#fff;border:1px solid var(--rule);border-radius:5px;padding:15px 18px;margin:0 0 14px}
+.toggle b{font-weight:900}
+.toggle span{font-size:14px;color:var(--muted);flex:1;min-width:200px}
+
+.cats{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.cats button{font:600 12px var(--mono);padding:6px 11px}
+.cats button.off{background:#FDF3F2;border-color:#E0C4C6;color:var(--bad)}
+
+.banned{background:var(--ink);color:#C9D1E2;border-radius:5px;padding:16px 19px;font-size:14px}
+.banned b{color:#fff;display:block;margin-bottom:8px;font-weight:900}
+.banned span{display:inline-block;border:1px solid #2C3450;border-radius:3px;
+  padding:3px 9px;margin:0 5px 5px 0;font:600 11.5px var(--mono);color:#9FAAC6}
+
+.msg{font:13px var(--mono);color:var(--muted);padding:10px 0}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="mark">ADHOT<i>BOX</i></span>
+    <h1>Your desk</h1>
+    <p class="sub">Every advertiser waiting on your sites. One click each.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <div class="keyrow">
+      <input id="k" type="text" placeholder="Your publisher key — pub-xxxxxxxx" autocomplete="off">
+      <button class="k" onclick="load()">Open</button>
+    </div>
+    <div id="out"><p class="msg">Enter your key to see what is queued.</p></div>
+  </section>
+
+</div>
+
+<script>
+var API = "https://adhotbox.realroofers.workers.dev";
+var KEY = localStorage.getItem("abxpub") || "";
+if (KEY) document.getElementById("k").value = KEY;
+
+function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+function money(c){ return c ? "$" + (c/100).toFixed(2) : "$0.00"; }
+
+function load(){
+  KEY = document.getElementById("k").value.trim();
+  if (!KEY) return;
+  localStorage.setItem("abxpub", KEY);
+  document.getElementById("out").innerHTML = '<p class="msg">Loading…</p>';
+
+  fetch(API + "?queue=1&pub=" + encodeURIComponent(KEY))
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (!d.ok) throw new Error(d.error || "error");
+      draw(d);
+    })
+    .catch(function(e){
+      document.getElementById("out").innerHTML =
+        '<p class="msg">' + esc(String(e.message||e)) + '</p>';
+    });
+}
+
+function draw(d){
+  var p = d.publisher, e = d.earnings || {};
+  var h = "";
+
+  h += '<div class="stats">'
+    +  '<div><p class="n">' + (e.impressions||0) + '</p><p class="l">Impressions</p></div>'
+    +  '<div><p class="n">' + (e.clicks||0) + '</p><p class="l">Clicks</p></div>'
+    +  '<div><p class="n">' + money(e.pub_share_cents) + '</p><p class="l">Your share</p></div>'
+    +  '<div><p class="n">' + (p.rev_share_pct||0) + '%</p><p class="l">Your rate</p></div>'
+    +  '</div>';
+
+  h += '<div class="toggle"><b>Accept everything</b>'
+    +  '<span>Leave this off and nothing runs on your sites until you say yes to it.</span>'
+    +  '<button class="' + (p.auto_accept ? "y" : "") + ' sm" onclick="auto(' + (p.auto_accept?0:1) + ')">'
+    +  (p.auto_accept ? "On" : "Off") + '</button></div>';
+
+  var blocked = (p.blocked_categories||"").split(",").filter(Boolean);
+  var allowed = (d.categories||[]).filter(function(c){ return c.allowed; });
+  h += '<div class="card"><p class="eyebrow">Categories</p>'
+    +  '<h3>Turn a whole category off</h3>'
+    +  '<p style="font-size:14.5px;color:#5A6478;margin:8px 0 0">Anything in a category you '
+    +  'switch off never reaches your desk again.</p><div class="cats">'
+    +  allowed.map(function(c){
+         var off = blocked.indexOf(c.code) > -1;
+         return '<button class="' + (off?"off":"") + '" onclick="cat(\\''
+              + c.code + '\\',' + (off?0:1) + ')">' + esc(c.label)
+              + (off ? " — off" : "") + '</button>';
+       }).join("")
+    +  '</div></div>';
+
+  var banned = (d.categories||[]).filter(function(c){ return !c.allowed; });
+  h += '<div class="banned"><b>Never accepted, anywhere on this network</b>'
+    +  banned.map(function(c){ return '<span>' + esc(c.label) + '</span>'; }).join("")
+    +  '</div>';
+
+  var ads = d.campaigns || [];
+  h += '<div style="margin-top:22px"><p class="eyebrow">Waiting on you</p>'
+    +  '<h2 style="font-size:22px;margin-bottom:14px">' + ads.length + ' advertiser'
+    +  (ads.length===1?"":"s") + '</h2></div>';
+
+  if (!ads.length) {
+    h += '<p class="msg">Nothing queued. New advertisers appear here as they are accepted onto the network.</p>';
+  } else {
+    h += ads.map(card).join("");
+  }
+
+  document.getElementById("out").innerHTML = h;
+}
+
+function card(a){
+  var decided = a.verdict !== "undecided";
+  return '<div class="ad' + (decided ? " decided" : "") + '">'
+    + '<div class="top"><span class="adv">' + esc(a.advertiser || "—") + '</span>'
+    +   '<span class="cat">' + esc(a.category || "general") + '</span>'
+    +   '<span class="rate">' + (a.cpm_cents ? money(a.cpm_cents) + " per 1,000" : "house") + '</span></div>'
+    + '<h3>' + esc(a.head) + '</h3>'
+    + (a.body ? '<p>' + esc(a.body) + '</p>' : '')
+    + '<p class="link">' + esc(a.href) + '</p>'
+    + '<div class="acts">'
+    +   '<button class="y sm" onclick="decide(' + a.id + ',\'accept\')">Accept</button>'
+    +   '<button class="n sm" onclick="decide(' + a.id + ',\'deny\')">Deny</button>'
+    +   (decided ? '<span class="verdict ' + esc(a.verdict) + '">' + esc(a.verdict) + 'ed</span>' : '')
+    + '</div></div>';
+}
+
+function decide(id, verdict){
+  fetch(API + "?decide=" + verdict + "&pub=" + encodeURIComponent(KEY) + "&id=" + id)
+    .then(function(r){ return r.json(); }).then(load);
+}
+function auto(on){
+  fetch(API + "?decide=auto&pub=" + encodeURIComponent(KEY) + "&on=" + on)
+    .then(function(r){ return r.json(); }).then(load);
+}
+function cat(code, block){
+  fetch(API + "?decide=category&pub=" + encodeURIComponent(KEY)
+        + "&cat=" + encodeURIComponent(code) + "&block=" + block)
+    .then(function(r){ return r.json(); }).then(load);
+}
+
+if (KEY) load();
+</script>
+</body>
+</html>

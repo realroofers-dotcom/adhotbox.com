@@ -1,0 +1,292 @@
+<!-- BUILT 2026-08-29 13:40 ET -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Carry ads on your site — AdHotBox</title>
+<meta name="description" content="A small site can carry a few ads and keep control of every one. Tell us where your readers are and what your site is about.">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0C1220;--paper:#fff;--wash:#F2F4F8;--rule:#D5DAE4;--muted:#5A6478;
+  --hot:#FF4A00;--navy:#00208B;--good:#0A7A3C;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font:400 17px/1.62 Rubik,system-ui,sans-serif}
+.wrap{max-width:840px;margin:0 auto;padding:0 22px}
+h1,h2,h3{font-weight:900;letter-spacing:-.018em;line-height:1.12;margin:0}
+p{margin:0 0 1em;max-width:64ch}
+.eyebrow{font:900 11px/1 Rubik;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--hot);margin:0 0 10px}
+
+header{background:var(--ink);color:#fff;padding:44px 0 50px}
+header .mark{font:900 21px/1 Rubik;letter-spacing:-.02em;display:block;margin-bottom:24px}
+header .mark i{font-style:normal;color:var(--hot)}
+header h1{font-size:clamp(30px,5.6vw,50px);max-width:18ch}
+header .sub{color:#B9C2D6;font-size:17px;margin-top:14px;max-width:54ch}
+
+section{padding:44px 0;border-bottom:1px solid var(--rule)}
+h2{font-size:clamp(23px,3.8vw,32px);margin-bottom:10px}
+.lede{color:var(--muted);max-width:58ch;margin-bottom:26px}
+
+.four{display:grid;gap:2px;background:var(--rule);border:1px solid var(--rule)}
+@media(min-width:720px){.four{grid-template-columns:repeat(4,1fr)}}
+.four div{background:#fff;padding:19px 17px}
+.four .t{font:900 11px/1 Rubik;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--hot);margin-bottom:7px}
+.four .w{font:900 18px/1.15 Rubik;margin-bottom:5px}
+.four .d{font-size:14px;color:var(--muted);line-height:1.5}
+
+form{margin-top:6px}
+fieldset{border:1px solid var(--rule);border-radius:5px;padding:20px 22px 8px;margin:0 0 18px}
+legend{font:900 11px/1 Rubik;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);padding:0 8px}
+label{display:block;margin:0 0 15px}
+label span{display:block;font:600 13.5px Rubik;margin-bottom:5px}
+label small{display:block;font:400 13px Rubik;color:var(--muted);margin-top:4px}
+input,select,textarea{width:100%;font:15px Rubik;padding:11px 13px;
+  border:1px solid var(--rule);border-radius:4px;background:#fff}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy)}
+textarea{min-height:78px;resize:vertical}
+.row{display:grid;gap:14px}
+@media(min-width:620px){.row-3{grid-template-columns:1fr 100px 120px}
+  .row-2{grid-template-columns:1fr 1fr}}
+button{font:700 16px Rubik;background:var(--ink);border:1px solid var(--ink);
+  color:#fff;padding:14px 28px;border-radius:4px;cursor:pointer}
+button:hover{opacity:.9}
+
+.rules{background:var(--wash);border-left:4px solid var(--hot);padding:20px 22px;margin:0 0 22px}
+.rules h3{font-size:18px;margin-bottom:11px}
+.rules li{margin-bottom:9px;max-width:62ch}
+.banned span{display:inline-block;background:#fff;border:1px solid var(--rule);
+  border-radius:3px;padding:3px 9px;margin:0 5px 5px 0;font:600 12px var(--mono);color:var(--muted)}
+
+pre{background:var(--ink);color:#E6EAF2;padding:16px 18px;border-radius:5px;
+  font:13px/1.7 var(--mono);overflow-x:auto}
+.ok{background:#EEF7F1;border:1px solid #BEE0CC;border-radius:5px;padding:22px 24px}
+.ok h3{color:var(--good);font-size:20px;margin-bottom:10px}
+.key{font:900 20px var(--mono);background:#fff;border:1px dashed var(--good);
+  border-radius:4px;padding:12px 16px;display:inline-block;margin:8px 0 12px}
+footer{padding:34px 0 60px;font-size:14.5px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="mark">ADHOT<i>BOX</i></span>
+    <h1>Carry a few ads. Keep control of every one.</h1>
+    <p class="sub">Built for small sites. You see each advertiser before it runs
+    and you accept or deny it with one click. Nothing appears on your pages that
+    you have not agreed to.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">How it works</p>
+    <h2>Four steps and you are done</h2>
+    <div class="four">
+      <div><p class="t">One</p><p class="w">Tell us where your readers are</p>
+        <p class="d">The town and the subject. That is what an advertiser is buying.</p></div>
+      <div><p class="t">Two</p><p class="w">Get your key</p>
+        <p class="d">Paste one line into your site, or install the WordPress plugin.</p></div>
+      <div><p class="t">Three</p><p class="w">Accept or deny</p>
+        <p class="d">Every advertiser appears on your desk. One click each.</p></div>
+      <div><p class="t">Four</p><p class="w">Get paid</p>
+        <p class="d">You keep the majority of what your space earns. Rate is on your desk.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Why the town matters</p>
+    <h2>A small site is worth more locally than nationally</h2>
+    <p class="lede">A national advertiser will not pay much for a thousand
+    readers. The hardware store two streets away might — if it knows the readers
+    are on its streets. That is the whole idea, and it is why the form asks where
+    your audience is rather than how big it is.</p>
+    <p>An advertiser can buy a country, a state, or one town. A campaign set to
+    one town only appears on sites that said their readers are in it.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Before you apply</p>
+    <h2>What is never accepted</h2>
+    <div class="rules">
+      <h3>Banned across the whole network, whatever a publisher wants</h3>
+      <p class="banned">
+        <span>Adult or sexual content</span>
+        <span>Gambling and betting</span>
+        <span>Stock promotion and issuer advertising</span>
+        <span>Token sales and crypto offers</span>
+        <span>Payday and high-interest lending</span>
+        <span>Weapons and ammunition</span>
+        <span>Tobacco and vaping</span>
+        <span>Get rich quick, miracle cures, fake news layouts</span>
+      </p>
+      <ul>
+        <li>Text only. Nothing animates, nothing expands, nothing follows a
+        reader anywhere.</li>
+        <li>No cookies and no tracking of people. The network counts which
+        advertisement was shown on which site. That is all it knows.</li>
+        <li>You may switch off any allowed category as well, and never see it.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Apply</p>
+    <h2>Tell us about the site</h2>
+    <p class="lede">Nothing here is published. It is used to match advertisers to
+    you and to work out what your space is worth.</p>
+
+    <form id="f" onsubmit="return false">
+
+      <fieldset>
+        <legend>You</legend>
+        <div class="row row-2">
+          <label><span>Your name</span><input id="contact" required></label>
+          <label><span>Email</span><input id="email" type="email" required></label>
+        </div>
+        <label><span>Telephone</span><input id="phone">
+          <small>Optional. Only used if there is a question about your application.</small></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>The site</legend>
+        <label><span>Name of the site or app</span><input id="name" required></label>
+        <label><span>Address</span><input id="domain" placeholder="example.com" required>
+          <small>The domain the ads will run on. One site per application.</small></label>
+        <div class="row row-2">
+          <label><span>What is it about</span>
+            <select id="topic">
+              <option value="general">General / community</option>
+              <option value="events">Events and announcements</option>
+              <option value="local">Local news</option>
+              <option value="food">Food and hospitality</option>
+              <option value="trades">Trades and contractors</option>
+              <option value="realestate">Real estate</option>
+              <option value="auto">Auto and repair</option>
+              <option value="retail">Retail and shops</option>
+              <option value="health">Health and wellness</option>
+              <option value="education">Education</option>
+              <option value="nonprofit">Nonprofit and civic</option>
+              <option value="markets">Markets and finance</option>
+              <option value="cannabis">Cannabis</option>
+              <option value="roofing">Roofing and construction</option>
+              <option value="solar">Solar and energy</option>
+              <option value="jobs">Jobs and work</option>
+            </select></label>
+          <label><span>Built on</span>
+            <select id="platform">
+              <option value="wordpress">WordPress</option>
+              <option value="squarespace">Squarespace</option>
+              <option value="wix">Wix</option>
+              <option value="shopify">Shopify</option>
+              <option value="ghost">Ghost</option>
+              <option value="static">Hand-built / static</option>
+              <option value="app">Mobile app</option>
+              <option value="other" selected>Something else</option>
+            </select></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Where the readers are</legend>
+        <div class="row row-3">
+          <label><span>Town or city</span><input id="city" placeholder="Clifton"></label>
+          <label><span>State</span><input id="region" placeholder="NJ" maxlength="6"></label>
+          <label><span>Country</span><input id="country" value="US" maxlength="3"></label>
+        </div>
+        <label><span>Other places you reach</span>
+          <input id="areas" placeholder="Passaic, Nutley, Montclair, all of North Jersey">
+          <small>Towns, counties, a region — however you would describe it to somebody
+          buying an advertisement.</small></label>
+        <label><span>Roughly how many page views a month</span>
+          <input id="views" type="number" min="0" placeholder="2000">
+          <small>An honest estimate. Nobody is turned away for a small number —
+          this network exists for small sites.</small></label>
+        <label><span>Who reads it</span>
+          <textarea id="audience" placeholder="Parents in the school district, people who follow the town council, anyone looking for a contractor…"></textarea></label>
+      </fieldset>
+
+      <button onclick="send()">Apply</button>
+      <p id="msg" style="margin-top:14px;font:14px var(--mono);color:var(--muted)"></p>
+    </form>
+
+    <div id="done" style="display:none"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Once you are accepted</p>
+    <h2>Putting a slot on the page</h2>
+    <p class="lede">Two lines, or the WordPress plugin if that is what you use.</p>
+<pre>&lt;div data-ad="card"&gt;&lt;/div&gt;
+
+&lt;script src="https://adhotbox.com/box.js"&gt;&lt;/script&gt;</pre>
+    <p style="margin-top:16px">Sizes are <b>rail</b> 300&times;600, <b>card</b>
+    300&times;250, <b>inline</b> 728&times;180 and <b>leader</b> 970&times;120.
+    Put as many or as few on a page as you like.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><b>AdHotBox</b> · [ email ] · [ telephone ]<br>
+    Advertising is sold directly. No placement is an endorsement by any site that
+    carries it.</p>
+  </div>
+</footer>
+
+<script>
+var API = "https://adhotbox.realroofers.workers.dev";
+function v(id){ return (document.getElementById(id).value || "").trim(); }
+
+function send(){
+  var m = document.getElementById("msg");
+  if (!v("contact") || !v("email") || !v("name") || !v("domain")) {
+    m.textContent = "Name, email, site name and address are needed."; return;
+  }
+  m.textContent = "Sending…";
+
+  var p = new URLSearchParams({
+    apply: "publisher",
+    name: v("name"), contact: v("contact"), email: v("email"), phone: v("phone"),
+    domain: v("domain"), sitename: v("name"),
+    topic: v("topic"), platform: v("platform"),
+    city: v("city"), region: v("region"), country: v("country") || "US",
+    areas: v("areas"), views: v("views"), audience: v("audience")
+  });
+
+  fetch(API + "?" + p.toString())
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (!d.ok) throw new Error(d.error || "could not send");
+      document.getElementById("f").style.display = "none";
+      var el = document.getElementById("done");
+      el.style.display = "block";
+      el.innerHTML =
+        '<div class="ok"><h3>Application received.</h3>'
+      + '<p>Keep this key. It is how you open your desk, and it is the only copy '
+      + 'we will show you.</p>'
+      + '<p class="key">' + (d.pub_key || "—") + '</p>'
+      + '<p>Somebody reads every application. If the site is accepted you will get '
+      + 'the snippet and your desk goes live at '
+      + '<a href="desk.html">adhotbox.com/desk.html</a>.</p>'
+      + '<p style="margin:0"><b>Nothing will ever appear on your site until you '
+      + 'accept it yourself.</b></p></div>';
+    })
+    .catch(function(e){ m.textContent = String(e.message || e); });
+}
+</script>
+</body>
+</html>
