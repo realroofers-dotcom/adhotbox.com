@@ -1,89 +1,164 @@
-<!-- BUILT 2026-08-29 14:23 ET -->
+<!-- BUILT 2026-08-30 16:06 ET -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AdHotBox — advertising across the properties</title>
-<meta name="description" content="A small ad network across a group of independent publications. No tracking, no third-party networks, and nothing accepted from a company we write about.">
+<title>AdHotBox — earn money on your site, or advertise on ours</title>
+<meta name="description" content="Two doors. Put a few advertisements on your site and keep control of every one, or buy a placement in one town for twenty dollars a month.">
 <meta name="ad-topic" content="general">
+<link rel="canonical" href="https://adhotbox.com/">
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
-:root{
-  --ink:#0C1220; --paper:#fff; --wash:#F2F4F8; --rule:#D5DAE4;
-  --muted:#5A6478; --hot:#FF4A00; --navy:#00208B;
-  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-}
+:root{--ink:#0C1220;--paper:#fff;--wash:#F2F4F8;--rule:#D5DAE4;--muted:#5A6478;
+  --hot:#FF4A00;--navy:#00208B;--good:#0A7A3C;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);
   font:400 17px/1.62 Rubik,system-ui,sans-serif;-webkit-text-size-adjust:100%}
-.wrap{max-width:1000px;margin:0 auto;padding:0 22px}
-h1,h2,h3{font-weight:900;letter-spacing:-.018em;line-height:1.1;margin:0}
-p{margin:0 0 1em;max-width:66ch}
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+h1,h2,h3{font-weight:900;letter-spacing:-.02em;line-height:1.08;margin:0}
+p{margin:0 0 1em;max-width:64ch}
 a{color:var(--navy)}
 .eyebrow{font:900 11px/1 Rubik;letter-spacing:.2em;text-transform:uppercase;
   color:var(--hot);margin:0 0 10px}
 
-header{background:var(--ink);color:#fff;padding:46px 0 54px}
-header .mark{font:900 24px/1 Rubik;letter-spacing:-.02em;display:block;margin-bottom:28px}
-header .mark i{font-style:normal;color:var(--hot)}
-header h1{font-size:clamp(32px,6.4vw,58px);max-width:20ch}
-header .sub{color:#B9C2D6;font-size:clamp(16px,2.2vw,19px);margin-top:16px;max-width:58ch}
+.hero{background:var(--ink);color:#fff;padding:52px 0 0}
+.hero h1{font-size:clamp(30px,5.6vw,52px);max-width:16ch}
+.hero .sub{color:#B9C2D6;font-size:clamp(16px,2.2vw,19px);margin-top:15px;max-width:52ch}
+.doors{display:grid;gap:16px;margin:38px 0 0;padding-bottom:52px}
+@media(min-width:760px){.doors{grid-template-columns:1fr 1fr}}
+.door{background:#fff;color:var(--ink);border-radius:14px;padding:28px 28px 26px;
+  text-decoration:none;display:flex;flex-direction:column;
+  box-shadow:0 2px 0 rgba(0,0,0,.14);transition:transform .12s}
+.door:hover{transform:translateY(-2px)}
+.door .t{font:900 10.5px/1 Rubik;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--hot);margin-bottom:12px}
+.door h2{font-size:clamp(23px,3.2vw,30px);margin-bottom:10px;max-width:15ch}
+.door p{font-size:15.5px;color:#39415A;margin:0 0 18px;max-width:none}
+.door ul{margin:0 0 22px;padding-left:1.1em;font-size:15px;color:#39415A}
+.door li{margin-bottom:7px}
+.door .go{margin-top:auto;display:inline-block;font:700 16px Rubik;
+  background:var(--ink);color:#fff;padding:14px 22px;border-radius:8px;text-align:center}
+.door.b .go{background:var(--hot);color:#180B05}
+.door .price{font:900 32px/1 var(--mono);margin:0 0 4px}
+.door .price small{font:600 13px Rubik;color:var(--muted);letter-spacing:0}
 
-section{padding:50px 0;border-bottom:1px solid var(--rule)}
-h2{font-size:clamp(24px,4vw,36px);margin-bottom:10px}
-.lede{color:var(--muted);max-width:60ch;margin-bottom:30px}
-
-table{width:100%;border-collapse:collapse;font-size:15.5px}
-th{text-align:left;background:var(--wash);padding:11px 13px;
-  font:900 11px/1 Rubik;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-td{border-bottom:1px solid var(--rule);padding:13px}
-td.d{font-family:var(--mono);font-size:14px}
-td.n{text-align:right;font-family:var(--mono);white-space:nowrap}
+section{padding:48px 0;border-bottom:1px solid var(--rule)}
+h2.s{font-size:clamp(23px,3.8vw,34px);margin-bottom:10px}
+.lede{color:var(--muted);max-width:60ch;margin-bottom:28px}
 
 .grid{display:grid;gap:2px;background:var(--rule);border:1px solid var(--rule);margin-top:8px}
 @media(min-width:760px){.grid{grid-template-columns:repeat(4,1fr)}}
 .grid div{background:#fff;padding:20px 18px}
 .grid .t{font:900 11px/1 Rubik;letter-spacing:.13em;text-transform:uppercase;
   color:var(--hot);margin-bottom:8px}
-.grid .w{font:900 19px/1.15 Rubik;margin-bottom:6px}
+.grid .w{font:900 18px/1.15 Rubik;margin-bottom:6px}
 .grid .d{font-size:14px;color:var(--muted);line-height:1.5}
 
-pre{background:var(--ink);color:#E6EAF2;padding:18px 20px;border-radius:5px;
-  font:13px/1.7 var(--mono);overflow-x:auto;margin:0 0 18px}
-pre .c{color:#7E8BA6}
+table{width:100%;border-collapse:collapse;font-size:15.5px}
+th{text-align:left;background:var(--wash);padding:11px 13px;
+  font:900 10.5px/1 Rubik;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+td{border-bottom:1px solid var(--rule);padding:13px}
+td.d{font-family:var(--mono);font-size:14px}
 
-.rules{background:var(--wash);border-left:4px solid var(--hot);padding:22px 24px;margin:0}
+.rules{background:var(--wash);border-left:4px solid var(--hot);padding:22px 24px}
 .rules h3{font-size:19px;margin-bottom:12px}
 .rules ul{margin:0;padding-left:1.1em}
 .rules li{margin-bottom:11px;max-width:64ch}
-.rules li b{font-weight:900}
 
 .demo{display:grid;gap:22px;margin-top:8px}
 @media(min-width:820px){.demo{grid-template-columns:260px 1fr}}
 
-footer{padding:38px 0 70px;font-size:14.5px;color:var(--muted)}
+footer{padding:36px 0 68px;font-size:14.5px;color:var(--muted)}
 footer b{color:var(--ink)}
+footer a{color:var(--muted)}
 </style>
 </head>
 <body>
 
-<header>
+<div id="ahb-nav"></div>
+
+<div class="hero">
   <div class="wrap">
-    <span class="mark">ADHOT<i>BOX</i></span>
-    <h1>Advertising across the properties.</h1>
-    <p class="sub">A small network over a group of independent publications. One
-    file, one line per site, and a rule about what will not be accepted.</p>
+    <h1>Which one are you?</h1>
+    <p class="sub">A small advertising network. Publishers approve every advertiser
+    by hand, advertisers can buy a single town, and nobody tracks anybody.</p>
+
+    <div class="doors">
+
+      <a class="door a" href="start.html">
+        <span class="t">I have a site or an app</span>
+        <h2>Earn money on it</h2>
+        <p class="price">$5<small> a placement, a month</small></p>
+        <p>Ten placements is fifty dollars a month, whatever your traffic does.</p>
+        <ul>
+          <li><b>No traffic minimum.</b> Two thousand readers is fine.</li>
+          <li>You accept or deny <b>every advertiser yourself</b>, one click each.</li>
+          <li>Keep running whatever else you run &mdash; no exclusivity.</li>
+          <li>Free WordPress plugin, or two lines on any site.</li>
+        </ul>
+        <span class="go">Start here &rarr;</span>
+      </a>
+
+      <a class="door b" href="advertise.html">
+        <span class="t">I have something to sell</span>
+        <h2>Advertise</h2>
+        <p class="price">$20<small> a placement, a month</small></p>
+        <p>Month to month. No contract, no minimum spend, stop whenever you like.</p>
+        <ul>
+          <li><b>Buy one town</b> if one town is what you want.</li>
+          <li>Told exactly where it ran, how often, and every click.</li>
+          <li>Every site it appears on <b>chose to accept you</b>.</li>
+          <li>Text, or a photograph you take on your phone.</li>
+        </ul>
+        <span class="go">What it costs &rarr;</span>
+      </a>
+
+    </div>
   </div>
-</header>
+</div>
 
 <section>
   <div class="wrap">
-    <p class="eyebrow">The roster</p>
-    <h2>Where an ad runs</h2>
-    <p class="lede">Each property is independent and writes what it writes. The
-    network places advertising across them; it has no say in anything else.</p>
+    <p class="eyebrow">Why this exists</p>
+    <h2 class="s">In February the last option for small sites closed</h2>
+    <p class="lede">Ezoic was the network that took small publishers. In February
+    2026 it raised its minimum to 250,000 monthly users. Raptive sat at 100,000
+    until October 2025. Mediavine wants 50,000 sessions.</p>
+    <p>Which leaves a great many sites with real readers and nowhere to go &mdash;
+    and a great many small businesses with no way to reach the people on their own
+    street.</p>
+    <p><b>The minimums are not snobbery.</b> A programmatic network sells every
+    impression into an auction, and an auction needs volume before it can price
+    anything. <b>There is no auction here.</b> An advertiser buys a place, the way
+    somebody buys a billboard. No bidding to be thin, so no floor to defend.</p>
+    <p><a href="compare.html">The whole comparison, with their numbers &rarr;</a></p>
+  </div>
+</section>
 
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Placements</p>
+    <h2 class="s">Four shapes</h2>
+    <p class="lede">Text, or one clean image. Nothing animates, nothing expands,
+    nothing covers what a reader came for.</p>
+    <div class="grid">
+      <div><p class="t">Rail</p><p class="w">300 &times; 600</p><p class="d">Tall, beside the content.</p></div>
+      <div><p class="t">Card</p><p class="w">300 &times; 250</p><p class="d">A box in a column.</p></div>
+      <div><p class="t">Inline</p><p class="w">728 &times; 180</p><p class="d">Between rows, in the flow.</p></div>
+      <div><p class="t">Leader</p><p class="w">970 &times; 120</p><p class="d">Wide strip, top or bottom.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Where it started</p>
+    <h2 class="s">The network's own properties</h2>
+    <p class="lede">These are ours. Everything else on the network belongs to
+    somebody else, and each publisher writes what it writes &mdash; the network
+    places advertising and has no say in anything else.</p>
     <table>
       <thead><tr><th>Property</th><th>Domain</th><th>Subject</th></tr></thead>
       <tbody>
@@ -93,94 +168,39 @@ footer b{color:var(--ink)}
         <tr><td>Newsweed</td><td class="d">newsweed.com</td><td>Cannabis and adjacent news</td></tr>
         <tr><td>JobCreation.us</td><td class="d">jobcreation.us</td><td>The nonprofit and its work</td></tr>
         <tr><td>Real Roofers</td><td class="d">realroofers.com</td><td>The trade</td></tr>
-        <tr><td>Good Solar</td><td class="d">goodsolar.com</td><td>Solar</td></tr>
-        <tr><td>Mark Nejmeh</td><td class="d">marknejmeh.com</td><td>Personal</td></tr>
       </tbody>
     </table>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <p class="eyebrow">Placements</p>
-    <h2>Four shapes</h2>
-    <p class="lede">The same creative renders in any of them. Nothing animates,
-    nothing expands, nothing follows anyone around.</p>
-    <div class="grid">
-      <div><p class="t">Rail</p><p class="w">Sidebar</p><p class="d">Tall, beside the content, sticky as the reader scrolls.</p></div>
-      <div><p class="t">Leader</p><p class="w">Wide strip</p><p class="d">Full width, top or bottom of a page.</p></div>
-      <div><p class="t">Inline</p><p class="w">In the list</p><p class="d">Between rows, in the flow of what the reader came for.</p></div>
-      <div><p class="t">Card</p><p class="w">In a column</p><p class="d">A box beside an article or in a grid.</p></div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <p class="eyebrow">Targeting</p>
-    <h2>By subject, and by company</h2>
-    <p class="lede">A campaign can be set to one property or all of them, to a
-    subject, or to the specific company a reader is looking at.</p>
-
-    <table>
-      <thead><tr><th>Set to</th><th>What it means</th></tr></thead>
-      <tbody>
-        <tr><td class="d">sites: ["*"]</td><td>Every property on the roster.</td></tr>
-        <tr><td class="d">sites: ["8k10q.com"]</td><td>One property only.</td></tr>
-        <tr><td class="d">sites: ["!warrantwire.com"]</td><td>Everywhere except that one.</td></tr>
-        <tr><td class="d">topics: ["markets"]</td><td>Only where the subject matches.</td></tr>
-        <tr><td class="d">needs: "ticker"</td><td>Only on a page about a specific company — and the ad names it.</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <p class="eyebrow">Installation</p>
-    <h2>Adding a site takes one line</h2>
-    <p class="lede">Add the domain to the roster in <code>box.js</code>. Then, on
-    that site, a slot wherever an ad should appear and the script once.</p>
-
-<pre><span class="c">&lt;!-- wherever the ad goes --&gt;</span>
-&lt;div data-ad="rail"&gt;&lt;/div&gt;
-
-<span class="c">&lt;!-- once, before &lt;/body&gt; --&gt;</span>
-&lt;script src="https://adhotbox.com/box.js"&gt;&lt;/script&gt;</pre>
-
-    <p>That is the whole installation. A site that is not on the roster serves
-    nothing at all, so a stray script tag on a page somewhere cannot start
-    showing advertising by accident.</p>
   </div>
 </section>
 
 <section id="policy">
   <div class="wrap">
     <p class="eyebrow">The rules</p>
-    <h2>What will not be accepted</h2>
-
+    <h2 class="s">What will not be accepted</h2>
     <div class="rules">
       <h3>Written down so it can be held against us</h3>
       <ul>
-        <li><b>Nothing from a company any of these sites covers</b>, from its
-        officers, or from anyone paid by it — including investor relations firms
-        and stock promoters. The research is worth nothing if the subject can
-        buy space beside it.</li>
+        <li><b>Nothing from a company any of our sites covers</b>, from its
+        officers, or from anyone paid by it &mdash; including investor relations
+        firms and stock promoters. The research is worth nothing if the subject
+        can buy space beside it.</li>
 
-        <li><b>No third-party ad networks.</b> A network serves whatever it
-        wants, and would eventually serve an issuer's advertisement on the page
-        listing that issuer's filing. Every placement here is sold directly and
-        the buyer is named on it.</li>
+        <li><b>No third-party ad networks.</b> A network serves whatever it wants,
+        and would eventually serve an issuer's advertisement on the page listing
+        that issuer's filing. Every placement here is sold directly and the buyer
+        is named on it.</li>
 
-        <li><b>Every paid placement is labelled</b>, carries the advertiser's
-        name underneath, and links to this page.</li>
+        <li><b>Refused for everybody, everywhere:</b> adult content, gambling,
+        stock promotion, token sales, payday lending, weapons, tobacco, and
+        get-rich-quick offers. No publisher can switch those on.</li>
 
-        <li><b>No tracking of people.</b> The network counts which campaign was
-        seen on which site, in which shape, on which subject. No cookie, no
-        identifier, nothing that follows anyone anywhere.</li>
+        <li><b>No tracking of people.</b> No cookie, no identifier, nothing that
+        follows anyone anywhere. We count which advertisement appeared on which
+        site and whether it was clicked. <a href="privacy.html">The whole of
+        it &rarr;</a></li>
 
-        <li><b>No advertiser sees a story before it runs</b>, and no advertiser
-        has ever been told what is coming. Buying space buys space.</li>
+        <li><b>No advertiser sees a story before it runs.</b> Buying space buys
+        space.</li>
       </ul>
     </div>
   </div>
@@ -189,7 +209,7 @@ footer b{color:var(--ink)}
 <section>
   <div class="wrap">
     <p class="eyebrow">This is a live slot</p>
-    <h2>What one looks like</h2>
+    <h2 class="s">What one looks like</h2>
     <div class="demo">
       <div><div data-ad="rail" data-topic="general"></div></div>
       <div><div data-ad="leader" data-topic="general"></div></div>
@@ -199,18 +219,23 @@ footer b{color:var(--ink)}
 
 <footer>
   <div class="wrap">
-    <p><b>AdHotBox</b> · [ email ] · [ telephone ]</p>
-    <p><a href="join.html" style="color:var(--muted)">Carry ads on your site</a> ·
-       <a href="advertise.html">Advertise</a> ·
-       <a href="compare.html">How this compares</a> ·
-       <a href="wordpress.html" style="color:var(--muted)">WordPress plugin</a> ·
-       <a href="desk.html" style="color:var(--muted)">Publisher desk</a></p>
+    <p><b>AdHotBox</b> &middot; [ email ] &middot; [ telephone ]</p>
+    <p><a href="start.html">Earn money on your site</a> &middot;
+       <a href="advertise.html">Advertise</a> &middot;
+       <a href="compare.html">How this compares</a> &middot;
+       <a href="wordpress.html">WordPress plugin</a> &middot;
+       <a href="app/">The app</a> &middot;
+       <a href="desk.html">Publisher desk</a> &middot;
+       <a href="privacy.html">Privacy</a></p>
+    <p>The name has been on the shelf since 2010, from a marketplace where
+    reporters sold their own stories to local papers.</p>
     <p>Advertising is sold directly. Rates on request. Nothing on any property in
     this network is investment advice, and no placement is an endorsement of an
-    advertiser by any publication in it.</p>
+    advertiser by any publication that carries it.</p>
   </div>
 </footer>
 
 <script src="box.js"></script>
+<script src="/nav.js"></script>
 </body>
 </html>
