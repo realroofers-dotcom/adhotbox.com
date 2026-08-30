@@ -1,0 +1,245 @@
+<!-- BUILT 2026-08-29 14:35 ET -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The fence — AdHotBox</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0C1220;--paper:#fff;--wash:#F2F4F8;--rule:#D5DAE4;--muted:#5A6478;
+  --hot:#FF4A00;--navy:#00208B;--good:#0A7A3C;--warn:#8A6A1C;--bad:#8F1D24;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--wash);color:var(--ink);font:400 16px/1.6 Rubik,system-ui,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:900;letter-spacing:-.018em;line-height:1.12;margin:0}
+p{margin:0 0 1em}
+.eyebrow{font:900 10.5px/1 Rubik;letter-spacing:.2em;text-transform:uppercase;color:var(--hot);margin:0 0 8px}
+
+header{background:var(--ink);color:#fff;padding:28px 0 32px}
+header .mark{font:900 18px/1 Rubik;display:block;margin-bottom:14px}
+header .mark i{font-style:normal;color:var(--hot)}
+header h1{font-size:clamp(23px,4.4vw,34px)}
+header .sub{color:#B9C2D6;font-size:15px;margin-top:8px}
+
+section{padding:24px 0}
+.keyrow{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+.keyrow input{flex:1;min-width:220px;font:14px var(--mono);padding:11px 13px;
+  border:1px solid var(--rule);border-radius:4px}
+button{font:600 14px Rubik;border:1px solid var(--rule);background:#fff;padding:9px 15px;
+  border-radius:4px;cursor:pointer}
+button:hover{border-color:var(--navy);color:var(--navy)}
+button.k{background:var(--ink);border-color:var(--ink);color:#fff}
+button.y{background:var(--good);border-color:var(--good);color:#fff}
+button.o{background:var(--hot);border-color:var(--hot);color:#180B05}
+button.n{border-color:#E0C4C6;color:var(--bad)}
+button.n:hover{background:var(--bad);color:#fff;border-color:var(--bad)}
+button.sm{font-size:12.5px;padding:7px 12px}
+
+.stats{display:grid;gap:2px;background:var(--rule);border:1px solid var(--rule);margin:0 0 18px}
+@media(min-width:760px){.stats{grid-template-columns:repeat(5,1fr)}}
+.stats div{background:#fff;padding:14px 15px}
+.stats .n{font:900 23px/1 var(--mono)}
+.stats .l{font:600 10px/1 Rubik;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+
+.tabs{display:flex;gap:5px;flex-wrap:wrap;margin:0 0 14px}
+.tabs button{font:600 12px var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.tabs button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+
+.site{background:#fff;border:1px solid var(--rule);border-radius:5px;padding:16px 18px;margin:0 0 11px}
+.site.promoted{border-left:4px solid var(--good)}
+.site.fenced{border-left:4px solid var(--bad);opacity:.72}
+.site .top{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:4px}
+.site .d{font:900 16px var(--mono)}
+.site .where{font-size:14px;color:var(--muted)}
+.site .badge{font:700 9.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid;border-radius:3px;padding:2px 7px}
+.b-pending{border-color:#E8DCBF;background:#FAF7EF;color:var(--warn)}
+.b-approved{border-color:#BEE0CC;background:#EEF7F1;color:var(--good)}
+.b-rejected{border-color:#E0C4C6;background:#FDF3F2;color:var(--bad)}
+.b-promoted{border-color:var(--good);background:var(--good);color:#fff}
+.b-fenced{border-color:var(--bad);background:var(--bad);color:#fff}
+.site .meta{font:12px var(--mono);color:var(--muted);margin:6px 0 0}
+.site .fee{margin-left:auto;font:700 12.5px var(--mono)}
+.fee.due{color:var(--warn)} .fee.paid{color:var(--good)} .fee.waived{color:var(--navy)}
+
+.ai{background:var(--wash);border-left:3px solid var(--rule);border-radius:0 4px 4px 0;
+  padding:11px 14px;margin:11px 0 0;font-size:14px}
+.ai.clear{border-left-color:var(--good)}
+.ai.flagged{border-left-color:var(--warn)}
+.ai.refuse{border-left-color:var(--bad)}
+.ai .v{font:700 10px var(--mono);letter-spacing:.13em;text-transform:uppercase;
+  display:block;margin-bottom:5px}
+.ai.clear .v{color:var(--good)} .ai.flagged .v{color:var(--warn)} .ai.refuse .v{color:var(--bad)}
+.ai .fl{font:12px var(--mono);color:var(--bad);margin-top:5px}
+.ai .none{color:var(--muted);font-style:italic}
+
+.acts{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;align-items:center}
+.note{background:var(--ink);color:#C9D1E2;border-radius:5px;padding:16px 18px;margin:0 0 18px;font-size:14px}
+.note b{color:#fff}
+.msg{font:13px var(--mono);color:var(--muted);padding:10px 0}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="mark">ADHOT<i>BOX</i></span>
+    <h1>The fence</h1>
+    <p class="sub">Every site, what the screen said, and what you decided.</p>
+  </div>
+</header>
+
+<div class="wrap">
+<section>
+
+  <div class="keyrow">
+    <input id="k" type="password" placeholder="LOG_KEY">
+    <button class="k" onclick="save()">Unlock</button>
+  </div>
+
+  <div class="note">
+    <b>The screen flags. You decide.</b> A model reads the front page and says
+    what it thinks it saw. It has never rejected anything on its own and it
+    should not — a wrong refusal costs a real publisher, and a flag costs
+    nothing. Same rule as everything else here: nothing is settled until a
+    person has looked at the thing itself.
+  </div>
+
+  <div id="out"><p class="msg">Enter the key.</p></div>
+
+</section>
+</div>
+
+<script>
+var API = "https://adhotbox.realroofers.workers.dev";
+var KEY = localStorage.getItem("abxfence") || "";
+var TAB = "pending";
+var DATA = null;
+if (KEY) document.getElementById("k").value = KEY;
+
+function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+function money(c){ return "$" + ((c||0)/100).toFixed(2); }
+
+function save(){
+  KEY = document.getElementById("k").value.trim();
+  localStorage.setItem("abxfence", KEY);
+  load();
+}
+
+function api(qs){
+  return fetch(API + qs, { headers: { "X-Auth-Key": KEY } }).then(function(r){ return r.json(); });
+}
+
+function load(){
+  if (!KEY) return;
+  document.getElementById("out").innerHTML = '<p class="msg">Loading…</p>';
+  api("?action=fence").then(function(d){
+    if (!d.ok) throw new Error(d.error || "error");
+    DATA = d; draw();
+  }).catch(function(e){
+    document.getElementById("out").innerHTML = '<p class="msg">' + esc(String(e.message||e)) + '</p>';
+  });
+}
+
+function draw(){
+  var d = DATA, sites = d.sites || [];
+  var n = function(st){ return sites.filter(function(s){ return s.status===st; }).length; };
+  var t = function(tr){ return sites.filter(function(s){ return (s.tier||'standard')===tr; }).length; };
+  var fee = (d.fee_income||[])[0] || {};
+
+  var h = '<div class="stats">'
+    + '<div><p class="n">' + n('pending') + '</p><p class="l">Waiting</p></div>'
+    + '<div><p class="n">' + n('approved') + '</p><p class="l">Approved</p></div>'
+    + '<div><p class="n">' + t('promoted') + '</p><p class="l">Promoted</p></div>'
+    + '<div><p class="n">' + t('fenced') + '</p><p class="l">Fenced</p></div>'
+    + '<div><p class="n">' + money(fee.collected_cents) + '</p><p class="l">Fees this month</p></div>'
+    + '</div>';
+
+  var tabs = [["pending","Waiting"],["approved","Approved"],["promoted","Promoted"],
+              ["fenced","Fenced"],["all","Everything"]];
+  h += '<div class="tabs">' + tabs.map(function(x){
+    return '<button class="' + (TAB===x[0]?"on":"") + '" onclick="tab(\'' + x[0] + '\')">'
+         + x[1] + '</button>'; }).join("") + '</div>';
+
+  var list = sites.filter(function(s){
+    if (TAB === "all") return true;
+    if (TAB === "promoted" || TAB === "fenced") return (s.tier||'standard') === TAB;
+    return s.status === TAB;
+  });
+
+  h += list.length ? list.map(card).join("")
+     : '<p class="msg">Nothing here.</p>';
+
+  document.getElementById("out").innerHTML = h;
+}
+
+function tab(t){ TAB = t; draw(); }
+
+function card(s){
+  var tier = s.tier || 'standard';
+  var where = [s.city, s.region].filter(Boolean).join(", ");
+  var v = s.ai_verdict || "";
+
+  var ai = v
+    ? '<div class="ai ' + esc(v) + '"><span class="v">Screen — ' + esc(v) + '</span>'
+      + (s.ai_summary ? esc(s.ai_summary) : '<span class="none">no summary</span>')
+      + (s.ai_flags ? '<p class="fl">flags: ' + esc(s.ai_flags) + '</p>' : '')
+      + '</div>'
+    : '<div class="ai"><span class="v">Not screened</span>'
+      + '<span class="none">Run the screen before deciding.</span></div>';
+
+  return '<div class="site ' + esc(tier) + '">'
+    + '<div class="top"><span class="d">' + esc(s.domain) + '</span>'
+    +   '<span class="badge b-' + esc(s.status) + '">' + esc(s.status) + '</span>'
+    +   (tier !== 'standard' ? '<span class="badge b-' + esc(tier) + '">' + esc(tier) + '</span>' : '')
+    +   '<span class="fee ' + (s.fee_waived ? 'waived' : (s.fee_paid_on ? 'paid' : 'due')) + '">'
+    +     (s.fee_waived
+           ? 'fee waived &middot; house ads to ' + esc(s.waiver_until || '')
+           : (s.fee_paid_on ? 'fee paid' : 'fee due')) + '</span></div>'
+    + '<p class="where">' + esc(s.name || "") + (where ? ' &middot; ' + esc(where) : '')
+    +   ' &middot; ' + esc(s.topic || "") + '</p>'
+    + '<p class="meta">' + esc(s.publisher || "") + ' &middot; ' + esc(s.email || "")
+    +   ' &middot; ' + (s.monthly_views || 0) + ' views/mo</p>'
+    + ai
+    + '<div class="acts">'
+    +   '<button class="sm" onclick="screen(' + s.id + ')">Run the screen</button>'
+    +   (s.status !== 'approved'
+        ? '<button class="y sm" onclick="approve(' + s.id + ')">Approve</button>' : '')
+    +   '<button class="o sm" onclick="tier(' + s.id + ',\'promoted\')">Promote</button>'
+    +   '<button class="sm" onclick="tier(' + s.id + ',\'standard\')">Standard</button>'
+    +   '<button class="n sm" onclick="tier(' + s.id + ',\'fenced\')">Fence</button>'
+    +   (s.fee_paid_on
+        ? '<button class="sm" onclick="refund(' + s.id + ')">Refund the fee</button>'
+        : '<button class="sm" onclick="feepaid(' + s.id + ')">Mark fee paid</button>')
+    +   '<button class="sm" onclick="waive(' + s.id + ')">Waive for 6 months</button>'
+    +   '<a href="https://' + esc(s.domain) + '" target="_blank" rel="noopener" '
+    +     'style="font:12px var(--mono);color:var(--navy);margin-left:auto">open the site &#8599;</a>'
+    + '</div></div>';
+}
+
+function screen(id){
+  var el = event.target; el.textContent = "reading…"; el.disabled = true;
+  api("?action=screen&site=" + id).then(load);
+}
+function approve(id){ api("?action=approve&what=site&id=" + id).then(load); }
+function tier(id, t){ api("?action=tier&site=" + id + "&tier=" + t).then(load); }
+function feepaid(id){ api("?action=fee&site=" + id + "&paid=1").then(load); }
+function waive(id){
+  var m = prompt("How many months of house placements instead of the fee?", "6");
+  if (!m) return;
+  api("?action=waive&site=" + id + "&months=" + encodeURIComponent(m)).then(load);
+}
+function refund(id){
+  if (!confirm("Record a refund of the ten dollars? The money still has to be sent back by hand."))
+    return;
+  api("?action=refund&site=" + id).then(load);
+}
+
+if (KEY) load();
+</script>
+</body>
+</html>

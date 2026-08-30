@@ -1,4 +1,4 @@
-<!-- BUILT 2026-08-29 13:40 ET -->
+<!-- BUILT 2026-08-29 14:32 ET -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -217,6 +217,42 @@ footer{padding:34px 0 60px;font-size:14.5px;color:var(--muted)}
           <textarea id="audience" placeholder="Parents in the school district, people who follow the town council, anyone looking for a contractor…"></textarea></label>
       </fieldset>
 
+      <div style="background:#F2F4F8;border-left:4px solid #FF4A00;padding:18px 20px;margin:0 0 20px">
+        <h3 style="font-size:17px;margin:0 0 9px">Ten dollars, once</h3>
+        <p style="font-size:14.5px;color:#5A6478;margin:0 0 9px">If your site is
+          accepted there is a <b>one-time ten dollar fee</b>. It pays for a person
+          to actually look at the site. <b>It is not refundable and it does not
+          come off what you earn.</b></p>
+        <p style="font-size:14.5px;color:#5A6478;margin:0 0 9px">Most networks do
+          not charge publishers anything, and that is a fair thing to hold against
+          us. Here is the reason we do: without it, every empty site built to farm
+          advertising applies, and the review is the whole product.</p>
+        <p style="font-size:14.5px;color:#5A6478;margin:0 0 16px"><b>Nothing is
+          charged now.</b> You are asked only if the site is accepted, and you can
+          walk away at that point.</p>
+
+        <div style="background:#fff;border:1px solid #D5DAE4;border-radius:5px;padding:16px 18px">
+          <h3 style="font-size:16px;margin:0 0 8px">Or pay nothing and carry one of
+            our advertisements</h3>
+          <p style="font-size:14.5px;color:#5A6478;margin:0 0 9px">Instead of the ten
+            dollars, run one of our own advertisements free for six months. It costs
+            you a slot rather than money.</p>
+          <p style="font-size:14.5px;color:#5A6478;margin:0 0 9px"><b>The catch, so
+            nobody finds it out later:</b> while it runs you cannot deny our
+            advertisements on that site. You still accept or deny every paying
+            advertiser one by one, exactly as normal.</p>
+          <p style="font-size:14.5px;color:#5A6478;margin:0"><b>If your site has only
+            one slot, that slot is ours for six months and you cannot sell it.</b>
+            With two or three slots it costs you very little.</p>
+          <label style="margin:14px 0 0"><span>Which would you rather</span>
+            <select id="feechoice">
+              <option value="fee">Pay the ten dollars if accepted</option>
+              <option value="waiver">Carry your advertisement for six months instead</option>
+              <option value="undecided">Tell me more first</option>
+            </select></label>
+        </div>
+      </div>
+
       <button onclick="send()">Apply</button>
       <p id="msg" style="margin-top:14px;font:14px var(--mono);color:var(--muted)"></p>
     </form>
@@ -264,7 +300,8 @@ function send(){
     domain: v("domain"), sitename: v("name"),
     topic: v("topic"), platform: v("platform"),
     city: v("city"), region: v("region"), country: v("country") || "US",
-    areas: v("areas"), views: v("views"), audience: v("audience")
+    areas: v("areas"), views: v("views"), audience: v("audience"),
+    fee: v("feechoice")
   });
 
   fetch(API + "?" + p.toString())

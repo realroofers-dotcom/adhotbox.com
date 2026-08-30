@@ -1,4 +1,4 @@
-<!-- BUILT 2026-08-29 13:37 ET -->
+<!-- BUILT 2026-08-29 14:35 ET -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -153,8 +153,8 @@ function draw(d){
     +  'switch off never reaches your desk again.</p><div class="cats">'
     +  allowed.map(function(c){
          var off = blocked.indexOf(c.code) > -1;
-         return '<button class="' + (off?"off":"") + '" onclick="cat(\\''
-              + c.code + '\\',' + (off?0:1) + ')">' + esc(c.label)
+         return '<button class="' + (off?"off":"") + '" onclick="cat(\''
+              + c.code + '\',' + (off?0:1) + ')">' + esc(c.label)
               + (off ? " — off" : "") + '</button>';
        }).join("")
     +  '</div></div>';

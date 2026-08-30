@@ -1,0 +1,243 @@
+<!-- BUILT 2026-08-29 14:23 ET -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The WordPress plugin — AdHotBox</title>
+<meta name="description" content="A free WordPress plugin that lets a small site carry advertising it approves itself. No traffic minimum, no exclusivity, no cookies. The plugin costs nothing; the network takes a share of what the ads earn.">
+<link rel="canonical" href="https://adhotbox.com/wordpress.html">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0C1220;--paper:#fff;--wash:#F2F4F8;--rule:#D5DAE4;--muted:#5A6478;
+  --hot:#FF4A00;--navy:#00208B;--good:#0A7A3C;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font:400 17px/1.62 Rubik,system-ui,sans-serif}
+.wrap{max-width:900px;margin:0 auto;padding:0 22px}
+h1,h2,h3{font-weight:900;letter-spacing:-.018em;line-height:1.1;margin:0}
+p{margin:0 0 1em;max-width:64ch}
+a{color:var(--navy)}
+.eyebrow{font:900 11px/1 Rubik;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--hot);margin:0 0 10px}
+
+header{background:var(--ink);color:#fff;padding:44px 0 52px}
+header .mark{font:900 20px/1 Rubik;letter-spacing:-.02em;display:block;margin-bottom:22px}
+header .mark i{font-style:normal;color:var(--hot)}
+header .mark a{color:inherit;text-decoration:none}
+header h1{font-size:clamp(30px,5.8vw,52px);max-width:19ch}
+header .sub{color:#B9C2D6;font-size:17.5px;margin-top:15px;max-width:56ch}
+header .free{display:inline-block;margin-top:22px;background:var(--hot);color:#180B05;
+  font:900 12px Rubik;letter-spacing:.14em;text-transform:uppercase;
+  padding:9px 15px;border-radius:3px}
+
+section{padding:46px 0;border-bottom:1px solid var(--rule)}
+h2{font-size:clamp(23px,3.9vw,34px);margin-bottom:10px}
+.lede{color:var(--muted);max-width:60ch;margin-bottom:28px}
+
+table{width:100%;border-collapse:collapse;font-size:15.5px;margin-top:6px}
+th{text-align:left;background:var(--wash);padding:11px 13px;
+  font:900 10.5px/1 Rubik;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+td{border-bottom:1px solid var(--rule);padding:12px 13px;vertical-align:top}
+td.n{font-family:var(--mono);font-size:14px;white-space:nowrap}
+tr.us td{background:#FFF6F2;font-weight:700}
+tr.us td:first-child{border-left:3px solid var(--hot)}
+
+.four{display:grid;gap:2px;background:var(--rule);border:1px solid var(--rule);margin-top:8px}
+@media(min-width:760px){.four{grid-template-columns:repeat(4,1fr)}}
+.four div{background:#fff;padding:20px 18px}
+.four .t{font:900 11px/1 Rubik;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--hot);margin-bottom:8px}
+.four .w{font:900 18px/1.15 Rubik;margin-bottom:6px}
+.four .d{font-size:14px;color:var(--muted);line-height:1.5}
+
+pre{background:var(--ink);color:#E6EAF2;padding:17px 20px;border-radius:5px;
+  font:13px/1.7 var(--mono);overflow-x:auto;margin:0 0 16px}
+code{font:14px var(--mono);background:var(--wash);padding:2px 6px;border-radius:3px}
+
+.get{background:var(--wash);border:1px solid var(--rule);border-radius:6px;
+  padding:26px 28px;display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.get div{flex:1;min-width:240px}
+.get h3{font-size:21px;margin-bottom:8px}
+.get p{margin:0;font-size:15px;color:var(--muted)}
+.btn{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;
+  font:700 16px Rubik;padding:14px 26px;border-radius:4px;white-space:nowrap}
+.btn:hover{opacity:.9}
+.btn.o{background:var(--hot);color:#180B05}
+
+.honest{background:var(--ink);color:#C9D1E2;border-radius:6px;padding:24px 26px}
+.honest h3{color:#fff;font-size:20px;margin-bottom:12px}
+.honest p{color:#C9D1E2;max-width:62ch}
+.honest b{color:#fff}
+
+.banned span{display:inline-block;background:var(--wash);border:1px solid var(--rule);
+  border-radius:3px;padding:4px 10px;margin:0 6px 6px 0;font:600 12.5px var(--mono);
+  color:var(--muted)}
+
+footer{padding:34px 0 64px;font-size:14.5px;color:var(--muted)}
+footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="mark"><a href="index.html">ADHOT<i>BOX</i></a></span>
+    <h1>A WordPress plugin for sites nobody else will take.</h1>
+    <p class="sub">No traffic minimum. You approve every advertiser yourself, one
+    click each. Run it alongside whatever else you run.</p>
+    <span class="free">The plugin is free — we take a share of what the ads earn</span>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Why this exists</p>
+    <h2>In February the last option for small sites closed</h2>
+    <p class="lede">These are the published minimums as they stand today. A site
+    with a couple of thousand readers a month qualifies for almost none of it.</p>
+
+    <table>
+      <thead><tr><th>Network</th><th>Minimum to join</th><th>Exclusive</th></tr></thead>
+      <tbody>
+        <tr><td>Raptive</td><td class="n">25,000 pageviews</td><td>Yes</td></tr>
+        <tr><td>Mediavine</td><td class="n">50,000 sessions</td><td>Yes</td></tr>
+        <tr><td>Mediavine Journey</td><td class="n">10,000 sessions</td><td>Yes</td></tr>
+        <tr><td>Monumetric</td><td class="n">10,000 pageviews</td><td>After trial</td></tr>
+        <tr><td>Ezoic</td><td class="n">250,000 users</td><td>No</td></tr>
+        <tr class="us"><td>AdHotBox</td><td class="n">None</td><td>No</td></tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:22px"><b>Ezoic was the one that took small sites.</b> Its
+    minimum was a few thousand visits. In February 2026 it raised that to 250,000
+    monthly users, and the trade press described it as leaving the small-publisher
+    market. Raptive had already been at 100,000 until October 2025.</p>
+
+    <p>Which leaves a great many sites with real readers and nowhere to go.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Why we can do it</p>
+    <h2>This is a billboard, not an auction</h2>
+    <p class="lede">The minimums are not snobbery. A programmatic network sells
+    each impression into an auction, and an auction needs volume before it can
+    price anything at all. Below some number the revenue will not cover the
+    overhead, so they draw a line.</p>
+    <p>AdHotBox does not run an auction. An advertiser buys a place — a town, a
+    subject, a set of sites — the way somebody buys a billboard or a page in the
+    church bulletin. <b>There is no bidding to be thin, so there is no floor to
+    defend.</b></p>
+    <p>Which is why two thousand readers in one town can be worth something here
+    and worth nothing at Mediavine. It is a different product, not a cheaper
+    version of the same one.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">What is different</p>
+    <h2>Four things no other network does</h2>
+    <div class="four">
+      <div><p class="t">One</p><p class="w">You approve each advertiser</p>
+        <p class="d">Every one appears on your desk. Accept or deny, one click. Nothing runs that you did not agree to.</p></div>
+      <div><p class="t">Two</p><p class="w">Your town is the product</p>
+        <p class="d">An advertiser can buy one town. The big networks target countries; nobody asks a small site where its readers are.</p></div>
+      <div><p class="t">Three</p><p class="w">No exclusivity</p>
+        <p class="d">Keep AdSense, keep anything. Find out which pays better without giving anything up.</p></div>
+      <div><p class="t">Four</p><p class="w">No cookies</p>
+        <p class="d">Text only. Nothing animates, nothing expands, nothing follows a reader anywhere.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Installing it</p>
+    <h2>Four steps</h2>
+    <p class="lede">The plugin costs nothing and there is nothing to buy.</p>
+    <ol style="max-width:62ch;line-height:1.75">
+      <li><a href="advertise.html">Advertise</a> ·
+       <a href="compare.html">How this compares</a> ·
+       <a href="join.html">Apply</a> and tell us where your readers are. You get a publisher key.</li>
+      <li>Install the plugin and paste the key into <b>Settings → AdHotBox</b>.</li>
+      <li>Put an advertisement wherever you want one — the block, the widget, or
+          the shortcode <code>[adhotbox size="card"]</code>.</li>
+      <li>Open your desk and accept the advertisers you want.</li>
+    </ol>
+
+    <p style="margin-top:24px"><b>Or without the plugin, on any site at all:</b></p>
+<pre>&lt;div data-ad="card"&gt;&lt;/div&gt;
+
+&lt;script src="https://adhotbox.com/box.js"&gt;&lt;/script&gt;</pre>
+
+    <p>Sizes are <b>rail</b> 300&times;600, <b>card</b> 300&times;250,
+    <b>inline</b> 728&times;180 and <b>leader</b> 970&times;120.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Refused for everybody</p>
+    <h2>What never reaches your desk</h2>
+    <p class="lede">Banned across the whole network. No publisher can switch these
+    on, and no amount of money changes it.</p>
+    <p class="banned">
+      <span>Adult or sexual content</span>
+      <span>Gambling and betting</span>
+      <span>Stock promotion and issuer advertising</span>
+      <span>Token sales and crypto offers</span>
+      <span>Payday and high-interest lending</span>
+      <span>Weapons and ammunition</span>
+      <span>Tobacco and vaping</span>
+      <span>Get rich quick, miracle cures, advertisements dressed as news</span>
+    </p>
+    <p>Beyond that list you may switch off any category you like and never see it
+    again.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="honest">
+      <h3>Before you install it, the honest part</h3>
+      <p><b>This network is new and the demand side is small.</b> Mediavine and
+      Raptive arrive with advertisers already signed. We arrive with the ones we
+      have sold and our own.</p>
+      <p><b>So a site joining now will not see much at first.</b> Telling you
+      otherwise would be the fastest way to lose you, and there is no exclusivity
+      here precisely so that you do not have to bet anything on us being right.</p>
+      <p>Install it beside whatever you already run. If it earns, keep it.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="get">
+      <div>
+        <h3>Get the plugin</h3>
+        <p>Free, GPL, and it loads one small script. No jQuery, no fonts, no images.</p>
+      </div>
+      <a class="btn o" href="join.html">Apply for a key</a>
+      <a class="btn" href="adhotbox-wordpress-plugin.zip">Download the plugin</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><a href="index.html">AdHotBox</a> · <a href="join.html">Apply</a> ·
+       <a href="desk.html">Your desk</a> · <a href="index.html#policy">The rules</a></p>
+    <p>Network minimums quoted above are as published by those networks in 2026
+    and change without notice. Nothing here is an endorsement of any advertiser by
+    any site that carries it.</p>
+    <p>[ email ] · [ telephone ]</p>
+  </div>
+</footer>
+
+</body>
+</html>
