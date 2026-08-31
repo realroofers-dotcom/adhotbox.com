@@ -1,292 +1,816 @@
-<!-- BUILT 2026-08-31 17:13 ET -->
+<!-- BUILT 2026-08-31 17:11 ET -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>AdHotBox — low-cost advertising for everybody</title>
-<meta name="description" content="Twenty dollars a month a site. Pick a town, or pick a subject. Advertise where your customers already are.">
-<meta name="ad-topic" content="general">
-<link rel="canonical" href="https://adhotbox.com/">
+<title>AdHotBox</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0C1220">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="AdHotBox">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-180.png">
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#0C1220;--paper:#fff;--wash:#F2F4F8;--rule:#D5DAE4;--muted:#5A6478;
-  --hot:#FF4A00;--navy:#00208B;
-  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-*{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);
-  font:400 17px/1.5 Rubik,system-ui,sans-serif;-webkit-text-size-adjust:100%}
-.wrap{max-width:940px;margin:0 auto;padding:0 20px}
-h1,h2{font-weight:900;letter-spacing:-.03em;line-height:1.02;margin:0}
-p{margin:0}
-a{color:var(--navy)}
+:root{--ink:#0C1220;--paper:#fff;--wash:#F2F4F8;--rule:#D9DEE8;--muted:#5A6478;
+  --hot:#FF4A00;--navy:#00208B;--good:#0A7A3C;--bad:#8F1D24;--warn:#8A6A1C;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --safe-t:env(safe-area-inset-top);--safe-b:env(safe-area-inset-bottom)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{margin:0;background:var(--wash);color:var(--ink);
+  font:400 17px/1.5 Rubik,system-ui,-apple-system,sans-serif;
+  overscroll-behavior-y:none;-webkit-text-size-adjust:100%}
+h1,h2,h3{font-weight:900;letter-spacing:-.02em;line-height:1.12;margin:0}
+p{margin:0 0 1em}
+button{font:700 17px Rubik;border:0;border-radius:10px;cursor:pointer;
+  -webkit-appearance:none}
+input,select,textarea{font:17px Rubik;width:100%;padding:15px 16px;
+  border:1.5px solid var(--rule);border-radius:10px;background:#fff}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy)}
 
-.top{background:var(--ink);color:#fff;padding:44px 0 36px}
-.top h1{font-size:clamp(33px,7.6vw,62px);max-width:13ch}
-.top .sub{color:#B9C2D6;font-size:clamp(17px,2.6vw,21px);margin-top:13px;max-width:32ch}
-.top .sub b{color:#fff;font-weight:700}
+/* shell */
+#app{min-height:100%;padding-bottom:calc(78px + var(--safe-b))}
+.bar{position:sticky;top:0;z-index:20;background:var(--ink);color:#fff;
+  padding:calc(14px + var(--safe-t)) 18px 14px;display:flex;align-items:center;gap:12px}
+.bar .mk{font:900 16px Rubik;letter-spacing:-.02em}
+.bar .mk i{font-style:normal;color:var(--hot)}
+.bar h1{font-size:19px;margin-left:auto;font-weight:700;letter-spacing:0}
+.bar .back{background:none;color:#fff;font:700 16px Rubik;padding:0;margin-right:-4px}
+.pad{padding:18px}
 
-.find{margin-top:28px}
-.find .row{display:flex;gap:8px}
-.find input{flex:1;min-width:0;font:17px Rubik;padding:17px 18px;border:0;
-  border-radius:10px;background:#fff;color:var(--ink)}
-.find input:focus{outline:3px solid var(--hot);outline-offset:1px}
-.find button{font:700 17px Rubik;background:var(--hot);border:0;color:#180B05;
-  padding:17px 24px;border-radius:10px;cursor:pointer;white-space:nowrap}
+/* tab bar */
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#fff;
+  border-top:1px solid var(--rule);display:flex;
+  padding-bottom:var(--safe-b)}
+.tabs button{flex:1;background:none;padding:11px 4px 13px;color:var(--muted);
+  font:600 11px Rubik;letter-spacing:.02em;display:flex;flex-direction:column;
+  align-items:center;gap:5px;border-radius:0}
+.tabs button .ic{font-size:21px;line-height:1}
+.tabs button.on{color:var(--ink)}
+.tabs button.on .ic{color:var(--hot)}
 
-.two{margin-top:18px}
-.two .lab{font:700 11px Rubik;letter-spacing:.16em;text-transform:uppercase;
-  color:#7E8BA6;margin:0 0 8px}
-.two .lab span{color:#fff}
-.chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px}
-.chips button{background:#182034;color:#B9C2D6;border:0;border-radius:20px;
-  padding:9px 15px;font:600 14.5px Rubik;cursor:pointer}
-.chips button:hover{background:#242E4A;color:#fff}
-.chips button.all{background:transparent;box-shadow:inset 0 0 0 1.5px #2B3552}
+/* cards */
+.card{background:#fff;border-radius:14px;padding:18px;margin:0 0 14px;
+  box-shadow:0 1px 2px rgba(12,18,32,.06)}
+.card .co{font:900 18px Rubik;margin-bottom:3px}
+.card .sub{font-size:14.5px;color:var(--muted)}
+.pill{display:inline-block;font:700 11px var(--mono);letter-spacing:.08em;
+  text-transform:uppercase;padding:4px 9px;border-radius:20px;margin-top:9px}
+.p-live{background:#EAF6EF;color:var(--good)}
+.p-paused{background:var(--wash);color:var(--muted)}
+.p-pending{background:#FAF6EA;color:var(--warn)}
 
-#out{background:var(--wash);border-bottom:1px solid var(--rule);display:none}
-#out.on{display:block}
-.res{padding:24px 0 30px}
-.res .n{font:900 20px Rubik;margin-bottom:4px}
-.res .r{font-size:15px;color:var(--muted);margin-bottom:16px}
-.site{background:#fff;border-radius:11px;padding:15px 17px;margin-bottom:9px;
-  display:flex;gap:13px;align-items:center}
+.nums{display:flex;gap:0;margin:16px -18px 4px;border-top:1px solid var(--rule)}
+.nums div{flex:1;padding:16px 8px;text-align:center;border-right:1px solid var(--rule)}
+.nums div:last-child{border-right:0}
+.nums .n{font:900 30px/1 var(--mono)}
+.nums .l{font:600 10.5px Rubik;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);margin-top:7px}
+
+.acts{display:flex;gap:10px;margin-top:16px}
+.acts button{flex:1;padding:15px 10px}
+.b-1{background:var(--ink);color:#fff}
+.b-2{background:var(--wash);color:var(--ink)}
+.b-y{background:var(--good);color:#fff}
+.b-n{background:#fff;color:var(--bad);box-shadow:inset 0 0 0 1.5px #E6C9CB}
+.b-o{background:var(--hot);color:#180B05}
+.wide{width:100%;padding:17px;margin-top:6px}
+
+.row{display:flex;justify-content:space-between;gap:14px;padding:14px 0;
+  border-bottom:1px solid var(--rule);font-size:15.5px}
+.row:last-child{border-bottom:0}
+.row .k{color:var(--muted)}
+.row .v{font-family:var(--mono);font-weight:700;text-align:right;white-space:nowrap}
+
+label{display:block;margin:0 0 18px}
+label span{display:block;font:700 14px Rubik;margin-bottom:7px}
+label small{display:block;font-size:13.5px;color:var(--muted);margin-top:7px;font-weight:400}
+
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{background:#fff;border:1.5px solid var(--rule);border-radius:20px;
+  padding:10px 15px;font:600 15px Rubik;color:var(--ink)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+
+.steps{display:flex;gap:6px;margin:0 0 20px}
+.steps div{flex:1;height:4px;border-radius:2px;background:var(--rule)}
+.steps div.on{background:var(--hot)}
+
+.preview{background:#fff;border:1px solid var(--rule);border-radius:10px;
+  overflow:hidden;position:relative;margin-top:12px}
+.preview .bar2{position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--hot)}
+.preview .in{padding:15px 16px 15px 19px}
+.preview .eb{font:600 9.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);display:block;margin-bottom:6px}
+.preview h5{font:700 16px Rubik;margin:0 0 6px}
+.preview p{font-size:13.5px;color:var(--muted);margin:0}
+
+.note{background:var(--ink);color:#C9D1E2;border-radius:12px;padding:16px 18px;
+  font-size:14.5px;line-height:1.55;margin:0 0 14px}
+.note b{color:#fff}
+.quiet{color:var(--muted);font-size:15px;text-align:center;padding:40px 20px}
+.err{color:var(--bad);font-size:14.5px;margin-top:10px}
+/* the composer */
+.shot{position:relative;background:var(--ink);border-radius:12px;overflow:hidden;
+  aspect-ratio:3/2;display:flex;align-items:center;justify-content:center}
+.shot canvas{width:100%;height:100%;object-fit:cover;display:block}
+.shot .empty{color:#7E8BA6;font-size:15px;text-align:center;padding:30px}
+.take{display:flex;gap:10px;margin:12px 0 0}
+.take label{flex:1;margin:0}
+.take .fake{display:block;text-align:center;background:var(--ink);color:#fff;
+  border-radius:10px;padding:15px;font:700 16px Rubik}
+.take .fake.alt{background:var(--wash);color:var(--ink)}
+.take input[type=file]{display:none}
+.styles{display:flex;gap:8px;margin:14px 0 0;overflow-x:auto;padding-bottom:4px}
+.styles button{flex:0 0 auto;background:#fff;border:1.5px solid var(--rule);
+  border-radius:20px;padding:9px 15px;font:600 14px Rubik}
+.styles button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+
+.take .fake.vid{background:#8A1C1C}
+.vinfo{font-size:14px;margin:10px 0 0;color:var(--muted);line-height:1.45}
+.vinfo.good{color:var(--good);font-weight:600}
+.vinfo.bad{color:var(--bad);font-weight:600}
+.shot .vready{display:flex;flex-direction:column;align-items:center;gap:12px;color:#fff}
+.shot .vready .play{width:64px;height:46px;background:var(--hot);border-radius:11px;
+  position:relative}
+.shot .vready .play:after{content:"";position:absolute;left:25px;top:14px;
+  border:9px solid transparent;border-left:15px solid #180B05;border-right:0}
+.shot .vready .lab{font:600 14px var(--mono);color:#a8aa9a}
+
+/* the picker */
+.site{background:#fff;border-radius:12px;padding:15px 16px;margin:0 0 10px;
+  display:flex;gap:13px;align-items:center;box-shadow:0 1px 2px rgba(12,18,32,.06)}
+.site.on{box-shadow:inset 0 0 0 2px var(--ink)}
+.site .tick{width:26px;height:26px;border-radius:50%;border:2px solid var(--rule);
+  flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  font:900 14px Rubik;color:transparent}
+.site.on .tick{background:var(--ink);border-color:var(--ink);color:#fff}
 .site .m{flex:1;min-width:0}
-.site .d{font:700 16px Rubik;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.site .w{font-size:14px;color:var(--muted);margin-top:2px}
-.site .p{font:700 16px var(--mono);white-space:nowrap;text-align:right}
-.site .p small{display:block;font:600 11px Rubik;color:var(--muted)}
-.res .go{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;
-  font:700 16px Rubik;padding:14px 24px;border-radius:10px;margin-top:12px}
-.res .none{background:#fff;border-radius:11px;padding:22px;color:var(--muted);font-size:16px}
-.res .none b{color:var(--ink)}
+.site .d{font:700 15.5px Rubik;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.site .w{font-size:13.5px;color:var(--muted);margin-top:2px}
+.site .pr{font:700 15px var(--mono);white-space:nowrap}
+.site .promo{font:700 9px var(--mono);letter-spacing:.1em;text-transform:uppercase;
+  background:#FFF1EA;color:var(--hot);border-radius:3px;padding:2px 6px;margin-left:6px}
 
-.doors{display:grid;gap:14px;padding:32px 0}
-@media(min-width:720px){.doors{grid-template-columns:1fr 1fr}}
-.door{border:1.5px solid var(--rule);border-radius:14px;padding:24px;
-  text-decoration:none;color:var(--ink);display:flex;flex-direction:column}
-.door:hover{border-color:var(--ink)}
-.door.b{background:var(--ink);color:#fff;border-color:var(--ink)}
-.door .p{font:900 40px/1 var(--mono);letter-spacing:-.03em}
-.door .p small{font:600 14px Rubik;color:var(--muted);letter-spacing:0;margin-left:5px}
-.door.b .p small{color:#9FAAC6}
-.door h2{font-size:22px;margin:11px 0 8px}
-.door .t{font-size:15.5px;color:var(--muted);margin-bottom:18px}
-.door.b .t{color:#B9C2D6}
-.door .go{margin-top:auto;font:700 16px Rubik;background:var(--ink);color:#fff;
-  padding:14px;border-radius:9px;text-align:center}
-.door.b .go{background:var(--hot);color:#180B05}
+.total{position:fixed;left:0;right:0;bottom:calc(78px + var(--safe-b));z-index:25;
+  background:var(--ink);color:#fff;padding:14px 18px;display:flex;
+  align-items:center;gap:14px}
+.total .t{font:900 22px var(--mono)}
+.total .s{font-size:13px;color:#9FAAC6}
+.total button{margin-left:auto;background:var(--hot);color:#180B05;padding:13px 20px}
 
-.strip{border-top:1px solid var(--rule);padding:28px 0}
-.plat{display:grid;gap:8px}
-@media(min-width:560px){.plat{grid-template-columns:repeat(3,1fr)}}
-.plat a{border:1.5px solid var(--rule);border-radius:10px;padding:14px 15px;
-  text-decoration:none;color:var(--ink);display:block}
-.plat a:hover{border-color:var(--ink)}
-.plat b{display:block;font-size:15.5px;font-weight:900;letter-spacing:-.01em}
-.plat span{display:block;font-size:13.5px;color:var(--muted);margin-top:2px}
-.four{display:grid;gap:22px}
-@media(min-width:700px){.four{grid-template-columns:repeat(4,1fr)}}
-.four p{font-size:15.5px;color:var(--muted);line-height:1.5}
-.four b{display:block;color:var(--ink);font-weight:900;font-size:16px;margin-bottom:4px}
-
-.rule{border-top:1px solid var(--rule);padding:28px 0;font-size:15.5px;color:var(--muted)}
-.rule b{color:var(--ink)}
-footer{padding:24px 0 60px;font-size:14px;color:var(--muted)}
-footer a{color:var(--muted)}
-footer p{margin-bottom:8px}
+.hero{font:900 30px/1.1 Rubik;letter-spacing:-.025em;margin:0 0 10px}
+.lede{color:var(--muted);font-size:16px;margin-bottom:26px}
 </style>
 </head>
 <body>
 
-<div id="ahb-nav"></div>
-
-<div class="top">
-  <div class="wrap">
-    <h1>Low-cost advertising for everybody.</h1>
-    <p class="sub"><b>$20 a month a site.</b> Pick a town, or pick a subject.</p>
-
-    <div class="find">
-      <div class="row">
-        <input id="q" placeholder="A town, or a subject"
-               autocapitalize="words" autocorrect="off" spellcheck="false"
-               onkeydown="if(event.key==='Enter')find()">
-        <button onclick="find()">Search</button>
-      </div>
-
-      <div class="two">
-        <p class="lab">Reach a <span>place</span> &mdash; for anyone who serves one</p>
-        <div class="chips" id="places">
-          <button onclick="qk('Clifton')">Clifton</button>
-          <button onclick="qk('Nutley')">Nutley</button>
-          <button onclick="qk('NJ')">New Jersey</button>
-        </div>
-
-        <p class="lab">Reach a <span>subject</span> &mdash; readers anywhere</p>
-        <div class="chips" id="subjects">
-          <button onclick="qk('markets')">Markets</button>
-          <button onclick="qk('cannabis')">Cannabis</button>
-          <button onclick="qk('roofing')">Trades</button>
-          <button onclick="qk('local')">Local news</button>
-        <button onclick="qk('political')">Local races</button>
-          <button class="all" onclick="qk('')">Everything</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="out"><div class="wrap res" id="res"></div></div>
-
-<div class="wrap">
-  <div class="doors">
-
-    <a class="door b" href="advertise.html">
-      <p class="p">$20<small>a site, a month &middot; $50 for video</small></p>
-      <h2>Advertise</h2>
-      <p class="t">Words or a picture $20. Video $50. Political $110. One town, or
-      one subject across the whole network, month to month.</p>
-      <span class="go">Advertise &rarr;</span>
-    </a>
-
-    <a class="door" href="start.html">
-      <p class="p">$5<small>a placement, yours</small></p>
-      <h2>Have a site? Earn on it.</h2>
-      <p class="t">Up to $27.50 on a political placement. No traffic minimum. You
-      approve every advertiser yourself, one click each.</p>
-      <span class="go">Start here &rarr;</span>
-    </a>
-
-  </div>
-</div>
-
-<div class="wrap">
-
-  <div class="strip" style="border-top:0;padding-top:34px">
-    <p class="eyebrow">Installing it</p>
-    <h2 class="s" style="margin-bottom:8px">One line. We made it easy.</h2>
-    <p style="color:var(--muted);max-width:56ch;margin-bottom:20px">Paste one line
-    in your footer and the advertisements place themselves. <b style="color:var(--ink)">No
-    account needed to try it</b> &mdash; an advertisement appears straight away so
-    you can see it working.</p>
-
-    <div class="plat">
-      <a href="install.html#wordpress"><b>WordPress</b><span>A plugin. Three clicks.</span></a>
-      <a href="install.html#squarespace"><b>Squarespace</b><span>One box in Settings.</span></a>
-      <a href="install.html#wix"><b>Wix</b><span>Custom code. One paste.</span></a>
-      <a href="install.html#shopify"><b>Shopify</b><span>One line in the theme.</span></a>
-      <a href="install.html#ghost"><b>Ghost</b><span>Code injection.</span></a>
-      <a href="install.html#webflow"><b>Webflow</b><span>Before body tag.</span></a>
-      <a href="install.html#gtm"><b>Tag Manager</b><span>Never touch your site.</span></a>
-      <a href="install.html#cpanel"><b>cPanel or FTP</b><span>Written for a beginner.</span></a>
-      <a href="install.html#other"><b>Anything else</b><span>One line. Works everywhere.</span></a>
-    </div>
-
-    <p style="margin-top:18px"><a href="install.html" style="font-weight:700">
-      Step-by-step for your platform &rarr;</a></p>
-  </div>
-
-  <div class="strip">
-    <div class="four">
-      <p><b>A town or a subject</b>A roofer buys his county. A writer buys readers anywhere.</p>
-      <p><b>No minimum</b>Two thousand readers is fine. Nobody else takes you.</p>
-      <p><b>You choose</b>Publishers approve each advertiser by hand.</p>
-      <p><b>No tracking</b>No cookies. Nothing follows anybody anywhere.</p>
-    </div>
-  </div>
-
-  <div class="rule" id="policy">
-    <p><b>Adult content is never accepted, anywhere, at any price.</b> Stock
-    promotion, token sales, payday lending and get-rich-quick offers are refused
-    too. Most other things are considered one at a time, licensed operators only
-    &mdash; and every publisher can switch off any category and never see it.
-    <a href="privacy.html">What we do and do not record &rarr;</a></p>
-  </div>
-</div>
-
-<footer>
-  <div class="wrap">
-    <p><a href="advertise.html">Advertise</a> &middot;
-       <a href="start.html">Earn on your site</a> &middot;
-       <a href="compare.html">Compare</a> &middot;
-       <a href="wordpress.html">WordPress</a> &middot;
-       <a href="app/">App</a> &middot;
-       <a href="desk.html">Desk</a> &middot;
-       <a href="privacy.html">Privacy</a></p>
-    <p>AdHotBox &middot; [ email ] &middot; [ telephone ]</p>
-    <p>No placement is an endorsement by any site that carries it.</p>
-  </div>
-</footer>
+<div id="app"></div>
+<div class="tabs" id="tabs" style="display:none"></div>
 
 <script>
+/* ============================================================
+   AdHotBox — the app
+   One app. Which screens you see depends on who signed in, not on
+   a choice anybody has to make.
+   ============================================================ */
+
 var API = "https://adhotbox.realroofers.workers.dev";
+var S = {
+  role:   localStorage.getItem("ahb_role")  || "",      /* advertiser | publisher */
+  key:    localStorage.getItem("ahb_key")   || "",
+  email:  localStorage.getItem("ahb_email") || "",
+  screen: "home",
+  data:   null,
+  draft:  { what:"", towns:[], head:"", body:"", slots:2, months:1,
+            photo:null, style:"bottom", artUrl:null, sites:[],
+            video:null, videoSecs:0, videoUrl:null },
+  step:   0
+};
+
+function save(){
+  localStorage.setItem("ahb_role", S.role);
+  localStorage.setItem("ahb_key", S.key);
+  localStorage.setItem("ahb_email", S.email);
+}
 function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){
   return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
-function qk(t){ document.getElementById("q").value = t; find(); }
+function money(c){ return "$" + ((c||0)/100).toFixed(2); }
+function el(id){ return document.getElementById(id); }
 
-/* replace the guessed chips with what is actually on the network */
-function real(d){
-  if (d.places && d.places.length) {
-    document.getElementById("places").innerHTML = d.places.slice(0,5).map(function(x){
-      return '<button onclick="qk(\'' + esc(x.name) + '\')">' + esc(x.name) + '</button>';
-    }).join("");
-  }
-  if (d.subjects && d.subjects.length) {
-    document.getElementById("subjects").innerHTML = d.subjects.slice(0,5).map(function(x){
-      return '<button onclick="qk(\'' + esc(x.name) + '\')">' + esc(x.name) + '</button>';
-    }).join("") + '<button class="all" onclick="qk(\'\')">Everything</button>';
-  }
+/* ---------- shell ---------- */
+
+function bar(title, back){
+  return '<div class="bar">'
+    + (back ? '<button class="back" onclick="go(\'' + back + '\')">&larr;</button>' : '')
+    + '<span class="mk">ADHOT<i>BOX</i></span>'
+    + (title ? '<h1>' + esc(title) + '</h1>' : '')
+    + '</div>';
 }
 
-function find(){
-  var t = (document.getElementById("q").value || "").trim();
-  var out = document.getElementById("out"), res = document.getElementById("res");
-  out.classList.add("on");
-  res.innerHTML = '<p class="n">Looking&hellip;</p>';
-  out.scrollIntoView({ behavior:"smooth", block:"start" });
+function tabs(){
+  if (!S.key) { el("tabs").style.display = "none"; return; }
+  el("tabs").style.display = "flex";
+  var items = S.role === "publisher"
+    ? [["home","Waiting","\u25CE"],["money","Earnings","\u25A4"],["set","Settings","\u2699"]]
+    : [["home","My ads","\u25A0"],["new","New","\uFF0B"],["set","Settings","\u2699"]];
+  el("tabs").innerHTML = items.map(function(i){
+    return '<button class="' + (S.screen===i[0]?"on":"") + '" onclick="go(\'' + i[0] + '\')">'
+         + '<span class="ic">' + i[2] + '</span>' + i[1] + '</button>';
+  }).join("");
+}
 
-  fetch(API + "?sites=1&q=" + encodeURIComponent(t))
+function go(s){ S.screen = s; if (s === "new") { S.step = 0; } render(); }
+
+function render(){
+  tabs();
+  if (!S.key) return openScreen();
+  if (S.role === "publisher") {
+    if (S.screen === "home")  return pubHome();
+    if (S.screen === "money") return pubMoney();
+    return settings();
+  }
+  if (S.screen === "home") return advHome();
+  if (S.screen === "new")  return advNew();
+  if (S.screen === "detail") return advDetail();
+  return settings();
+}
+
+/* ---------- open ---------- */
+
+function openScreen(){
+  el("app").innerHTML = bar()
+    + '<div class="pad" style="padding-top:44px">'
+    + '<p class="hero">Your advertising,<br>in your pocket.</p>'
+    + '<p class="lede">Sign in with the key we sent you. Publishers and '
+    + 'advertisers use the same app.</p>'
+    + '<label><span>Your key or email</span>'
+    + '<input id="k" placeholder="pub-xxxxxxxx or your email" autocapitalize="off" '
+    + 'autocorrect="off" spellcheck="false"></label>'
+    + '<button class="b-1 wide" onclick="signin()">Open</button>'
+    + '<p id="e" class="err"></p>'
+    + '<p style="margin-top:26px;font-size:14.5px;color:var(--muted)">'
+    + 'No account? <a href="https://adhotbox.com/join.html" style="color:var(--navy)">'
+    + 'Carry ads on your site</a> or '
+    + '<a href="https://adhotbox.com/advertise.html" style="color:var(--navy)">advertise</a>.</p>'
+    + '</div>';
+}
+
+function signin(){
+  var v = (el("k").value || "").trim();
+  if (!v) return;
+  el("e").textContent = "";
+
+  if (v.indexOf("pub-") === 0) {
+    fetch(API + "?queue=1&pub=" + encodeURIComponent(v))
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if (!d.ok) throw new Error(d.error || "not recognised");
+        S.role = "publisher"; S.key = v; S.data = d; save(); go("home");
+      })
+      .catch(function(e){ el("e").textContent = String(e.message || e); });
+    return;
+  }
+
+  if (v.indexOf("@") > 0) {
+    S.role = "advertiser"; S.email = v; S.key = v; save(); go("home");
+    return;
+  }
+  el("e").textContent = "That does not look like a key or an email address.";
+}
+
+/* ---------- advertiser ---------- */
+
+function advHome(){
+  el("app").innerHTML = bar("My ads") + '<div class="pad" id="b">'
+    + '<p class="quiet">Loading…</p></div>';
+
+  fetch(API + "?report=" + encodeURIComponent(localStorage.getItem("ahb_camp") || "")
+        + "&email=" + encodeURIComponent(S.email))
     .then(function(r){ return r.json(); })
     .then(function(d){
-      real(d);
-      var s = d.sites || [];
-      if (!s.length) {
-        res.innerHTML = '<div class="none"><b>Nothing there yet.</b><br>'
-          + 'Tell us the town or the subject and we will write when a site turns '
-          + 'up &mdash; or if you have one, put it on and be the first.'
-          + '<div style="margin-top:14px">'
-          + '<a class="go" href="advertise.html">Tell us what you want</a></div></div>';
-        return;
-      }
-      var reach = d.monthly_reach
-        ? ' &middot; about ' + d.monthly_reach.toLocaleString() + ' readers a month'
-        : '';
-      res.innerHTML =
-          '<p class="n">' + s.length + ' site' + (s.length===1?"":"s")
-        + (t ? ' for &ldquo;' + esc(t) + '&rdquo;' : '') + '</p>'
-        + '<p class="r">$' + (s.length*20) + ' a month for all of them'
-        + reach + '</p>'
-        + s.slice(0,40).map(function(x){
-            return '<div class="site"><span class="m">'
-              + '<span class="d">' + esc(x.name || x.domain) + '</span>'
-              + '<span class="w">' + esc(x.where || "")
-              + (x.where && x.topic ? ' &middot; ' : '') + esc(x.topic || "")
-              + (x.views ? ' &middot; ' + x.views.toLocaleString() + ' a month' : '')
-              + '</span></span>'
-              + '<span class="p">$20<small>a month</small></span></div>';
-          }).join("")
-        + '<a class="go" href="advertise.html">Advertise on these &rarr;</a>';
+      if (!d.ok) throw new Error("nothing yet");
+      S.data = d;
+      el("b").innerHTML = advCard(d)
+        + '<button class="b-o wide" onclick="go(\'new\')">+ New advertisement</button>';
     })
     .catch(function(){
-      res.innerHTML = '<div class="none">Could not search just now.</div>';
+      el("b").innerHTML =
+          '<div class="note"><b>Nothing running yet.</b> Once an advertisement is '
+        + 'approved it appears here with what it is doing.</div>'
+        + '<button class="b-o wide" onclick="go(\'new\')">+ New advertisement</button>';
     });
 }
 
-/* fill the chips with real ones on load, quietly */
-fetch(API + "?sites=1").then(function(r){ return r.json(); })
-  .then(function(d){ if (d && d.ok) real(d); }).catch(function(){});
+function advCard(d){
+  var c = d.campaign || {};
+  return '<div class="card" onclick="go(\'detail\')">'
+    + '<p class="co">' + esc(c.head || "Your advertisement") + '</p>'
+    + '<p class="sub">' + esc(c.geo || "") + '</p>'
+    + '<span class="pill p-' + (c.status === "live" ? "live" : "pending") + '">'
+    +   esc(c.status || "pending") + '</span>'
+    + '<div class="nums">'
+    +   '<div><p class="n">' + (d.impressions||0) + '</p><p class="l">Seen</p></div>'
+    +   '<div><p class="n">' + (d.clicks||0) + '</p><p class="l">Clicks</p></div>'
+    +   '<div><p class="n">' + (d.by_site ? d.by_site.length : 0) + '</p><p class="l">Sites</p></div>'
+    + '</div>'
+    + '<div class="acts">'
+    +   '<button class="b-2">Pause</button>'
+    +   '<button class="b-1" onclick="go(\'detail\')">See more</button>'
+    + '</div></div>';
+}
+
+function advDetail(){
+  var d = S.data || {}, sites = d.by_site || [];
+  el("app").innerHTML = bar("The numbers", "home") + '<div class="pad">'
+    + '<div class="note"><b>We do not know who saw it.</b> We know where it ran, '
+    + 'how often, and who clicked through. Nothing about a person is recorded.</div>'
+    + '<div class="card"><p class="co">Where it ran</p>'
+    + (sites.length ? sites.map(function(s){
+        return '<div class="row"><span class="k">' + esc(s.site_domain)
+             + (s.city ? '<br><span style="font-size:13px">' + esc(s.city) + '</span>' : '')
+             + '</span><span class="v">' + (s.impressions||0) + '<br>'
+             + '<span style="font-size:12px;color:var(--muted)">' + (s.clicks||0) + ' clicks</span>'
+             + '</span></div>';
+      }).join("") : '<p class="quiet">Nothing yet.</p>')
+    + '</div></div>';
+}
+
+/* ---------- new advertisement — one question a screen ---------- */
+
+var TOWNS = ["Clifton","Nutley","Passaic","Montclair","Bloomfield","Paterson",
+             "Belleville","Little Falls","Wayne","Rutherford"];
+
+function advNew(){
+  var st = S.step, d = S.draft;
+  var dots = '<div class="steps">'
+    + [0,1,2,3,4].map(function(i){ return '<div class="' + (i<=st?"on":"") + '"></div>'; }).join("")
+    + '</div>';
+
+  var body = "";
+
+  if (st === 0) {
+    body = '<p class="hero">What do you do?</p>'
+      + '<p class="lede">One line. This is not the advertisement — it tells us '
+      + 'which sites are a fit.</p>'
+      + '<label><input id="f" value="' + esc(d.what) + '" '
+      + 'placeholder="Roof repair and replacement"></label>'
+      + '<button class="b-1 wide" onclick="step(1)">Next</button>';
+  }
+
+  if (st === 1) {
+    body = '<p class="hero">Where?</p>'
+      + '<p class="lede">Tap the towns you work in. Your advertisement only appears '
+      + 'on sites read in those places.</p>'
+      + '<div class="chips">' + TOWNS.map(function(t){
+          return '<button class="chip ' + (d.towns.indexOf(t)>-1?"on":"") + '" '
+               + 'onclick="town(\'' + t + '\')">' + t + '</button>'; }).join("")
+      + '</div>'
+      + '<button class="b-1 wide" style="margin-top:24px" onclick="step(2)">Next</button>';
+  }
+
+  if (st === 2) {
+    body = '<p class="hero">Make it.</p>'
+      + '<p class="lede">A picture of the work, or forty-five seconds of video. '
+      + 'Your words go underneath either way, so it still reads for anybody who '
+      + 'does not press play. Words alone are fine too.</p>'
+      + '<div class="shot" id="shot"><span class="empty">No picture yet</span></div>'
+      + '<div class="take">'
+      +   '<label><span class="fake">Take a picture</span>'
+      +     '<input type="file" accept="image/*" capture="environment" onchange="shot(this)"></label>'
+      +   '<label><span class="fake alt">From the phone</span>'
+      +     '<input type="file" accept="image/*" onchange="shot(this)"></label>'
+      + '</div>'
+      + '<div class="take" style="margin-top:8px">'
+      +   '<label><span class="fake vid">Film 45 seconds</span>'
+      +     '<input type="file" accept="video/*" capture="environment" onchange="vid(this)"></label>'
+      +   '<label><span class="fake alt">A video from the phone</span>'
+      +     '<input type="file" accept="video/*" onchange="vid(this)"></label>'
+      + '</div>'
+      + '<p id="vinfo" class="vinfo"></p>'
+      + '<div class="styles">'
+      +   ['bottom','top','band','none'].map(function(k){
+            var n = {bottom:"Words at the bottom",top:"Words at the top",
+                     band:"Band across it",none:"No words on the picture"}[k];
+            return '<button class="' + (d.style===k?"on":"") + '" onclick="sty(\'' + k + '\')">'
+                 + n + '</button>'; }).join("")
+      + '</div>'
+      + '<label style="margin-top:20px"><span>Headline</span><input id="h" value="'
+      + esc(d.head) + '" oninput="live()" placeholder="Storm damage? We answer the phone."></label>'
+      + '<label><span>Two lines under it</span><textarea id="bd" rows="3" oninput="live()" '
+      + 'placeholder="Thirty years on roofs in Passaic County. Free estimate, and we '
+      + 'show up when we say.">' + esc(d.body) + '</textarea></label>'
+      + '<div id="pv"></div>'
+      + '<button class="b-1 wide" style="margin-top:20px" onclick="step(3)">Next</button>';
+  }
+
+  if (st === 3) {
+    body = '<p class="hero">Pick the sites.</p>'
+      + '<p class="lede">Twenty dollars a month each. Every one shows its town and '
+      + 'roughly how many people read it.</p>'
+      + '<div id="sites"><p class="quiet">Looking…</p></div>';
+  }
+
+  if (st === 4) {
+    var n = d.sites.length, total = n * 20;
+    body = '<p class="hero">' + n + ' place' + (n===1?"":"s") + ', a month.</p>'
+      + '<div class="card">'
+      +   d.sites.map(function(x){
+            return '<div class="row"><span class="k">' + esc(x.domain)
+                 + '<br><span style="font-size:13px">' + esc(x.where||"") + '</span></span>'
+                 + '<span class="v">$20</span></div>'; }).join("")
+      +   '<div class="row" style="border-top:2px solid var(--ink);border-bottom:0;'
+      +     'padding-top:14px"><span class="k" style="font-weight:900;color:var(--ink)">'
+      +     'A month</span><span class="v" style="font-size:20px">$' + total + '</span></div>'
+      + '</div>'
+      + '<div class="note">A person reads this, and <b>every site decides for itself</b> '
+      + 'whether to carry it. A site may say no, and <b>you are not charged for a '
+      + 'placement that does not run.</b> Month to month — stop whenever you like.</div>'
+      + '<button class="b-o wide" onclick="submitAd()">Send it</button>';
+  }
+
+  el("app").innerHTML = bar("New advertisement", st ? null : "home")
+    + '<div class="pad">' + dots + body + '</div>';
+
+  if (st === 2) { live(); paint(); }
+  if (st === 3) loadSites();
+}
+
+/* ---------- the picture ---------- */
+
+function shot(input){
+  var f = input.files && input.files[0];
+  if (!f) return;
+  var r = new FileReader();
+  r.onload = function(){
+    var img = new Image();
+    img.onload = function(){ S.draft.photo = img; paint(); live(); };
+    img.src = r.result;
+  };
+  r.readAsDataURL(f);
+}
+
+function sty(k){ S.draft.style = k; paint(); live(); }
+
+/* ---------- a video, forty-five seconds ---------- */
+
+function vid(input){
+  var f = input.files && input.files[0];
+  if (!f) return;
+  var info = el("vinfo");
+  info.className = "vinfo";
+  info.textContent = "Checking the length…";
+
+  var v = document.createElement("video");
+  v.preload = "metadata";
+  v.onloadedmetadata = function(){
+    var secs = Math.round(v.duration || 0);
+    URL.revokeObjectURL(v.src);
+
+    if (!secs) { info.className = "vinfo bad"; info.textContent =
+      "Could not read that file. An mp4 from the phone works best."; return; }
+
+    if (secs > 45) {
+      info.className = "vinfo bad";
+      info.textContent = "That one is " + secs + " seconds. "
+        + "Forty-five is the most — trim it and try again. Nobody watches longer.";
+      S.draft.video = null; S.draft.videoSecs = 0;
+      return;
+    }
+
+    if (f.size > 30 * 1024 * 1024) {
+      info.className = "vinfo bad";
+      info.textContent = "That file is " + (f.size/1048576).toFixed(0)
+        + " MB. Keep it under 30 — film at a lower quality if you need to.";
+      return;
+    }
+
+    S.draft.video = f;
+    S.draft.videoSecs = secs;
+    S.draft.photo = null;                 /* a video replaces the picture */
+    info.className = "vinfo good";
+    info.textContent = secs + " seconds, " + (f.size/1048576).toFixed(1)
+      + " MB. Good. Your words go underneath it.";
+    paint();
+  };
+  v.onerror = function(){
+    info.className = "vinfo bad";
+    info.textContent = "Could not read that file. An mp4 works best.";
+  };
+  v.src = URL.createObjectURL(f);
+}
+
+/* draw the photo and the words onto a canvas, so what he sees is
+   what gets uploaded — not a preview of something else */
+function paint(){
+  var box = el("shot"); if (!box) return;
+  var d = S.draft;
+
+  if (d.video) {
+    box.innerHTML = '<span class="vready">'
+      + '<span class="play"></span>'
+      + '<span class="lab">' + d.videoSecs + ' seconds &middot; ready</span>'
+      + '</span>';
+    return;
+  }
+
+  if (!d.photo) { box.innerHTML = '<span class="empty">No picture yet</span>'; return; }
+
+  var W = 1200, H = 800;
+  var c = document.createElement("canvas");
+  c.width = W; c.height = H;
+  var x = c.getContext("2d");
+
+  /* cover */
+  var ir = d.photo.width / d.photo.height, br = W / H, sw, sh, sx, sy;
+  if (ir > br) { sh = d.photo.height; sw = sh * br; sx = (d.photo.width - sw)/2; sy = 0; }
+  else { sw = d.photo.width; sh = sw / br; sx = 0; sy = (d.photo.height - sh)/2; }
+  x.drawImage(d.photo, sx, sy, sw, sh, 0, 0, W, H);
+
+  var head = (el("h") ? el("h").value : d.head) || "";
+  var line = (el("bd") ? el("bd").value : d.body) || "";
+
+  if (d.style !== "none" && (head || line)) {
+    var top = d.style === "top";
+    if (d.style === "band") {
+      x.fillStyle = "rgba(12,18,32,.86)";
+      x.fillRect(0, H*0.62, W, H*0.38);
+    } else {
+      var g = x.createLinearGradient(0, top ? 0 : H, 0, top ? H*0.55 : H*0.35);
+      g.addColorStop(0, "rgba(12,18,32,.88)");
+      g.addColorStop(1, "rgba(12,18,32,0)");
+      x.fillStyle = g;
+      x.fillRect(0, top ? 0 : H*0.35, W, top ? H*0.55 : H*0.65);
+    }
+    x.fillStyle = "#fff";
+    x.textBaseline = "top";
+    var y = top ? 60 : H - 210;
+    x.font = "900 62px Rubik, system-ui, sans-serif";
+    wrap(x, head, 60, y, W-120, 68);
+    x.font = "400 34px Rubik, system-ui, sans-serif";
+    x.fillStyle = "rgba(255,255,255,.86)";
+    wrap(x, line, 60, y + 82, W-120, 42);
+    /* the orange rule, so it looks like ours */
+    x.fillStyle = "#FF4A00";
+    x.fillRect(0, top ? 0 : H-6, 120, 6);
+  }
+
+  box.innerHTML = "";
+  box.appendChild(c);
+  S.draft.canvas = c;
+}
+
+function wrap(x, text, left, top, max, lh){
+  var words = String(text||"").split(/\s+/), line = "", y = top, n = 0;
+  for (var i = 0; i < words.length; i++) {
+    var t = line ? line + " " + words[i] : words[i];
+    if (x.measureText(t).width > max && line) {
+      x.fillText(line, left, y); line = words[i]; y += lh; n++;
+      if (n > 2) return;
+    } else line = t;
+  }
+  if (line) x.fillText(line, left, y);
+}
+
+/* ---------- picking the sites ---------- */
+
+function loadSites(){
+  var box = el("sites"); if (!box) return;
+  var d = S.draft;
+  var city = d.towns.length ? d.towns[0] : "";
+  fetch(API + "?sites=1&city=" + encodeURIComponent(city))
+    .then(function(r){ return r.json(); })
+    .then(function(res){
+      var list = res.sites || [];
+      if (!list.length) {
+        box.innerHTML = '<div class="note">Nothing on the network in those towns '
+          + 'yet. <b>Send it anyway</b> and we will tell you when there is.</div>'
+          + '<button class="b-1 wide" onclick="step(4)">Carry on</button>';
+        return;
+      }
+      box.innerHTML = list.map(function(x){
+        var on = d.sites.some(function(y){ return y.id === x.id; });
+        return '<div class="site' + (on?" on":"") + '" onclick="pick(' + x.id + ')">'
+          + '<span class="tick">&#10003;</span>'
+          + '<span class="m"><span class="d">' + esc(x.name || x.domain)
+          + (x.promoted ? '<span class="promo">picked</span>' : '') + '</span>'
+          + '<span class="w">' + esc(x.where || "") + ' &middot; ' + esc(x.topic || "")
+          + ' &middot; ' + (x.views ? x.views.toLocaleString() + ' a month' : 'new')
+          + '</span></span>'
+          + '<span class="pr">$20</span></div>';
+      }).join("");
+      S.sitesList = list;
+      totalBar();
+    })
+    .catch(function(){ box.innerHTML = '<p class="quiet">Could not load.</p>'; });
+}
+
+function pick(id){
+  var d = S.draft;
+  var i = d.sites.findIndex(function(y){ return y.id === id; });
+  if (i > -1) d.sites.splice(i,1);
+  else {
+    var x = (S.sitesList||[]).filter(function(y){ return y.id === id; })[0];
+    if (x) d.sites.push(x);
+  }
+  loadSites();
+}
+
+function totalBar(){
+  var old = el("tot"); if (old) old.remove();
+  var n = S.draft.sites.length;
+  if (!n) return;
+  var b = document.createElement("div");
+  b.className = "total"; b.id = "tot";
+  b.innerHTML = '<span><span class="t">$' + (n*20) + '</span>'
+    + '<span class="s"> a month</span><br><span class="s">' + n + ' place'
+    + (n===1?"":"s") + '</span></span>'
+    + '<button onclick="step(4)">Next</button>';
+  document.body.appendChild(b);
+}
+
+function step(n){
+  var d = S.draft;
+  if (S.step === 0 && el("f")) d.what = el("f").value;
+  if (S.step === 2) { if (el("h")) d.head = el("h").value; if (el("bd")) d.body = el("bd").value; }
+  var t = el("tot"); if (t) t.remove();
+  S.step = n; advNew();
+}
+function town(t){
+  var i = S.draft.towns.indexOf(t);
+  if (i > -1) S.draft.towns.splice(i,1); else S.draft.towns.push(t);
+  advNew();
+}
+function slots(){ S.draft.slots = parseInt(el("sl").value,10) || 1; advNew(); }
+function live(){
+  var h = el("h") ? el("h").value : "", b = el("bd") ? el("bd").value : "";
+  if (!el("pv")) return;
+  el("pv").innerHTML = '<p style="font:700 12px var(--mono);letter-spacing:.12em;'
+    + 'text-transform:uppercase;color:var(--muted);margin:18px 0 0">How it will look</p>'
+    + '<div class="preview"><span class="bar2"></span><span class="in">'
+    + '<span class="eb">Sponsor</span>'
+    + '<h5>' + esc(h || "Your headline") + '</h5>'
+    + '<p>' + esc(b || "Two lines about what you do and why somebody should call.") + '</p>'
+    + '</span></div>';
+}
+
+function submitAd(){
+  var d = S.draft;
+  if (d.video && !d.videoUrl) return uploadVideo(function(){ submitAd(); });
+  if (!d.video && d.canvas && !d.artUrl) return uploadArt(function(){ submitAd(); });
+  var p = new URLSearchParams({
+    apply:"advertiser", name: d.what || "New advertiser",
+    contact: S.email, email: S.email,
+    note: "HEAD: " + d.head + " | BODY: " + d.body
+        + " | TOWNS: " + d.towns.join(", ")
+        + " | SITES: " + d.sites.map(function(x){ return x.domain; }).join(", ")
+        + " | PLACEMENTS: " + d.sites.length
+        + (d.artUrl ? " | ART: " + d.artUrl : "")
+        + (d.videoUrl ? " | VIDEO: " + d.videoUrl + " (" + d.videoSecs + "s)" : "")
+  });
+  el("app").innerHTML = bar("Sent") + '<div class="pad" style="padding-top:50px">'
+    + '<p class="hero">Sent.</p>'
+    + '<p class="lede">A person reads every one. You will hear back with what is '
+    + 'available where you named, and what it costs.</p>'
+    + '<div class="note"><b>Nothing is charged yet.</b> Not until the placements '
+    + 'are agreed and the sites have accepted them.</div>'
+    + '<button class="b-1 wide" onclick="go(\'home\')">Done</button></div>';
+  fetch(API + "?" + p.toString()).catch(function(){});
+}
+
+function uploadVideo(then){
+  var d = S.draft;
+  el("app").innerHTML = bar("Sending") + '<div class="pad" style="padding-top:60px">'
+    + '<p class="hero">Sending the video…</p>'
+    + '<p class="lede">It is ' + (d.video.size/1048576).toFixed(1)
+    + ' MB, so give it a moment on a phone signal.</p></div>';
+
+  fetch(API + "?video=1&seconds=" + d.videoSecs
+        + "&email=" + encodeURIComponent(S.email), {
+    method: "POST",
+    headers: { "Content-Type": d.video.type || "video/mp4" },
+    body: d.video
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(res){ d.videoUrl = res.url || null; then(); })
+  .catch(function(){ then(); });          /* the words alone still go */
+}
+
+function uploadArt(then){
+  var d = S.draft;
+  el("app").innerHTML = bar("Sending") + '<div class="pad" style="padding-top:60px">'
+    + '<p class="hero">Sending the picture…</p></div>';
+  d.canvas.toBlob(function(blob){
+    fetch(API + "?upload=1&email=" + encodeURIComponent(S.email), {
+      method: "POST",
+      headers: { "Content-Type": "image/jpeg" },
+      body: blob
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(res){ d.artUrl = res.url || null; then(); })
+    .catch(function(){ then(); });          /* words alone still go */
+  }, "image/jpeg", 0.82);
+}
+
+/* ---------- publisher ---------- */
+
+function pubHome(){
+  el("app").innerHTML = bar("Waiting") + '<div class="pad" id="b">'
+    + '<p class="quiet">Loading…</p></div>';
+
+  fetch(API + "?queue=1&pub=" + encodeURIComponent(S.key))
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      S.data = d;
+      var ads = (d.campaigns || []).filter(function(c){ return c.verdict === "undecided"; });
+      var h = ads.length
+        ? '<p style="font:900 22px Rubik;margin:0 0 16px">' + ads.length + ' waiting</p>'
+          + ads.map(pubCard).join("")
+        : '<div class="note"><b>Nothing waiting.</b> New advertisers appear here as '
+          + 'they are accepted onto the network. You will get one notification and '
+          + 'nothing else.</div>';
+      el("b").innerHTML = h;
+    })
+    .catch(function(){ el("b").innerHTML = '<p class="quiet">Could not load.</p>'; });
+}
+
+function pubCard(a){
+  return '<div class="card">'
+    + '<p class="co">' + esc(a.advertiser || "—") + '</p>'
+    + '<p class="sub">' + esc(a.category || "") + '</p>'
+    + '<p style="font:700 16px Rubik;margin:14px 0 6px">' + esc(a.head) + '</p>'
+    + (a.body ? '<p class="sub">' + esc(a.body) + '</p>' : '')
+    + '<div class="acts">'
+    +   '<button class="b-y" onclick="decide(' + a.id + ',\'accept\')">Accept</button>'
+    +   '<button class="b-n" onclick="decide(' + a.id + ',\'deny\')">Deny</button>'
+    + '</div></div>';
+}
+
+function decide(id, v){
+  fetch(API + "?decide=" + v + "&pub=" + encodeURIComponent(S.key) + "&id=" + id)
+    .then(function(r){ return r.json(); }).then(pubHome);
+}
+
+function pubMoney(){
+  var e = (S.data && S.data.earnings) || {};
+  var p = (S.data && S.data.publisher) || {};
+  el("app").innerHTML = bar("Earnings") + '<div class="pad">'
+    + '<div class="card"><div class="nums" style="margin-top:0;border-top:0">'
+    + '<div><p class="n">' + money(e.pub_share_cents) + '</p><p class="l">Yours</p></div>'
+    + '<div><p class="n">' + (e.impressions||0) + '</p><p class="l">Seen</p></div>'
+    + '<div><p class="n">' + (e.clicks||0) + '</p><p class="l">Clicks</p></div>'
+    + '</div></div>'
+    + '<div class="card"><p class="co">Your sites</p>'
+    + ((S.data && S.data.sites || []).map(function(s){
+        return '<div class="row"><span class="k">' + esc(s.domain) + '</span>'
+             + '<span class="v">' + esc(s.status) + '</span></div>'; }).join("")
+       || '<p class="quiet">None yet.</p>')
+    + '</div></div>';
+}
+
+/* ---------- settings ---------- */
+
+function settings(){
+  var pub = S.role === "publisher";
+  var p = (S.data && S.data.publisher) || {};
+  el("app").innerHTML = bar("Settings") + '<div class="pad">'
+    + '<div class="card">'
+    +   '<div class="row"><span class="k">Signed in as</span><span class="v" '
+    +     'style="font-size:13px">' + esc(S.email || S.key) + '</span></div>'
+    +   (pub ? '<div class="row"><span class="k">Your rate</span><span class="v">'
+    +     (p.rev_share_pct||0) + '%</span></div>' : '')
+    + '</div>'
+    + (pub
+      ? '<div class="card"><p class="co">Accept everything</p>'
+        + '<p class="sub" style="margin:6px 0 14px">Leave this off and nothing runs '
+        + 'on your sites until you say yes to it.</p>'
+        + '<button class="' + (p.auto_accept ? "b-y" : "b-2") + ' wide" '
+        + 'onclick="auto(' + (p.auto_accept?0:1) + ')">'
+        + (p.auto_accept ? "On" : "Off") + '</button></div>'
+      : '')
+    + '<div class="note">No cookies. No identifier. Nothing here follows anybody '
+    + 'anywhere &mdash; not your readers, and not you.</div>'
+    + '<button class="b-2 wide" onclick="out()">Sign out</button>'
+    + '</div>';
+}
+
+function auto(on){
+  fetch(API + "?decide=auto&pub=" + encodeURIComponent(S.key) + "&on=" + on)
+    .then(function(r){ return r.json(); })
+    .then(function(){ pubHome(); go("set"); });
+}
+function out(){
+  localStorage.clear(); S.key = ""; S.role = ""; S.email = ""; S.data = null;
+  go("home");
+}
+
+/* ---------- start ---------- */
+render();
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js").catch(function(){});
+}
 </script>
-<script src="box.js"></script>
-<script src="/nav.js"></script>
 </body>
 </html>
