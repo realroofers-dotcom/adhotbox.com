@@ -1,4 +1,4 @@
-<!-- BUILT 2026-08-30 16:02 ET -->
+<!-- BUILT 2026-08-31 17:13 ET -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -186,7 +186,10 @@ function card(a){
   return '<div class="ad' + (decided ? " decided" : "") + '">'
     + '<div class="top"><span class="adv">' + esc(a.advertiser || "—") + '</span>'
     +   '<span class="cat">' + esc(a.category || "general") + '</span>'
-    +   '<span class="rate">' + (a.cpm_cents ? money(a.cpm_cents) + " per 1,000" : "house") + '</span></div>'
+    +   '<span class="rate">' + (a.you_get_cents
+          ? '<b style="color:var(--good);font-size:15px">' + money(a.you_get_cents)
+            + '</b> <span style="color:var(--muted)">a month, yours</span>'
+          : "house") + '</span></div>'
     + '<h3>' + esc(a.head) + '</h3>'
     + (a.body ? '<p>' + esc(a.body) + '</p>' : '')
     + '<p class="link">' + esc(a.href) + '</p>'

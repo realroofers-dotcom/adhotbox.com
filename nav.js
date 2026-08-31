@@ -1,4 +1,4 @@
-/* BUILT 2026-08-30 16:04 ET */
+/* BUILT 2026-08-31 16:59 ET */
 /* ============================================================
    nav.js — the menu, on every page
    One file. Change it here and it changes everywhere.
@@ -19,6 +19,7 @@ var LINKS = [
   { href: "/start.html",     label: "Start here", cta: true },
   { href: "/join.html",      label: "Carry ads" },
   { href: "/compare.html",   label: "How we compare" },
+  { href: "/install.html",   label: "Install it" },
   { href: "/wordpress.html", label: "WordPress" },
   { href: "/app/",           label: "The app" },
   { href: "/desk.html",      label: "Your desk" }
