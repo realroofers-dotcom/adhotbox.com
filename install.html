@@ -1,0 +1,396 @@
+<!-- BUILT 2026-08-31 17:05 ET -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Putting it on your site — AdHotBox</title>
+<meta name="description" content="Pick what your site is built with and follow the steps. Then press the button and we will check it worked.">
+<link rel="canonical" href="https://adhotbox.com/install.html">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0C1220;--paper:#fff;--wash:#F2F4F8;--rule:#D5DAE4;--muted:#5A6478;
+  --hot:#FF4A00;--navy:#00208B;--good:#0A7A3C;--bad:#8F1D24;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font:400 17px/1.6 Rubik,system-ui,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-weight:900;letter-spacing:-.024em;line-height:1.08;margin:0}
+p{margin:0 0 1em;max-width:64ch}
+a{color:var(--navy)}
+.eyebrow{font:900 11px/1 Rubik;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--hot);margin:0 0 10px}
+
+header{background:var(--ink);color:#fff;padding:44px 0 46px}
+header h1{font-size:clamp(30px,5.6vw,50px);max-width:16ch}
+header .sub{color:#B9C2D6;font-size:18px;margin-top:14px;max-width:50ch}
+
+section{padding:38px 0;border-bottom:1px solid var(--rule)}
+h2{font-size:clamp(22px,3.6vw,30px);margin-bottom:10px}
+.lede{color:var(--muted);max-width:58ch;margin-bottom:22px}
+
+/* pick a platform */
+.picks{display:grid;gap:9px}
+@media(min-width:620px){.picks{grid-template-columns:repeat(3,1fr)}}
+.picks button{background:#fff;border:1.5px solid var(--rule);border-radius:11px;
+  padding:17px 14px;font:700 16px Rubik;color:var(--ink);cursor:pointer;text-align:left}
+.picks button:hover{border-color:var(--ink)}
+.picks button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.picks button small{display:block;font:400 13px Rubik;color:var(--muted);margin-top:3px}
+.picks button.on small{color:#9FAAC6}
+
+/* steps */
+#how{display:none}
+#how.on{display:block}
+.step{display:flex;gap:16px;padding:20px 0;border-bottom:1px solid var(--rule)}
+.step:last-child{border-bottom:0}
+.step .n{flex:0 0 38px;height:38px;border-radius:50%;background:var(--ink);color:#fff;
+  font:900 18px/38px var(--mono);text-align:center}
+.step .b{flex:1;min-width:0}
+.step h3{font-size:19px;margin-bottom:6px}
+.step p{font-size:15.5px;color:#39415A;margin:0 0 8px}
+.step p:last-child{margin:0}
+pre{background:var(--ink);color:#E6EAF2;padding:14px 16px;border-radius:8px;
+  font:13px/1.7 var(--mono);overflow-x:auto;margin:10px 0;position:relative}
+.copy{background:var(--wash);border:1px solid var(--rule);border-radius:8px;
+  padding:12px 14px;margin:10px 0}
+.copy code{font:13.5px var(--mono);word-break:break-all}
+.copy button{float:right;background:var(--ink);color:#fff;border:0;border-radius:6px;
+  padding:6px 12px;font:600 13px Rubik;cursor:pointer;margin-left:10px}
+code{font:14.5px var(--mono);background:var(--wash);padding:2px 6px;border-radius:4px}
+.tip{background:var(--wash);border-left:4px solid var(--hot);padding:12px 15px;
+  font-size:14.5px;color:#39415A;margin:10px 0 0}
+.tip b{color:var(--ink)}
+
+/* the check */
+.check{background:var(--ink);color:#fff;border-radius:12px;padding:26px}
+.check h2{color:#fff;margin-bottom:8px}
+.check p{color:#B9C2D6}
+.check .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.check input{flex:1;min-width:200px;font:17px Rubik;padding:15px 16px;border:0;
+  border-radius:9px}
+.check button{font:700 17px Rubik;background:var(--hot);border:0;color:#180B05;
+  padding:15px 26px;border-radius:9px;cursor:pointer}
+#verdict{margin-top:16px;display:none}
+#verdict.on{display:block}
+.v{background:#fff;color:var(--ink);border-radius:10px;padding:18px 20px}
+.v h3{font-size:19px;margin-bottom:8px}
+.v.good h3{color:var(--good)}
+.v.bad h3{color:var(--bad)}
+.v p{color:#39415A;margin:0}
+.marks{display:flex;gap:18px;margin:12px 0 0;flex-wrap:wrap}
+.marks span{font:600 14.5px Rubik}
+.marks .y{color:var(--good)}
+.marks .n{color:var(--bad)}
+
+.auto{display:grid;gap:12px;margin-top:8px}
+@media(min-width:700px){.auto{grid-template-columns:1fr 1fr}}
+.auto div{background:var(--wash);border-radius:10px;padding:16px 18px}
+.auto h3{font-size:16.5px;margin-bottom:5px}
+.auto p{font-size:14.5px;color:var(--muted);margin:0}
+footer{padding:28px 0 60px;font-size:14px;color:var(--muted)}
+footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+
+<div id="ahb-nav"></div>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">One line, then a button that checks</p>
+    <h1>Putting it on your site.</h1>
+    <p class="sub">Paste one line and the advertisements place themselves. No
+    account needed to try it &mdash; you will see it working straight away.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Step one</p>
+    <h2>What is your site built with?</h2>
+    <p class="lede">Not sure? Pick <b>Something else</b> — those steps work
+    everywhere.</p>
+
+    <div class="picks" id="picks">
+      <button data-p="wordpress">WordPress<small>A plugin. Three clicks.</small></button>
+      <button data-p="squarespace">Squarespace<small>One box in Settings.</small></button>
+      <button data-p="wix">Wix<small>Custom code, in Settings.</small></button>
+      <button data-p="shopify">Shopify<small>Edit the theme layout.</small></button>
+      <button data-p="ghost">Ghost<small>Code injection.</small></button>
+      <button data-p="webflow">Webflow<small>Custom code, before body.</small></button>
+      <button data-p="gtm">Google Tag Manager<small>If you already use it.</small></button>
+      <button data-p="cpanel">cPanel or FTP<small>Editing the file yourself.</small></button>
+      <button data-p="other">Something else<small>Two lines. Works anywhere.</small></button>
+    </div>
+  </div>
+</section>
+
+<div id="how"><section><div class="wrap" id="steps"></div></section></div>
+
+<section>
+  <div class="wrap">
+    <div class="check">
+      <h2>Did it work?</h2>
+      <p>Put your address in and we will open your front page and look for both
+      pieces. <b>No account needed.</b></p>
+      <div class="row">
+        <input id="dom" placeholder="yoursite.com" autocapitalize="off"
+               autocorrect="off" spellcheck="false"
+               onkeydown="if(event.key==='Enter')check()">
+        <button onclick="check()">Check my site</button>
+      </div>
+      <div id="verdict"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Before you apply</p>
+    <h2>You can try it right now</h2>
+    <p class="lede">Paste the line and one of our own advertisements appears,
+    marked <b>Demonstration</b>. That is not a trick to make the page look busy —
+    it is there so you can see the thing working before you commit to anything.</p>
+    <p>No account, no key, nothing to sign. <b>Real advertisers never reach a site
+    nobody has approved</b>, and a demonstration earns nobody anything.</p>
+    <p>When you apply and are accepted, the demonstration is replaced by advertisers
+    you have said yes to.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Honest answer</p>
+    <h2>Is there a program that installs it for me?</h2>
+    <p class="lede">No, and it is worth knowing why.</p>
+    <p><b>Nothing you download can write to your web server.</b> To do that it
+    would need your hosting password — and a program that asks a stranger for
+    those is indistinguishable from a scam. That boundary is deliberate and it
+    protects you.</p>
+    <p><b>What we did instead was remove the work.</b> One line in your footer and
+    the advertisements place themselves — no second paste, no code blocks, no
+    editing pages. That is as close to automatic as anything can safely get.</p>
+    <p>And beyond that, an install button inside the platform you already use:</p>
+    <div class="auto">
+      <div><h3>One line, anywhere</h3><p>Paste it in the footer and the slots place
+        themselves. Works on any site, on any host, today.</p></div>
+      <div><h3>WordPress</h3><p>A plugin. Upload, activate, paste your key. Already built.</p></div>
+      <div><h3>Shopify, Wix, Squarespace, Ghost, Webflow</h3>
+        <p>Each has its own app listing with an Install button. We are building
+        them one at a time — tell us which you use and it moves up the list.</p></div>
+      <div><h3>Google Tag Manager</h3><p>If your site already has it, one paste
+        inside GTM and you never touch your site's code at all.</p></div>
+      <div><h3>Behind Cloudflare?</h3><p>It can be added at the network edge with
+        no change to your site whatsoever. Ask us.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><a href="index.html">AdHotBox</a> &middot;
+       <a href="start.html">Start here</a> &middot;
+       <a href="wordpress.html">WordPress plugin</a> &middot;
+       <a href="desk.html">Your desk</a> &middot;
+       <a href="privacy.html">Privacy</a></p>
+    <p>Stuck? Write to [ email ] and a person will answer.</p>
+  </div>
+</footer>
+
+<script>
+var API = "https://adhotbox.realroofers.workers.dev";
+var SNIP_AUTO   = '<script src="https://adhotbox.com/box.js" data-auto><\/script>';
+var SNIP_SLOT   = '<div data-ad="card"></div>';
+var SNIP_SCRIPT = '<script src="https://adhotbox.com/box.js"><\/script>';
+
+function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+
+function copyBox(label, text){
+  var id = "c" + Math.random().toString(36).slice(2,7);
+  return '<div class="copy"><button onclick="cp(\'' + id + '\',this)">Copy</button>'
+       + '<code id="' + id + '">' + esc(text) + '</code></div>';
+}
+function cp(id, btn){
+  var t = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(t).then(function(){
+    btn.textContent = "Copied"; setTimeout(function(){ btn.textContent = "Copy"; }, 1600);
+  });
+}
+
+var STEPS = {
+  wordpress: [
+    ["Get the plugin", "<p>Download it from the WordPress page on this site, or search "
+      + "<b>AdHotBox</b> in Plugins, Add New once it is listed.</p>"
+      + '<p><a href="wordpress.html">The plugin page &rarr;</a></p>'],
+    ["Install it", "<p>In WordPress: <b>Plugins</b>, then <b>Add New</b>, then "
+      + "<b>Upload Plugin</b>. Choose the zip file. Then <b>Activate</b>.</p>"
+      + '<div class="tip"><b>You never touch cPanel for this.</b> Everything happens '
+      + 'inside the WordPress dashboard you already use.</div>'],
+    ["Paste your key", "<p><b>AdHotBox</b> appears in the left menu. Open it, go to "
+      + "<b>Settings</b>, paste the key we emailed you, and save.</p>"],
+    ["Put an ad where you want one", "<p>Edit any page or post, add a block, and "
+      + "search for <b>AdHotBox</b>. Pick a size. That is it.</p>"
+      + "<p>Or use the widget under Appearance, or type "
+      + "<code>[adhotbox size=\"card\"]</code> anywhere text goes.</p>"],
+    ["Accept your first advertiser", "<p>Back in <b>AdHotBox</b> in the left menu. "
+      + "A red number means somebody is waiting. Click it, read the advertisement, "
+      + "and press <b>Accept</b> or <b>Deny</b>.</p>"]
+  ],
+  squarespace: [
+    ["Open the code injection box", "<p><b>Settings</b> &rarr; <b>Advanced</b> &rarr; "
+      + "<b>Code Injection</b>. There is a box marked <b>Footer</b>.</p>"],
+    ["Paste this one line and save", "" + copyBox("auto", SNIP_AUTO)
+      + "<p>That is the whole installation. The advertisements place themselves — "
+      + "after the opening paragraphs, in the sidebar if you have one, above the "
+      + "footer.</p>"],
+    ["Check it", "<p>Use the button below. Nothing else to do.</p>"
+      + '<div class="tip"><b>Want to choose the spots yourself?</b> Drop the '
+      + '<code>data-auto</code> from the line above, then add a <b>Code</b> block '
+      + 'wherever you want an advertisement and paste '
+      + '<code>&lt;div data-ad="card"&gt;&lt;/div&gt;</code> into it.</div>']
+  ],
+  wix: [
+    ["Open Custom Code", "<p><b>Settings</b> &rarr; <b>Custom Code</b> &rarr; "
+      + "<b>Add Custom Code</b>.</p>"],
+    ["Paste this one line", "<p>Set <b>Add Code to Pages</b> to all pages, and "
+      + "<b>Place Code in</b> to <b>Body &ndash; end</b>.</p>" + copyBox("auto", SNIP_AUTO)],
+    ["Publish", "<p>Wix only runs custom code on the published site, not in the "
+      + "editor. <b>Publish first, then check.</b></p>"]
+  ],
+  shopify: [
+    ["Open the theme code", "<p><b>Online Store</b> &rarr; <b>Themes</b> &rarr; "
+      + "<b>&hellip;</b> &rarr; <b>Edit code</b>.</p>"],
+    ["Find theme.liquid", "<p>In the Layout folder. Scroll to the bottom and find "
+      + "the line that says <code>&lt;/body&gt;</code>.</p>"],
+    ["Paste this one line just above it", "" + copyBox("auto", SNIP_AUTO)
+      + '<div class="tip">On a shop, advertisements suit blog and article pages far '
+      + 'better than product pages. Add <code>data-in="article, .blog"</code> to the '
+      + 'line to keep them there.</div>']
+  ],
+  ghost: [
+    ["Open code injection", "<p><b>Settings</b> &rarr; <b>Code injection</b>. "
+      + "There is a box marked <b>Site Footer</b>.</p>"],
+    ["Paste this one line and save", "" + copyBox("auto", SNIP_AUTO)
+      + "<p>Done. The advertisements place themselves inside your posts.</p>"]
+  ],
+  webflow: [
+    ["Open project settings", "<p><b>Project Settings</b> &rarr; <b>Custom Code</b>. "
+      + "There is a box marked <b>Before &lt;/body&gt; tag</b>.</p>"],
+    ["Paste this one line there", "" + copyBox("auto", SNIP_AUTO)],
+    ["Publish", "<p>Custom code only runs on the published site.</p>"]
+  ],
+  gtm: [
+    ["This is the easy one", "<p>If your site already has Google Tag Manager you "
+      + "never have to touch your site's code at all.</p>"],
+    ["Make a new tag", "<p>In GTM: <b>Tags</b> &rarr; <b>New</b> &rarr; "
+      + "<b>Custom HTML</b>.</p>"],
+    ["Paste this into it", "" + copyBox("auto", SNIP_AUTO)
+      + "<p>Trigger: <b>All Pages</b>. Save, then <b>Submit</b> to publish the "
+      + "container.</p>"],
+    ["That is all of it", "<p>The advertisements place themselves. You never touch "
+      + "your site's code at any point.</p>"]
+  ],
+  cpanel: [
+    ["Open the File Manager", "<p>Log in to cPanel, and open <b>File Manager</b>. "
+      + "Go into the folder called <b>public_html</b> — that is your website.</p>"
+      + '<div class="tip"><b>Make a copy first.</b> Right-click the file you are '
+      + 'about to edit and choose Copy, so there is a way back.</div>'],
+    ["Find the file", "<p>Usually <b>index.html</b>. If your site has a shared "
+      + "footer file, that is better — one edit covers every page.</p>"],
+    ["Edit it", "<p>Right-click the file, choose <b>Edit</b>. Scroll to the bottom "
+      + "and find the line that says <code>&lt;/body&gt;</code>.</p>"],
+    ["Paste this one line just above </body>", "" + copyBox("auto", SNIP_AUTO)
+      + "<p>That is the whole installation. Nothing else to add anywhere.</p>"],
+    ["Save", "<p>Press <b>Save Changes</b>, then use the button below to check it.</p>"
+      + '<div class="tip"><b>Have a shared footer file?</b> Put it there instead and '
+      + 'one edit covers every page on the site.</div>']
+  ],
+  other: [
+    ["One line, that is all", "<p>Put this just before <code>&lt;/body&gt;</code> "
+      + "at the bottom of the page.</p>" + copyBox("auto", SNIP_AUTO)],
+    ["Where they end up", "<p>The script reads the page and puts advertisements in "
+      + "sensible places on its own — after the opening paragraphs, in the sidebar "
+      + "if there is one, above the footer.</p>"
+      + "<p>It will never put one in a header, a menu, a form, or inside another "
+      + "advertisement, and never two close together. On a page with almost no text "
+      + "it does nothing at all.</p>"],
+    ["If you would rather choose the spots", "<p>Drop <code>data-auto</code> from the "
+      + "line, and put this wherever you want an advertisement.</p>"
+      + copyBox("slot", SNIP_SLOT)],
+    ["Check it", "<p>Use the button below. We will open your page and tell you "
+      + "whether it took.</p>"]
+  ]
+};
+
+/* a link like install.html#wix opens straight onto that platform */
+function fromHash(){
+  var h = (location.hash || "").replace("#","").toLowerCase();
+  if (!h || !STEPS[h]) return;
+  var b = document.querySelector('#picks button[data-p="' + h + '"]');
+  if (!b) return;
+  document.querySelectorAll("#picks button").forEach(function(x){ x.classList.remove("on"); });
+  b.classList.add("on");
+  show(h);
+}
+
+document.querySelectorAll("#picks button").forEach(function(b){
+  b.addEventListener("click", function(){
+    document.querySelectorAll("#picks button").forEach(function(x){ x.classList.remove("on"); });
+    b.classList.add("on");
+    show(b.dataset.p);
+  });
+});
+
+function show(p){
+  var list = STEPS[p] || STEPS.other;
+  document.getElementById("steps").innerHTML =
+      '<p class="eyebrow">Step two</p><h2>Now do this</h2>'
+    + list.map(function(s, i){
+        return '<div class="step"><span class="n">' + (i+1) + '</span>'
+             + '<div class="b"><h3>' + s[0] + '</h3>' + s[1] + '</div></div>';
+      }).join("");
+  var how = document.getElementById("how");
+  how.classList.add("on");
+  how.scrollIntoView({ behavior:"smooth", block:"start" });
+}
+
+window.addEventListener("hashchange", fromHash);
+fromHash();
+
+function check(){
+  var d = (document.getElementById("dom").value || "").trim();
+  if (!d) return;
+  var v = document.getElementById("verdict");
+  v.classList.add("on");
+  v.innerHTML = '<div class="v"><p>Opening your site&hellip;</p></div>';
+
+  fetch(API + "?check=1&domain=" + encodeURIComponent(d))
+    .then(function(r){ return r.json(); })
+    .then(function(x){
+      var good = x.script && x.slot;
+      v.innerHTML = '<div class="v ' + (good ? "good" : "bad") + '">'
+        + '<h3>' + (good ? "It is working." : (x.reached ? "Not quite." : "Could not open it.")) + '</h3>'
+        + '<p>' + esc(x.says || "") + '</p>'
+        + (x.reached
+          ? '<div class="marks">'
+            + '<span class="' + (x.script ? "y" : "n") + '">'
+            + (x.script ? "\u2713" : "\u2717") + ' the script</span>'
+            + '<span class="' + (x.slot ? "y" : "n") + '">'
+            + (x.slot ? "\u2713" : "\u2717") + ' a place to put an ad</span>'
+            + '</div>' : '')
+        + (x.note ? '<p style="margin-top:10px">' + esc(x.note)
+            + ' <a href="join.html">Apply &rarr;</a></p>' : '')
+        + '</div>';
+    })
+    .catch(function(){
+      v.innerHTML = '<div class="v bad"><h3>Could not check just now.</h3>'
+        + '<p>Try again in a moment.</p></div>';
+    });
+}
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>
