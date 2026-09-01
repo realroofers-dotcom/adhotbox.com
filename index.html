@@ -1,11 +1,46 @@
-<!-- BUILT 2026-08-31 19:54 ET -->
+<!-- BUILT 2026-08-31 20:06 ET -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>AdHotBox — low-cost advertising for everybody</title>
-<meta name="description" content="Twenty dollars a month a site. Pick a town, or pick a subject. Advertise where your customers already are.">
+<meta name="description" content="Video ads from $50, text and image ads from $20, political from $110. Pick a town, or pick a subject. No traffic minimum, no cookies, and every publisher approves each advertiser by hand.">
+<meta name="keywords" content="video advertising, video ads, local advertising, small business advertising, cheap advertising, banner ads, text ads, image ads, sponsored placements, political advertising, campaign ads, ballot question ads, local news advertising, hyperlocal advertising, town advertising, niche site advertising, blog advertising, WordPress advertising, publisher monetization, ad network for small sites, no minimum traffic ad network, cookieless advertising, privacy advertising, AdSense alternative, Ezoic alternative, Mediavine alternative, sidebar ads, in-article ads, leaderboard ads, 45 second video ads, self-hosted video ads">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AdHotBox">
+<meta property="og:title" content="AdHotBox — video ads $50, text and image $20, political $110">
+<meta property="og:description" content="Low-cost advertising for everybody. Pick a town, or pick a subject. Publishers approve every advertiser by hand and nobody tracks anybody.">
+<meta property="og:url" content="https://adhotbox.com/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AdHotBox — low-cost advertising for everybody">
+<meta name="twitter:description" content="Video ads from $50. Text and image from $20. Political from $110. One town, or one subject, month to month.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "AdHotBox",
+  "url": "https://adhotbox.com/",
+  "serviceType": "Advertising network",
+  "description": "A small advertising network for small sites and small advertisers. Video, image and text placements, targetable to a single town or a single subject.",
+  "areaServed": "US",
+  "audience": { "@type": "Audience", "audienceType": "Small businesses, local candidates, newsletter writers, and small website publishers" },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Placements",
+    "itemListElement": [
+      { "@type": "Offer", "name": "Text or image advertisement", "price": "20.00", "priceCurrency": "USD",
+        "description": "One placement on one site for one month. Text, or a single image with a line under it." },
+      { "@type": "Offer", "name": "Video advertisement, 45 seconds", "price": "50.00", "priceCurrency": "USD",
+        "description": "A still and a play button with the words underneath. Self-hosted, never autoplays, no cookies." },
+      { "@type": "Offer", "name": "Political or ballot question advertisement", "price": "110.00", "priceCurrency": "USD",
+        "description": "Carries a required paid-for line. School board, town council, referendums." },
+      { "@type": "Offer", "name": "Political video advertisement, 45 seconds", "price": "150.00", "priceCurrency": "USD",
+        "description": "Forty-five seconds of a candidate, with the paid-for line printed on it." }
+    ]
+  }
+}
+</script>
 <meta name="ad-topic" content="general">
 <link rel="canonical" href="https://adhotbox.com/">
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -78,6 +113,24 @@ a{color:var(--navy)}
 .door.b .go{background:var(--hot);color:#180B05}
 
 .strip{border-top:1px solid var(--rule);padding:28px 0}
+.kinds{display:grid;gap:12px}
+@media(min-width:700px){.kinds{grid-template-columns:1fr 1fr}}
+.k{border:1.5px solid var(--rule);border-radius:12px;padding:20px}
+.k.v{border-color:var(--ink);border-width:2px;position:relative}
+@media(min-width:700px){.k.v{grid-column:1/-1;display:grid;
+  grid-template-columns:96px 1fr;gap:20px;align-items:start}}
+.k .pl{display:block;width:74px;height:52px;background:var(--ink);border-radius:12px;
+  position:relative;margin-bottom:14px}
+@media(min-width:700px){.k .pl{margin-bottom:0;grid-row:1/span 4}}
+.k .pl:after{content:"";position:absolute;left:29px;top:15px;
+  border:11px solid transparent;border-left:17px solid var(--hot);border-right:0}
+.k b{display:block;font:900 19px/1.15 Rubik;letter-spacing:-.015em;margin-bottom:7px}
+.k p{font-size:15px;color:#39415A;margin:0 0 8px;max-width:none}
+.k .fine{font-size:13.5px;color:var(--muted)}
+.k .tagp{display:inline-block;font:700 13px var(--mono);background:var(--wash);
+  border-radius:20px;padding:6px 13px;margin-top:6px}
+.k.v .tagp{background:var(--ink);color:#fff}
+
 .cardtable{overflow-x:auto;border:1px solid var(--rule);border-radius:10px}
 .cardtable table{width:100%;border-collapse:collapse;min-width:460px}
 .cardtable th{text-align:left;background:var(--wash);padding:11px 14px;
@@ -116,7 +169,8 @@ footer p{margin-bottom:8px}
 <div class="top">
   <div class="wrap">
     <h1>Low-cost advertising for everybody.</h1>
-    <p class="sub"><b>$20 a month a site.</b> Pick a town, or pick a subject.</p>
+    <p class="sub"><b>Video, pictures or words.</b> From $20 a month a site. Pick a
+    town, or pick a subject.</p>
 
     <div class="find">
       <div class="row">
@@ -175,6 +229,52 @@ footer p{margin-bottom:8px}
 <div class="wrap">
 
   <div class="strip" style="border-top:0;padding-top:34px">
+    <p class="eyebrow">What we place</p>
+    <h2 class="s" style="margin-bottom:8px">Video, pictures, or plain words.</h2>
+    <p style="color:var(--muted);max-width:56ch;margin-bottom:20px">Whatever you
+    have. A film you shot on your phone, a photograph of the work, or two good
+    lines.</p>
+
+    <div class="kinds">
+      <div class="k v">
+        <span class="pl"></span>
+        <b>Video &mdash; 45 seconds</b>
+        <p>A still picture and a play button, with your words underneath. <b>It never
+        plays on its own and never makes a sound until somebody presses it.</b></p>
+        <p class="fine">We hold the film ourselves &mdash; no YouTube, no cookie, no
+        <i>watch on YouTube</i> button, and nothing suggested at the end to pull the
+        reader away. You are told how many pressed play.</p>
+        <span class="tagp">$50 a site, a month</span>
+      </div>
+      <div class="k">
+        <b>A picture</b>
+        <p>One clean image with a headline and two lines under it. Shot on a phone is
+        fine &mdash; most of them are.</p>
+        <p class="fine">Uploaded to us and served from our own domain, because an
+        image on the advertiser's server is a tracking pixel whether anybody meant
+        one or not.</p>
+        <span class="tagp">$20 a site, a month</span>
+      </div>
+      <div class="k">
+        <b>Plain words</b>
+        <p>A headline, two lines, and where to go. Reads like part of the page rather
+        than an interruption.</p>
+        <p class="fine">Nothing animates, nothing expands, nothing covers what the
+        reader came for.</p>
+        <span class="tagp">$20 a site, a month</span>
+      </div>
+      <div class="k">
+        <b>Political and ballot questions</b>
+        <p>School board, town council, referendums. Words, a picture, or a film of
+        the candidate talking to the town.</p>
+        <p class="fine">Carries a paid-for line naming who paid, printed on the face
+        of it. Without that line it does not run.</p>
+        <span class="tagp">$110, or $150 with a film</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="strip">
     <p class="eyebrow">What it costs</p>
     <h2 class="s" style="margin-bottom:8px">The whole rate card</h2>
     <p style="color:var(--muted);max-width:56ch;margin-bottom:20px">A placement is
