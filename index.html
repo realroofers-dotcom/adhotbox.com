@@ -1,4 +1,4 @@
-<!-- BUILT 2026-08-31 17:13 ET -->
+<!-- BUILT 2026-08-31 19:54 ET -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,6 +78,18 @@ a{color:var(--navy)}
 .door.b .go{background:var(--hot);color:#180B05}
 
 .strip{border-top:1px solid var(--rule);padding:28px 0}
+.cardtable{overflow-x:auto;border:1px solid var(--rule);border-radius:10px}
+.cardtable table{width:100%;border-collapse:collapse;min-width:460px}
+.cardtable th{text-align:left;background:var(--wash);padding:11px 14px;
+  font:900 10.5px/1 Rubik;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.cardtable th.r,.cardtable td.r{text-align:right}
+.cardtable td{border-top:1px solid var(--rule);padding:14px}
+.cardtable td b{display:block;font-size:16px;font-weight:900;letter-spacing:-.01em}
+.cardtable td span{display:block;font-size:13.5px;color:var(--muted);margin-top:2px}
+.cardtable td.p{font:900 22px var(--mono);white-space:nowrap;vertical-align:middle}
+.cardtable td.k{font:700 16px var(--mono);color:var(--muted);white-space:nowrap;
+  vertical-align:middle}
+
 .plat{display:grid;gap:8px}
 @media(min-width:560px){.plat{grid-template-columns:repeat(3,1fr)}}
 .plat a{border:1.5px solid var(--rule);border-radius:10px;padding:14px 15px;
@@ -144,16 +156,16 @@ footer p{margin-bottom:8px}
     <a class="door b" href="advertise.html">
       <p class="p">$20<small>a site, a month &middot; $50 for video</small></p>
       <h2>Advertise</h2>
-      <p class="t">Words or a picture $20. Video $50. Political $110. One town, or
-      one subject across the whole network, month to month.</p>
+      <p class="t">From $20 a month. One town, or one subject across the whole
+      network. You are told where it ran and every click.</p>
       <span class="go">Advertise &rarr;</span>
     </a>
 
     <a class="door" href="start.html">
       <p class="p">$5<small>a placement, yours</small></p>
       <h2>Have a site? Earn on it.</h2>
-      <p class="t">Up to $27.50 on a political placement. No traffic minimum. You
-      approve every advertiser yourself, one click each.</p>
+      <p class="t">$5 to $37.50 a placement, every month it runs. No traffic
+      minimum. You approve every advertiser yourself.</p>
       <span class="go">Start here &rarr;</span>
     </a>
 
@@ -163,6 +175,46 @@ footer p{margin-bottom:8px}
 <div class="wrap">
 
   <div class="strip" style="border-top:0;padding-top:34px">
+    <p class="eyebrow">What it costs</p>
+    <h2 class="s" style="margin-bottom:8px">The whole rate card</h2>
+    <p style="color:var(--muted);max-width:56ch;margin-bottom:20px">A placement is
+    one advertisement, on one site, for one month. Month to month &mdash; no
+    contract, no minimum spend, stop whenever you like.</p>
+
+    <div class="cardtable">
+      <table>
+        <thead><tr>
+          <th>A placement, a month</th>
+          <th class="r">You pay</th>
+          <th class="r">The site keeps</th>
+        </tr></thead>
+        <tbody>
+          <tr><td><b>Words, or a picture</b><span>Text, or one clean image with a
+              line under it</span></td>
+              <td class="r p">$20</td><td class="r k">$5</td></tr>
+          <tr><td><b>Video &mdash; 45 seconds</b><span>A still and a play button,
+              your words underneath. Never autoplays</span></td>
+              <td class="r p">$50</td><td class="r k">$12.50</td></tr>
+          <tr><td><b>Political and ballot questions</b><span>School board, town
+              council, referendums. Carries a paid-for line</span></td>
+              <td class="r p">$110</td><td class="r k">$27.50</td></tr>
+          <tr><td><b>Political video &mdash; 45 seconds</b><span>Forty-five seconds
+              of you, talking to the town</span></td>
+              <td class="r p">$150</td><td class="r k">$37.50</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin-top:16px;color:var(--muted);max-width:60ch">Nothing before the
+    first placement &mdash; no setup fee, no platform fee, no agency. <b
+    style="color:var(--ink)">And you are only charged for placements that actually
+    run</b>, because every publisher approves each advertiser by hand.</p>
+    <p style="margin-top:10px"><a href="advertise.html" style="font-weight:700">What
+    an advertiser gets &rarr;</a> &nbsp;&middot;&nbsp; <a href="start.html"
+    style="font-weight:700">What a site earns &rarr;</a></p>
+  </div>
+
+  <div class="strip">
     <p class="eyebrow">Installing it</p>
     <h2 class="s" style="margin-bottom:8px">One line. We made it easy.</h2>
     <p style="color:var(--muted);max-width:56ch;margin-bottom:20px">Paste one line
