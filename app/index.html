@@ -1,10 +1,11 @@
-<!-- BUILT 2026-08-29 14:41 ET -->
+<!-- BUILT 2026-08-31 20:06 ET -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>AdHotBox</title>
+<title>AdHotBox — video, picture and text advertising</title>
+<meta name="description" content="Film 45 seconds on your phone and put it on the sites your customers read. Video $50, pictures and words $20, political $110.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#0C1220">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -88,6 +89,16 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy)}
 label{display:block;margin:0 0 18px}
 label span{display:block;font:700 14px Rubik;margin-bottom:7px}
 label small{display:block;font-size:13.5px;color:var(--muted);margin-top:7px;font-weight:400}
+.pricenote{font-size:15px;color:var(--muted);margin:14px 0 0;line-height:1.5;
+  background:var(--wash);border-radius:10px;padding:13px 15px}
+.pricenote b{color:var(--ink)}
+
+.yours{font:900 19px/1 var(--mono);color:var(--good);margin-left:auto;white-space:nowrap}
+.yours small{font:600 11px Rubik;color:var(--muted);margin-left:3px}
+.yours.sm{font-size:16px}
+.paidfor{font:600 12px var(--mono);color:var(--muted);margin:10px 0 0}
+.dest{font:12px var(--mono);color:var(--muted);margin:8px 0 0;word-break:break-all}
+.chip.off{background:#FDF3F2;border-color:#E6C9CB;color:var(--bad)}
 
 .chips{display:flex;gap:8px;flex-wrap:wrap}
 .chip{background:#fff;border:1.5px solid var(--rule);border-radius:20px;
@@ -127,6 +138,29 @@ label small{display:block;font-size:13.5px;color:var(--muted);margin-top:7px;fon
 .styles button{flex:0 0 auto;background:#fff;border:1.5px solid var(--rule);
   border-radius:20px;padding:9px 15px;font:600 14px Rubik}
 .styles button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+
+.take .fake.vid{background:var(--hot);color:#180B05}
+.kinds{display:grid;gap:10px;margin-top:22px}
+.k{border:1.5px solid var(--rule);border-radius:12px;padding:16px 17px}
+.k.v{border-color:var(--ink);border-width:2px}
+.k .pl{display:block;width:56px;height:40px;background:var(--ink);border-radius:10px;
+  position:relative;margin-bottom:12px}
+.k .pl:after{content:"";position:absolute;left:22px;top:11px;
+  border:9px solid transparent;border-left:14px solid var(--hot);border-right:0}
+.k b{display:block;font:900 17px/1.15 Rubik;letter-spacing:-.015em;margin-bottom:5px}
+.k span{display:block;font-size:14.5px;color:var(--muted);margin-bottom:9px}
+.k em{display:inline-block;font:700 13px var(--mono);font-style:normal;
+  background:var(--wash);border-radius:20px;padding:5px 12px}
+.k.v em{background:var(--ink);color:#fff}
+.vinfo{font-size:14px;margin:10px 0 0;color:var(--muted);line-height:1.45}
+.vinfo.good{color:var(--good);font-weight:600}
+.vinfo.bad{color:var(--bad);font-weight:600}
+.shot .vready{display:flex;flex-direction:column;align-items:center;gap:12px;color:#fff}
+.shot .vready .play{width:64px;height:46px;background:var(--hot);border-radius:11px;
+  position:relative}
+.shot .vready .play:after{content:"";position:absolute;left:25px;top:14px;
+  border:9px solid transparent;border-left:15px solid #180B05;border-right:0}
+.shot .vready .lab{font:600 14px var(--mono);color:#a8aa9a}
 
 /* the picker */
 .site{background:#fff;border-radius:12px;padding:15px 16px;margin:0 0 10px;
@@ -174,7 +208,9 @@ var S = {
   screen: "home",
   data:   null,
   draft:  { what:"", towns:[], head:"", body:"", slots:2, months:1,
-            photo:null, style:"bottom", artUrl:null, sites:[] },
+            photo:null, style:"bottom", artUrl:null, sites:[],
+            video:null, videoSecs:0, videoUrl:null,
+            cat:"", paidfor:"" },
   step:   0
 };
 
@@ -187,6 +223,30 @@ function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){
   return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
 function money(c){ return "$" + ((c||0)/100).toFixed(2); }
 function el(id){ return document.getElementById(id); }
+
+/* ---------- what things cost ----------
+   One table, matching the rate card on the site. A political
+   placement costs more because it is the category most publishers
+   refuse; the one that takes it is paid for the trouble. */
+
+var RATES = {
+  standard:        { price: 20,  pub: 5,     label: "Words, or a picture" },
+  video:           { price: 50,  pub: 12.50, label: "Video, 45 seconds" },
+  political:       { price: 110, pub: 27.50, label: "Political" },
+  political_video: { price: 150, pub: 37.50, label: "Political video" }
+};
+
+var POLITICAL = ["political", "civic"];
+
+function rateFor(){
+  var d = S.draft;
+  var pol = POLITICAL.indexOf(d.cat) > -1;
+  var vid = !!d.video;
+  if (pol && vid) return RATES.political_video;
+  if (pol)        return RATES.political;
+  if (vid)        return RATES.video;
+  return RATES.standard;
+}
 
 /* ---------- shell ---------- */
 
@@ -202,7 +262,8 @@ function tabs(){
   if (!S.key) { el("tabs").style.display = "none"; return; }
   el("tabs").style.display = "flex";
   var items = S.role === "publisher"
-    ? [["home","Waiting","\u25CE"],["money","Earnings","\u25A4"],["set","Settings","\u2699"]]
+    ? [["home","Waiting","\u25CE"],["running","Running","\u25A3"],
+       ["money","Earnings","\u25A4"],["set","Settings","\u2699"]]
     : [["home","My ads","\u25A0"],["new","New","\uFF0B"],["set","Settings","\u2699"]];
   el("tabs").innerHTML = items.map(function(i){
     return '<button class="' + (S.screen===i[0]?"on":"") + '" onclick="go(\'' + i[0] + '\')">'
@@ -216,8 +277,9 @@ function render(){
   tabs();
   if (!S.key) return openScreen();
   if (S.role === "publisher") {
-    if (S.screen === "home")  return pubHome();
-    if (S.screen === "money") return pubMoney();
+    if (S.screen === "home")    return pubHome();
+    if (S.screen === "running") return pubRunning();
+    if (S.screen === "money")   return pubMoney();
     return settings();
   }
   if (S.screen === "home") return advHome();
@@ -232,8 +294,22 @@ function openScreen(){
   el("app").innerHTML = bar()
     + '<div class="pad" style="padding-top:44px">'
     + '<p class="hero">Your advertising,<br>in your pocket.</p>'
-    + '<p class="lede">Sign in with the key we sent you. Publishers and '
-    + 'advertisers use the same app.</p>'
+    + '<p class="lede">Film forty-five seconds, or photograph the work, and put it '
+    + 'on the sites your customers already read.</p>'
+    + '<div class="kinds">'
+    +   '<div class="k v"><span class="pl"></span>'
+    +     '<b>Video &mdash; 45 seconds</b>'
+    +     '<span>Shot on this phone. Never autoplays.</span>'
+    +     '<em>$50 a site, a month</em></div>'
+    +   '<div class="k"><b>A picture, or plain words</b>'
+    +     '<span>A photograph of the work, or two good lines.</span>'
+    +     '<em>$20 a site, a month</em></div>'
+    +   '<div class="k"><b>Political and ballot questions</b>'
+    +     '<span>Carries a paid-for line.</span>'
+    +     '<em>$110, or $150 with a film</em></div>'
+    + '</div>'
+    + '<p class="lede" style="margin-top:22px">Sign in with the key we sent you. '
+    + 'Publishers and advertisers use the same app.</p>'
     + '<label><span>Your key or email</span>'
     + '<input id="k" placeholder="pub-xxxxxxxx or your email" autocapitalize="off" '
     + 'autocorrect="off" spellcheck="false"></label>'
@@ -340,11 +416,35 @@ function advNew(){
   var body = "";
 
   if (st === 0) {
+    var CATS = [
+      ["trades","Trades and contractors"], ["local","Local business"],
+      ["food","Food and hospitality"], ["realestate","Real estate"],
+      ["auto","Auto and repair"], ["retail","Shops and retail"],
+      ["events","Events and announcements"], ["health","Health and wellness"],
+      ["markets","Markets and finance"], ["software","Software and tools"],
+      ["education","Education"], ["nonprofit","Nonprofit and civic"],
+      ["political","Political or a ballot question"], ["general","Something else"]
+    ];
     body = '<p class="hero">What do you do?</p>'
-      + '<p class="lede">One line. This is not the advertisement — it tells us '
-      + 'which sites are a fit.</p>'
-      + '<label><input id="f" value="' + esc(d.what) + '" '
+      + '<p class="lede">One line, and what kind of business it is. This is not the '
+      + 'advertisement — it tells us which sites are a fit.</p>'
+      + '<label><span>In one line</span><input id="f" value="' + esc(d.what) + '" '
       + 'placeholder="Roof repair and replacement"></label>'
+      + '<label><span>What kind of business</span><select id="cat" onchange="setcat()">'
+      +   '<option value="">Pick one</option>'
+      +   CATS.map(function(c){
+            return '<option value="' + c[0] + '"' + (d.cat===c[0]?" selected":"")
+                 + '>' + c[1] + '</option>'; }).join("")
+      + '</select></label>'
+      + (POLITICAL.indexOf(d.cat) > -1
+        ? '<label><span>Paid for by</span><input id="pf" value="' + esc(d.paidfor)
+          + '" placeholder="Friends of Jane Smith"><small>Required, and it prints on '
+          + 'the advertisement. Without it we cannot run it. The disclosure rules for '
+          + 'your race are yours to follow — we print what you tell us.</small></label>'
+          + '<div class="note">Political placements are <b>$110 a month</b>, or '
+          + '<b>$150</b> with a film. It is the category most sites refuse, so the '
+          + 'ones that take it are paid more.</div>'
+        : '')
       + '<button class="b-1 wide" onclick="step(1)">Next</button>';
   }
 
@@ -361,8 +461,11 @@ function advNew(){
 
   if (st === 2) {
     body = '<p class="hero">Make it.</p>'
-      + '<p class="lede">Take a picture of the work, or of the truck. Then put a '
-      + 'line on it. Or skip the picture and use words only.</p>'
+      + '<p class="lede"><b>Forty-five seconds of video</b> is the strongest thing '
+      + 'you can run, and this phone already shoots it. A picture of the work is the '
+      + 'next best. Words alone are fine too &mdash; and your words go underneath '
+      + 'whatever you choose, so it still reads for anybody who does not press '
+      + 'play.</p>'
       + '<div class="shot" id="shot"><span class="empty">No picture yet</span></div>'
       + '<div class="take">'
       +   '<label><span class="fake">Take a picture</span>'
@@ -370,6 +473,14 @@ function advNew(){
       +   '<label><span class="fake alt">From the phone</span>'
       +     '<input type="file" accept="image/*" onchange="shot(this)"></label>'
       + '</div>'
+      + '<div class="take" style="margin-top:8px">'
+      +   '<label><span class="fake vid">Film 45 seconds</span>'
+      +     '<input type="file" accept="video/*" capture="environment" onchange="vid(this)"></label>'
+      +   '<label><span class="fake alt">A video from the phone</span>'
+      +     '<input type="file" accept="video/*" onchange="vid(this)"></label>'
+      + '</div>'
+      + '<p id="vinfo" class="vinfo"></p>'
+      + '<p class="pricenote" id="pricenote"></p>'
       + '<div class="styles">'
       +   ['bottom','top','band','none'].map(function(k){
             var n = {bottom:"Words at the bottom",top:"Words at the top",
@@ -394,17 +505,24 @@ function advNew(){
   }
 
   if (st === 4) {
-    var n = d.sites.length, total = n * 20;
+    var r = rateFor();
+    var n = d.sites.length, total = n * r.price;
     body = '<p class="hero">' + n + ' place' + (n===1?"":"s") + ', a month.</p>'
+      + '<p class="lede">' + r.label + ' &mdash; $' + r.price + ' a site.</p>'
       + '<div class="card">'
       +   d.sites.map(function(x){
             return '<div class="row"><span class="k">' + esc(x.domain)
                  + '<br><span style="font-size:13px">' + esc(x.where||"") + '</span></span>'
-                 + '<span class="v">$20</span></div>'; }).join("")
+                 + '<span class="v">$' + r.price + '</span></div>'; }).join("")
       +   '<div class="row" style="border-top:2px solid var(--ink);border-bottom:0;'
       +     'padding-top:14px"><span class="k" style="font-weight:900;color:var(--ink)">'
-      +     'A month</span><span class="v" style="font-size:20px">$' + total + '</span></div>'
+      +     'A month</span><span class="v" style="font-size:22px">$' + total + '</span></div>'
       + '</div>'
+      + (d.paidfor
+        ? '<div class="card"><p class="co" style="font-size:14px">Prints on the '
+          + 'advertisement</p><p class="sub" style="margin-top:6px">Paid for by '
+          + esc(d.paidfor) + '</p></div>'
+        : '')
       + '<div class="note">A person reads this, and <b>every site decides for itself</b> '
       + 'whether to carry it. A site may say no, and <b>you are not charged for a '
       + 'placement that does not run.</b> Month to month — stop whenever you like.</div>'
@@ -414,7 +532,7 @@ function advNew(){
   el("app").innerHTML = bar("New advertisement", st ? null : "home")
     + '<div class="pad">' + dots + body + '</div>';
 
-  if (st === 2) { live(); paint(); }
+  if (st === 2) { live(); paint(); pricenote(); }
   if (st === 3) loadSites();
 }
 
@@ -434,11 +552,79 @@ function shot(input){
 
 function sty(k){ S.draft.style = k; paint(); live(); }
 
+function pricenote(){
+  var n = el("pricenote"); if (!n) return;
+  var r = rateFor();
+  n.innerHTML = '<b>$' + r.price + '</b> a site, a month &mdash; ' + r.label
+    + (S.draft.video
+      ? '. A film costs more and is worth it, but <b>your words still do the work</b> '
+        + 'for everybody who does not press play.'
+      : '. Adding a 45-second film makes it $'
+        + (POLITICAL.indexOf(S.draft.cat) > -1 ? 150 : 50) + '.');
+}
+
+/* ---------- a video, forty-five seconds ---------- */
+
+function vid(input){
+  var f = input.files && input.files[0];
+  if (!f) return;
+  var info = el("vinfo");
+  info.className = "vinfo";
+  info.textContent = "Checking the length…";
+
+  var v = document.createElement("video");
+  v.preload = "metadata";
+  v.onloadedmetadata = function(){
+    var secs = Math.round(v.duration || 0);
+    URL.revokeObjectURL(v.src);
+
+    if (!secs) { info.className = "vinfo bad"; info.textContent =
+      "Could not read that file. An mp4 from the phone works best."; return; }
+
+    if (secs > 45) {
+      info.className = "vinfo bad";
+      info.textContent = "That one is " + secs + " seconds. "
+        + "Forty-five is the most — trim it and try again. Nobody watches longer.";
+      S.draft.video = null; S.draft.videoSecs = 0;
+      return;
+    }
+
+    if (f.size > 30 * 1024 * 1024) {
+      info.className = "vinfo bad";
+      info.textContent = "That file is " + (f.size/1048576).toFixed(0)
+        + " MB. Keep it under 30 — film at a lower quality if you need to.";
+      return;
+    }
+
+    S.draft.video = f;
+    S.draft.videoSecs = secs;
+    S.draft.photo = null;                 /* a video replaces the picture */
+    info.className = "vinfo good";
+    info.textContent = secs + " seconds, " + (f.size/1048576).toFixed(1)
+      + " MB. Good. Your words go underneath it.";
+    paint(); pricenote();
+  };
+  v.onerror = function(){
+    info.className = "vinfo bad";
+    info.textContent = "Could not read that file. An mp4 works best.";
+  };
+  v.src = URL.createObjectURL(f);
+}
+
 /* draw the photo and the words onto a canvas, so what he sees is
    what gets uploaded — not a preview of something else */
 function paint(){
   var box = el("shot"); if (!box) return;
   var d = S.draft;
+
+  if (d.video) {
+    box.innerHTML = '<span class="vready">'
+      + '<span class="play"></span>'
+      + '<span class="lab">' + d.videoSecs + ' seconds &middot; ready</span>'
+      + '</span>';
+    return;
+  }
+
   if (!d.photo) { box.innerHTML = '<span class="empty">No picture yet</span>'; return; }
 
   var W = 1200, H = 800;
@@ -515,6 +701,7 @@ function loadSites(){
       }
       box.innerHTML = list.map(function(x){
         var on = d.sites.some(function(y){ return y.id === x.id; });
+        var rp = rateFor();
         return '<div class="site' + (on?" on":"") + '" onclick="pick(' + x.id + ')">'
           + '<span class="tick">&#10003;</span>'
           + '<span class="m"><span class="d">' + esc(x.name || x.domain)
@@ -522,7 +709,7 @@ function loadSites(){
           + '<span class="w">' + esc(x.where || "") + ' &middot; ' + esc(x.topic || "")
           + ' &middot; ' + (x.views ? x.views.toLocaleString() + ' a month' : 'new')
           + '</span></span>'
-          + '<span class="pr">$20</span></div>';
+          + '<span class="pr">$' + rp.price + '</span></div>';
       }).join("");
       S.sitesList = list;
       totalBar();
@@ -547,16 +734,34 @@ function totalBar(){
   if (!n) return;
   var b = document.createElement("div");
   b.className = "total"; b.id = "tot";
-  b.innerHTML = '<span><span class="t">$' + (n*20) + '</span>'
+  var rr = rateFor();
+  b.innerHTML = '<span><span class="t">$' + (n*rr.price) + '</span>'
     + '<span class="s"> a month</span><br><span class="s">' + n + ' place'
-    + (n===1?"":"s") + '</span></span>'
+    + (n===1?"":"s") + ' at $' + rr.price + '</span></span>'
     + '<button onclick="step(4)">Next</button>';
   document.body.appendChild(b);
 }
 
+function setcat(){
+  var d = S.draft;
+  if (el("f")) d.what = el("f").value;
+  if (el("pf")) d.paidfor = el("pf").value;
+  d.cat = el("cat").value;
+  advNew();
+}
+
 function step(n){
   var d = S.draft;
-  if (S.step === 0 && el("f")) d.what = el("f").value;
+  if (S.step === 0) {
+    if (el("f"))  d.what = el("f").value;
+    if (el("pf")) d.paidfor = el("pf").value;
+    if (el("cat")) d.cat = el("cat").value;
+    if (n > 0 && POLITICAL.indexOf(d.cat) > -1 && !d.paidfor.trim()) {
+      alert("A political advertisement needs a paid-for line. It prints on the "
+          + "advertisement and we cannot run one without it.");
+      return;
+    }
+  }
   if (S.step === 2) { if (el("h")) d.head = el("h").value; if (el("bd")) d.body = el("bd").value; }
   var t = el("tot"); if (t) t.remove();
   S.step = n; advNew();
@@ -581,7 +786,8 @@ function live(){
 
 function submitAd(){
   var d = S.draft;
-  if (d.canvas && !d.artUrl) return uploadArt(function(){ submitAd(); });
+  if (d.video && !d.videoUrl) return uploadVideo(function(){ submitAd(); });
+  if (!d.video && d.canvas && !d.artUrl) return uploadArt(function(){ submitAd(); });
   var p = new URLSearchParams({
     apply:"advertiser", name: d.what || "New advertiser",
     contact: S.email, email: S.email,
@@ -589,7 +795,11 @@ function submitAd(){
         + " | TOWNS: " + d.towns.join(", ")
         + " | SITES: " + d.sites.map(function(x){ return x.domain; }).join(", ")
         + " | PLACEMENTS: " + d.sites.length
+        + " | CATEGORY: " + (d.cat || "general")
+        + " | RATE: $" + rateFor().price + " (" + rateFor().label + ")"
+        + (d.paidfor ? " | PAID FOR BY: " + d.paidfor : "")
         + (d.artUrl ? " | ART: " + d.artUrl : "")
+        + (d.videoUrl ? " | VIDEO: " + d.videoUrl + " (" + d.videoSecs + "s)" : "")
   });
   el("app").innerHTML = bar("Sent") + '<div class="pad" style="padding-top:50px">'
     + '<p class="hero">Sent.</p>'
@@ -599,6 +809,24 @@ function submitAd(){
     + 'are agreed and the sites have accepted them.</div>'
     + '<button class="b-1 wide" onclick="go(\'home\')">Done</button></div>';
   fetch(API + "?" + p.toString()).catch(function(){});
+}
+
+function uploadVideo(then){
+  var d = S.draft;
+  el("app").innerHTML = bar("Sending") + '<div class="pad" style="padding-top:60px">'
+    + '<p class="hero">Sending the video…</p>'
+    + '<p class="lede">It is ' + (d.video.size/1048576).toFixed(1)
+    + ' MB, so give it a moment on a phone signal.</p></div>';
+
+  fetch(API + "?video=1&seconds=" + d.videoSecs
+        + "&email=" + encodeURIComponent(S.email), {
+    method: "POST",
+    headers: { "Content-Type": d.video.type || "video/mp4" },
+    body: d.video
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(res){ d.videoUrl = res.url || null; then(); })
+  .catch(function(){ then(); });          /* the words alone still go */
 }
 
 function uploadArt(then){
@@ -640,11 +868,19 @@ function pubHome(){
 }
 
 function pubCard(a){
+  var yours = a.you_get_cents ? money(a.you_get_cents) : null;
   return '<div class="card">'
-    + '<p class="co">' + esc(a.advertiser || "—") + '</p>'
-    + '<p class="sub">' + esc(a.category || "") + '</p>'
+    + '<div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">'
+    +   '<p class="co" style="margin:0">' + esc(a.advertiser || "—") + '</p>'
+    +   (yours ? '<span class="yours">' + yours + '<small>/mo, yours</small></span>' : '')
+    + '</div>'
+    + '<p class="sub">' + esc(a.category || "")
+    +   (a.price_label ? ' &middot; ' + esc(a.price_label) : '') + '</p>'
     + '<p style="font:700 16px Rubik;margin:14px 0 6px">' + esc(a.head) + '</p>'
     + (a.body ? '<p class="sub">' + esc(a.body) + '</p>' : '')
+    + (a.paid_for_by
+      ? '<p class="paidfor">Paid for by ' + esc(a.paid_for_by) + '</p>' : '')
+    + '<p class="dest">' + esc(a.href || "") + '</p>'
     + '<div class="acts">'
     +   '<button class="b-y" onclick="decide(' + a.id + ',\'accept\')">Accept</button>'
     +   '<button class="b-n" onclick="decide(' + a.id + ',\'deny\')">Deny</button>'
@@ -653,7 +889,55 @@ function pubCard(a){
 
 function decide(id, v){
   fetch(API + "?decide=" + v + "&pub=" + encodeURIComponent(S.key) + "&id=" + id)
-    .then(function(r){ return r.json(); }).then(pubHome);
+    .then(function(r){ return r.json(); })
+    .then(function(){ render(); });
+}
+
+function pubRunning(){
+  el("app").innerHTML = bar("Running") + '<div class="pad" id="b">'
+    + '<p class="quiet">Loading…</p></div>';
+
+  fetch(API + "?queue=1&pub=" + encodeURIComponent(S.key))
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      S.data = d;
+      var all = d.campaigns || [];
+      var yes = all.filter(function(c){ return c.verdict === "accept"; });
+      var no  = all.filter(function(c){ return c.verdict === "deny"; });
+
+      var h = '';
+      h += '<p style="font:900 20px Rubik;margin:0 0 4px">On your site</p>';
+      h += yes.length
+        ? '<p class="sub" style="margin-bottom:14px">$'
+          + (yes.reduce(function(t,c){ return t + (c.you_get_cents||0); },0)/100).toFixed(2)
+          + ' a month while they all run.</p>'
+          + yes.map(function(c){ return liveRow(c, "deny", "Stop it"); }).join("")
+        : '<div class="note" style="margin-top:10px">Nothing accepted yet. '
+          + 'New advertisers appear under <b>Waiting</b>.</div>';
+
+      h += '<p style="font:900 20px Rubik;margin:26px 0 12px">Turned away</p>';
+      h += no.length
+        ? no.map(function(c){ return liveRow(c, "accept", "Let it run"); }).join("")
+        : '<p class="quiet" style="text-align:left;padding:0">You have not denied '
+          + 'anybody.</p>';
+
+      el("b").innerHTML = h;
+    })
+    .catch(function(){ el("b").innerHTML = '<p class="quiet">Could not load.</p>'; });
+}
+
+function liveRow(c, verdict, label){
+  return '<div class="card" style="padding:15px 16px">'
+    + '<div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">'
+    +   '<p class="co" style="margin:0;font-size:16px">' + esc(c.advertiser || "—") + '</p>'
+    +   (c.you_get_cents
+        ? '<span class="yours sm">' + money(c.you_get_cents) + '<small>/mo</small></span>'
+        : '')
+    + '</div>'
+    + '<p class="sub" style="margin-top:5px">' + esc(c.head) + '</p>'
+    + '<button class="b-2 wide" style="margin-top:12px;padding:12px" '
+    +   'onclick="decide(' + c.id + ',\'' + verdict + '\')">' + label + '</button>'
+    + '</div>';
 }
 
 function pubMoney(){
@@ -692,6 +976,7 @@ function settings(){
         + '<button class="' + (p.auto_accept ? "b-y" : "b-2") + ' wide" '
         + 'onclick="auto(' + (p.auto_accept?0:1) + ')">'
         + (p.auto_accept ? "On" : "Off") + '</button></div>'
+        + catBlock(p)
       : '')
     + '<div class="note">No cookies. No identifier. Nothing here follows anybody '
     + 'anywhere &mdash; not your readers, and not you.</div>'
@@ -699,10 +984,44 @@ function settings(){
     + '</div>';
 }
 
+/* whole categories a publisher never wants to see */
+function catBlock(p){
+  var cats = (S.data && S.data.categories || []).filter(function(c){ return c.allowed; });
+  if (!cats.length) return '';
+  var off = String(p.blocked_categories || "").split(",").filter(Boolean);
+
+  return '<div class="card"><p class="co">Categories</p>'
+    + '<p class="sub" style="margin:6px 0 14px">Switch one off and it never reaches '
+    + 'you again. Most sites switch off politics.</p>'
+    + '<div class="chips">'
+    + cats.map(function(c){
+        var isOff = off.indexOf(c.code) > -1;
+        return '<button class="chip' + (isOff ? " off" : "") + '" onclick="cat(\''
+             + c.code + '\',' + (isOff?0:1) + ')">' + esc(c.label)
+             + (isOff ? " &mdash; off" : "") + '</button>';
+      }).join("")
+    + '</div></div>';
+}
+
+function cat(code, block){
+  fetch(API + "?decide=category&pub=" + encodeURIComponent(S.key)
+        + "&cat=" + encodeURIComponent(code) + "&block=" + block)
+    .then(function(r){ return r.json(); })
+    .then(function(){
+      return fetch(API + "?queue=1&pub=" + encodeURIComponent(S.key))
+        .then(function(r){ return r.json(); })
+        .then(function(d){ S.data = d; go("set"); });
+    });
+}
+
 function auto(on){
   fetch(API + "?decide=auto&pub=" + encodeURIComponent(S.key) + "&on=" + on)
     .then(function(r){ return r.json(); })
-    .then(function(){ pubHome(); go("set"); });
+    .then(function(){
+      return fetch(API + "?queue=1&pub=" + encodeURIComponent(S.key))
+        .then(function(r){ return r.json(); })
+        .then(function(d){ S.data = d; go("set"); });
+    });
 }
 function out(){
   localStorage.clear(); S.key = ""; S.role = ""; S.email = ""; S.data = null;

@@ -1,21 +1,55 @@
 {
   "name": "AdHotBox",
   "short_name": "AdHotBox",
-  "description": "Your advertising, in your pocket. Advertisers see what their advertisement is doing. Publishers accept or deny each one.",
+  "description": "Film 45 seconds on your phone and put it on the sites your customers read. Video, picture and text advertising from $20 a month. Publishers approve every advertiser by hand.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#F2F4F8",
   "theme_color": "#0C1220",
-  "categories": ["business", "productivity"],
+  "categories": [
+    "business",
+    "productivity"
+  ],
   "icons": [
-    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ],
   "shortcuts": [
-    { "name": "New advertisement", "url": "./index.html#new" },
-    { "name": "Waiting", "url": "./index.html#home" }
+    {
+      "name": "New advertisement",
+      "short_name": "New ad",
+      "url": "./index.html#new",
+      "description": "Film 45 seconds, photograph the work, or write two lines"
+    },
+    {
+      "name": "Waiting on me",
+      "short_name": "Waiting",
+      "url": "./index.html#home",
+      "description": "Advertisers asking to run on your site"
+    },
+    {
+      "name": "Earnings",
+      "short_name": "Earnings",
+      "url": "./index.html#money",
+      "description": "What your placements have earned"
+    }
   ]
 }
