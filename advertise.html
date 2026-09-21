@@ -149,6 +149,26 @@ footer a{color:var(--muted)}
     <p style="margin-top:18px"><b>Month to month. No contract, no minimum spend,
     stop whenever you like.</b> Nothing before the first placement — no setup fee,
     no platform fee, no agency.</p>
+
+    <!-- 21 Sep 2026: PAY BY CARD, on the pay desk (Stripe, cards only; bank = achplug.com).
+         The buttons open Stripe's page; the money is booked on the network the moment it
+         clears; the placement runs when the sites accept it. #paid= below is the message after. -->
+    <div id="paybox" style="margin-top:22px;background:var(--wash);border:1px solid var(--rule);border-radius:6px;padding:20px 22px">
+      <p class="eyebrow" style="margin-bottom:8px">Pay for a placement</p>
+      <p style="margin:0 0 14px"><b>Pay by card now, a month at a time.</b> Your money sits on your account with us until the sites you picked accept the placement; anything that does not run is refunded. Already have a campaign code from us? Put it in and the payment goes straight on that campaign.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px">
+        <label style="display:flex;flex-direction:column;gap:4px;font:900 11px Rubik;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">Campaign code (optional)
+          <input id="paycode" placeholder="from our email" style="font:15px var(--mono);padding:9px 11px;border:1px solid var(--rule);border-radius:4px;width:220px;text-transform:none;letter-spacing:0"></label>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px">
+        <a class="paybtn" data-sku="ad_standard" href="#" style="display:block;background:var(--ink);color:#fff;text-decoration:none;border-radius:4px;padding:12px 14px;font:700 15px Rubik">Words or a picture <span style="float:right;font-family:var(--mono)">$20</span></a>
+        <a class="paybtn" data-sku="ad_video" href="#" style="display:block;background:var(--ink);color:#fff;text-decoration:none;border-radius:4px;padding:12px 14px;font:700 15px Rubik">Video, 45 seconds <span style="float:right;font-family:var(--mono)">$50</span></a>
+        <a class="paybtn" data-sku="ad_political" href="#" style="display:block;background:var(--ink);color:#fff;text-decoration:none;border-radius:4px;padding:12px 14px;font:700 15px Rubik">Political, ballot <span style="float:right;font-family:var(--mono)">$110</span></a>
+        <a class="paybtn" data-sku="ad_political_video" href="#" style="display:block;background:var(--ink);color:#fff;text-decoration:none;border-radius:4px;padding:12px 14px;font:700 15px Rubik">Political video <span style="float:right;font-family:var(--mono)">$150</span></a>
+      </div>
+      <p style="margin:12px 0 0;font:13px var(--mono);color:var(--muted)">Cards through Stripe. Paying from a bank account? Ask us for the bank form (achplug.com) — no card fees.</p>
+      <div id="paidmsg" style="display:none;margin-top:14px;background:#fff;border-left:4px solid #1E6B4E;padding:14px 16px"></div>
+    </div>
     <p><b>Why political costs more:</b> it is the category most publishers refuse,
     it arrives in a rush and stops dead the day after an election, and it carries
     rules the others do not. The site that takes it is paid for the aggravation.</p>
@@ -312,7 +332,36 @@ footer a{color:var(--muted)}
 
 <script>
 var API = "https://adhotbox.realroofers.workers.dev";
+var PAY = "https://pay.warrantwire.com";
 function v(id){ return (document.getElementById(id).value || "").trim(); }
+/* pay for a placement: the button opens Stripe's page through the pay desk;
+   the campaign code, if any, travels as ref and the money lands on it */
+document.querySelectorAll(".paybtn").forEach(function (a) {
+  a.addEventListener("click", function (e) {
+    e.preventDefault();
+    var p = new URLSearchParams({ go: a.getAttribute("data-sku"), on: "ab", collect_email: "1" });
+    var code = v("paycode"); if (code) p.set("ref", code);
+    location.href = PAY + "/?" + p.toString();
+  });
+});
+/* the message after the sale: Stripe sends the buyer back here with the
+   session id; the desk confirms it is paid and what was bought */
+(function () {
+  var qs = new URLSearchParams(location.search), sid = qs.get("paid"), box = document.getElementById("paidmsg");
+  if (qs.get("cancelled")) { box.style.display = "block"; box.innerHTML = "<b>Nothing was charged.</b> The card page was closed before paying. Whenever you are ready, the buttons above are still here."; box.scrollIntoView({ block: "center" }); return; }
+  if (!sid) return;
+  box.style.display = "block"; box.innerHTML = "Checking your payment&hellip;"; box.scrollIntoView({ block: "center" });
+  var tries = 0;
+  (function ask() {
+    fetch(PAY + "/?paid=" + encodeURIComponent(sid)).then(function (r) { return r.json(); }).then(function (d) {
+      if (d && d.paid) {
+        var what = (d.skus || []).map(function (s) { return ({ ad_standard: "words or a picture", ad_video: "video, 45 seconds", ad_political: "political or ballot question", ad_political_video: "political video" })[s] || s; }).join(", ");
+        box.innerHTML = "<b>Paid. Thank you.</b> A placement for a month &mdash; " + what + (d.cents ? " &mdash; $" + (d.cents / 100).toFixed(2) : "") + " &mdash; is on your account" + (d.ref ? " against campaign <b>" + d.ref + "</b>" : "") + ".<br><br><b>What happens next.</b> A person reads your application and sets the placement up on the towns and subjects you named; every publisher accepts or declines it by hand; you are emailed the moment it is running, with the link to your report (where it ran, how often, every click, counted by our own server). Anything that does not run is refunded. A receipt from Stripe is on its way to " + (d.email || "your email") + ".<br><br>Questions: reply to that email and it reaches a person.";
+      } else if (tries++ < 8) { setTimeout(ask, 1500); }
+      else { box.innerHTML = "<b>The card page came back, but the payment has not been confirmed yet.</b> Stripe usually confirms within a minute; if your card was charged, you are covered &mdash; the confirmation arrives by email. If not, the buttons above are still here."; }
+    }).catch(function () { if (tries++ < 8) setTimeout(ask, 1500); });
+  })();
+})();
 function send(){
   var m = document.getElementById("msg");
   if (!v("name") || !v("contact") || !v("email")) {
