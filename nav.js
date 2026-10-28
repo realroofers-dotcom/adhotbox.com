@@ -16,6 +16,7 @@
 var LINKS = [
   { href: "/",               label: "The network" },
   { href: "/advertise.html", label: "Advertise" },
+  { href: "/local.html",     label: "📍 Local sites" },
   { href: "/start.html",     label: "Start here", cta: true },
   { href: "/join.html",      label: "Carry ads" },
   { href: "/compare.html",   label: "How we compare" },
