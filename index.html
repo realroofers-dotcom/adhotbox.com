@@ -41,6 +41,28 @@
   }
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "Organization", "@id": "https://adhotbox.com/#org", "name": "AdHotBox", "url": "https://adhotbox.com/",
+      "email": "realroofers@gmail.com", "telephone": "+1-702-544-2002",
+      "founder": { "@type": "Person", "name": "Mark Nejmeh" },
+      "address": { "@type": "PostalAddress", "streetAddress": "377 Valley Rd", "addressLocality": "Clifton", "addressRegion": "NJ", "postalCode": "07013", "addressCountry": "US" } },
+    { "@type": "WebSite", "name": "AdHotBox", "url": "https://adhotbox.com/", "publisher": { "@id": "https://adhotbox.com/#org" } },
+    { "@type": "FAQPage", "mainEntity": [
+      { "@type": "Question", "name": "What does an ad on AdHotBox cost?", "acceptedAnswer": { "@type": "Answer", "text": "$20 a site, a month for words or a picture. $50 for a 45-second video. $110 for a political or ballot question ad, $150 with a film. Month to month, no contract, no setup fee." } },
+      { "@type": "Question", "name": "Can I advertise to just one town?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Pick a town, or pick a subject and reach readers anywhere across the network." } },
+      { "@type": "Question", "name": "What does a website earn carrying AdHotBox ads?", "acceptedAnswer": { "@type": "Answer", "text": "$5 to $37.50 a placement, every month it runs. No traffic minimum, and the site approves every advertiser by hand." } },
+      { "@type": "Question", "name": "Does AdHotBox track readers?", "acceptedAnswer": { "@type": "Answer", "text": "No. No cookie, no identifier, no profile. Advertisers are told where the ad ran, how often, and how many clicked." } },
+      { "@type": "Question", "name": "How do I put AdHotBox on my site?", "acceptedAnswer": { "@type": "Answer", "text": "Paste one line in your footer, or use the free WordPress plugin. Squarespace, Wix, Shopify, Ghost and Webflow are covered step by step." } },
+      { "@type": "Question", "name": "What if my ad does not run?", "acceptedAnswer": { "@type": "Answer", "text": "You are only charged for placements that actually run. Anything else is refunded, and any payment can be refunded within seven days." } },
+      { "@type": "Question", "name": "What ads does AdHotBox refuse?", "acceptedAnswer": { "@type": "Answer", "text": "Adult content, stock promotion, token sales, payday lending and get-rich-quick offers." } },
+      { "@type": "Question", "name": "Do political ads need anything special?", "acceptedAnswer": { "@type": "Answer", "text": "A paid-for line naming who paid, printed on the face of the ad. Without it the ad does not run." } }
+    ] }
+  ]
+}
+</script>
 <meta name="ad-topic" content="general">
 <link rel="canonical" href="https://adhotbox.com/">
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -354,6 +376,22 @@ footer p{margin-bottom:8px}
     &mdash; and every publisher can switch off any category and never see it.
     <a href="privacy.html">What we do and do not record &rarr;</a></p>
   </div>
+
+  <!-- AEO 1a, 2026-10-28: plain answers, each one already said elsewhere on this site -->
+  <div class="strip" id="questions">
+    <p class="eyebrow">Questions</p>
+    <h2 class="s" style="margin-bottom:14px">Straight answers.</h2>
+    <div class="four">
+      <p><b>What does an ad cost?</b>$20 a site, a month for words or a picture. $50 for a 45-second video. $110 for a political or ballot question ad, $150 with a film. Month to month, no contract, no setup fee.</p>
+      <p><b>Can I reach just one town?</b>Yes. Pick a town, or pick a subject and reach readers anywhere across the network.</p>
+      <p><b>What does a site earn?</b>$5 to $37.50 a placement, every month it runs. No traffic minimum, and the site approves every advertiser by hand.</p>
+      <p><b>Do you track readers?</b>No. No cookie, no identifier, no profile. Advertisers are told where the ad ran, how often, and how many clicked.</p>
+      <p><b>How do I put it on my site?</b>Paste one line in your footer, or use the free WordPress plugin. Squarespace, Wix, Shopify, Ghost and Webflow are covered step by step.</p>
+      <p><b>What if it does not run?</b>You are only charged for placements that actually run. Anything else is refunded, and any payment can be refunded within seven days.</p>
+      <p><b>What is refused?</b>Adult content, stock promotion, token sales, payday lending and get-rich-quick offers.</p>
+      <p><b>Do political ads need anything?</b>A paid-for line naming who paid, printed on the face of the ad. Without it the ad does not run.</p>
+    </div>
+  </div>
 </div>
 
 <footer>
@@ -365,7 +403,7 @@ footer p{margin-bottom:8px}
        <a href="app/">App</a> &middot;
        <a href="desk.html">Desk</a> &middot;
        <a href="privacy.html">Privacy</a></p>
-    <p>AdHotBox &middot; [ email ] &middot; [ telephone ]</p>
+    <p>AdHotBox &middot; <a href="terms.html">Terms</a> &middot; <a href="mailto:realroofers@gmail.com">realroofers@gmail.com</a> &middot; 702-544-2002</p>
     <p>No placement is an endorsement by any site that carries it.</p>
   </div>
 </footer>

@@ -1,0 +1,31 @@
+# AdHotBox
+
+> Low-cost advertising for everybody. A small ad network for small advertisers and small websites in the United States: words, a picture, or a 45-second video, placed by town or by subject. No traffic minimum, no cookies, and every publisher approves each advertiser by hand.
+
+## Prices (a placement = one ad, on one site, for one month)
+- Words or a picture: $20 (the site keeps $5)
+- Video, 45 seconds, never autoplays: $50 (the site keeps $12.50)
+- Political or ballot question: $110 (the site keeps $27.50)
+- Political video, 45 seconds: $150 (the site keeps $37.50)
+- Month to month. No contract, no setup fee, no minimum spend. Charged only for placements that actually run; seven-day money back.
+
+## For advertisers
+- [Advertise](https://adhotbox.com/advertise.html): pick a town or a subject, pay by card or bank
+- [How this compares](https://adhotbox.com/compare.html): other ad networks' published minimums side by side
+
+## For website owners
+- [Start here](https://adhotbox.com/start.html): free sign-up
+- [Carry ads on your site](https://adhotbox.com/join.html): earn $5 to $37.50 a placement a month
+- [Install it](https://adhotbox.com/install.html): one line for any site; WordPress, Squarespace, Wix, Shopify, Ghost, Webflow
+- [WordPress plugin](https://adhotbox.com/wordpress.html): free
+
+## Rules
+- No reader tracking: no cookie, no identifier, no profile ([Privacy](https://adhotbox.com/privacy.html)).
+- Refused: adult content, stock promotion, token sales, payday lending, get-rich-quick offers.
+- Political ads carry a paid-for line naming who paid.
+- [Terms](https://adhotbox.com/terms.html)
+
+## Contact
+AdHotBox, built and run by Mark Nejmeh through Jersey Shore Const LLC, 377 Valley Rd, Clifton, NJ 07013. realroofers@gmail.com, 702-544-2002.
+
+Built 2026-10-28.
