@@ -1,0 +1,6 @@
+# 15 Nov 2026 cache-1a: the ad scripts used to be kept by browsers for 4 hours (Pages default), so a change to the
+# ads (new site, new words) showed up hours late. Five minutes now.
+/house.js
+  Cache-Control: public, max-age=300
+/box.js
+  Cache-Control: public, max-age=300
