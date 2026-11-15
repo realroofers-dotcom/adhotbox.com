@@ -1,4 +1,4 @@
-/* BUILT 2026-11-15 · house-1a · adhotbox.com/house.js - THE HOUSE ADS, ONE COPY, ROTATED BY ADHOTBOX.
+/* BUILT 2026-11-15 · house-1b (Peaches 2c: red scarf, smaller eyes; cache-busted) · house-1a · adhotbox.com/house.js - THE HOUSE ADS, ONE COPY, ROTATED BY ADHOTBOX.
    Mark: "all our sites cross-advertise through house placements" (28 Sep) / "these ads should rotate through adhotbox" /
    "every ad of every company has a logo and that is how an ad will show with minimal text" / "branding matters always" /
    "we have to make sure gigapoo is on all finance sites as an ad please" / "stick to the branding please" (15 Nov 2026).
@@ -9,7 +9,7 @@
 (function () {
   if (window.__houseAds) return; window.__houseAds = 1;
   var ADS = [
-    { key: "gigapoo",   host: "gigapoo.com",    href: "https://gigapoo.com/meetings.html", logo: "https://gigapoo.com/peaches.svg",              name: "Gigapoo",       words: "Every stockholder meeting, with directions. Meet other owners there.", bg: "#eaf4fb", fg: "#12283d", acc: "#f28c28", always: true },
+    { key: "gigapoo",   host: "gigapoo.com",    href: "https://gigapoo.com/meetings.html", logo: "https://gigapoo.com/peaches.svg?v=3",              name: "Gigapoo",       words: "Every stockholder meeting, with directions. Meet other owners there.", bg: "#eaf4fb", fg: "#12283d", acc: "#f28c28", always: true },
     { key: "warrantwire", host: "warrantwire.com", href: "https://warrantwire.com/",        logo: "https://warrantwire.com/apple-touch-icon.png", name: "Warrant Wire",  words: "The finance cops: warrant deals, read.", bg: "#ffffff", fg: "#14150f", acc: "#b23a2b" },
     { key: "8k10q",     host: "8k10q.com",      href: "https://8k10q.com/",                logo: "https://8k10q.com/apple-touch-icon.png",       name: "8K10Q",         words: "We read any filing for you.", bg: "#00208B", fg: "#ffffff", acc: "#FF4A00" },
     { key: "shellmkt",  host: "shellmkt.com",   href: "https://shellmkt.com/",             logo: "https://shellmkt.com/apple-touch-icon.png",    name: "Shell Market",  words: "Shell companies trading: who is the shell.", bg: "#11161b", fg: "#ecebe6", acc: "#e0a63a" },
