@@ -130,12 +130,21 @@
     var ps = Array.prototype.filter.call(document.querySelectorAll("article p, main p"), function (p) { return !inBad(p) && (p.textContent || "").trim().split(/\s+/).length >= 25; });
     ps.forEach(function (p, i) { if (made >= cfg.max || i === ps.length - 1) return; n++; if (n % cfg.paras === 0) put(p); });
   }
+  /* house-1g (15 Nov 2026, Mark: "in between stories as well like a real newspaper"): a page that draws its story lists
+     late (Newsweed's sections load from the feed) puts <li data-house-inline data-mini></li> between stories and calls
+     window.houseInline() - only the new, unfilled spaces are drawn. Small ones (data-mini) are one line, like a paper. */
+  css2 += ".hin.mini{margin:6px 0;list-style:none}.hin.mini .lab{display:none}.hin.mini a{padding:6px 10px;gap:10px;border-width:1px;border-radius:8px}"
+    + ".hin.mini img{width:30px;height:30px;border-radius:6px}.hin.mini b{font-size:14px;display:inline}.hin.mini small{font-size:12.5px}"
+    + ".hin.mini .go{font-size:12px}.hin.mini:before{content:'Advertisement';display:block;font:600 9px ui-monospace,Menlo,monospace;letter-spacing:.14em;text-transform:uppercase;opacity:.5;margin:0 0 2px}";
+  var placed = false, styled = false, count = 0;
   var drawInline = function () {
-    autoPlace();
-    var slots = document.querySelectorAll("[data-house-inline]"); if (!slots.length) return;
-    var st = document.createElement("style"); st.textContent = css2; document.head.appendChild(st);
-    Array.prototype.forEach.call(slots, function (box, i) {
-      box.className = (box.className ? box.className + " " : "") + "hin"; box.setAttribute("aria-label", "Advertisement");
+    if (!placed) { placed = true; autoPlace(); }
+    var slots = document.querySelectorAll("[data-house-inline]:not([data-done])"); if (!slots.length) return;
+    if (!styled) { styled = true; var st = document.createElement("style"); st.textContent = css2; document.head.appendChild(st); }
+    Array.prototype.forEach.call(slots, function (box) {
+      var i = count++;
+      box.setAttribute("data-done", "1");
+      box.className = (box.className ? box.className + " " : "") + "hin" + (box.hasAttribute("data-mini") ? " mini" : ""); box.setAttribute("aria-label", "Advertisement");
       houseInline(box, i);   /* shown at once; replaced if a paid placement answers */
       fetch(API + "?serve=1&site=" + encodeURIComponent(here) + "&shape=inline")
         .then(function (r) { return r.json(); })
@@ -143,6 +152,7 @@
         .catch(function () {});
     });
   };
+  window.houseInline = drawInline;
   var both = function () { draw(); drawInline(); };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", both); else both();
 })();
