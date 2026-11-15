@@ -9,7 +9,7 @@
 (function () {
   if (window.__houseAds) return; window.__houseAds = 1;
   var ADS = [
-    { key: "gigapoo",   host: "gigapoo.com",    href: "https://gigapoo.com/meetings.html", logo: "https://gigapoo.com/peaches.svg?v=3",              name: "Gigapoo",       words: "Every stockholder meeting, with directions. Meet other owners there.", bg: "#eaf4fb", fg: "#12283d", acc: "#f28c28", always: true },
+    { key: "gigapoo",   host: "gigapoo.com",    href: "https://gigapoo.com/", logo: "https://gigapoo.com/peaches.svg?v=3", name: "Gigapoo", words: "Get a job. Get work done. Make money. Real people, real names.", bg: "#eaf4fb", fg: "#12283d", acc: "#f28c28", always: true },
     { key: "warrantwire", host: "warrantwire.com", href: "https://warrantwire.com/",        logo: "https://warrantwire.com/apple-touch-icon.png", name: "Warrant Wire",  words: "The finance cops: warrant deals, read.", bg: "#ffffff", fg: "#14150f", acc: "#b23a2b" },
     { key: "8k10q",     host: "8k10q.com",      href: "https://8k10q.com/",                logo: "https://8k10q.com/apple-touch-icon.png",       name: "8K10Q",         words: "We read any filing for you.", bg: "#00208B", fg: "#ffffff", acc: "#FF4A00" },
     { key: "shellmkt",  host: "shellmkt.com",   href: "https://shellmkt.com/",             logo: "https://shellmkt.com/apple-touch-icon.png",    name: "Shell Market",  words: "Shell companies trading: who is the shell.", bg: "#11161b", fg: "#ecebe6", acc: "#e0a63a" },
@@ -44,10 +44,15 @@
     /* Mark: "every site we have should be advertised through newsweed especially wallstdomains and all others" */
     "newsweed.com": { first: ["wallstdomains"], max: 4, words: {} }
   };
+  /* house-1j (15 Nov 2026, Mark: "why would we have a gigapoo ad with the info on a stockholder meeting when gigapoo is so
+     much more"): Gigapoo says what it is everywhere; only on the finance sites does it point to the stockholder meetings. */
+  var FINANCE = ["8k10q.com", "warrantwire.com", "shellmkt.com", "triggeredshort.com", "stockfraudaudit.com", "nycfraudaudit.com", "vegasforensicaudit.com"];
+  var MEET = { words: "Every stockholder meeting, with directions. Meet other owners there.", href: "https://gigapoo.com/meetings.html" };
   var hs = HOST[here] || null;
   var pool = ADS.filter(function (a) { return here.indexOf(a.host) < 0; }).map(function (a) {
     var c = {}; for (var k in a) c[k] = a[k];
     if (hs && hs.words[a.key]) c.words = hs.words[a.key];
+    if (a.key === "gigapoo" && FINANCE.indexOf(here) > -1) { c.words = MEET.words; c.href = MEET.href; }
     return c;
   });
   var pinned = hs ? hs.first.map(function (k) { return pool.filter(function (a) { return a.key === k; })[0]; }).filter(Boolean) : [];
