@@ -17,17 +17,32 @@
     { key: "wisesleuth", host: "wisesleuth.com", href: "https://wisesleuth.com/",          logo: "https://wisesleuth.com/apple-touch-icon.png",  name: "Wise Sleuth",   words: "The research club.", bg: "#000000", fg: "#ffffff", acc: "#764a24" },
     { key: "adhotbox",  host: "adhotbox.com",   href: "https://adhotbox.com/advertise.html", logo: "https://adhotbox.com/apple-touch-icon.png",  name: "AdHotBox",      words: "Your ad here, from $20. Local businesses, local sites.", bg: "#F2F4F8", fg: "#0C1220", acc: "#FF4A00" }
   ];
-  var here = location.hostname.replace(/^www\./, "");
-  var pool = ADS.filter(function (a) { return here.indexOf(a.host) < 0; });
-  var first = pool.filter(function (a) { return a.always; });
-  var rest = pool.filter(function (a) { return !a.always; });
+  /* ?house_as=site.com previews the strip as that site would show it (for checking a page before it is pushed) */
+  var here = ((location.search.match(/[?&]house_as=([a-z0-9.\-]+)/) || [])[1] || location.hostname).replace(/^www\./, "");
+  /* house-1c (15 Nov 2026): a host can put chosen ads first, in its own words. Mark: "advertisements for the other
+     sites belong on triggeredshort.com: find out who is using a triggered short with warrantwire" / "8k10q ads as well". */
+  var HOST = {
+    "triggeredshort.com": { first: ["warrantwire", "8k10q", "shellmkt"], max: 4, words: {   /* + Mark: "shellmkt ads as well" */
+      warrantwire: "Find out who is using a triggered short with Warrant Wire.",
+      "8k10q": "Find out what the filings really say with 8K10Q.",
+      shellmkt: "Find out which shell companies are trading with Shell Market." } }
+  };
+  var hs = HOST[here] || null;
+  var pool = ADS.filter(function (a) { return here.indexOf(a.host) < 0; }).map(function (a) {
+    var c = {}; for (var k in a) c[k] = a[k];
+    if (hs && hs.words[a.key]) c.words = hs.words[a.key];
+    return c;
+  });
+  var pinned = hs ? hs.first.map(function (k) { return pool.filter(function (a) { return a.key === k; })[0]; }).filter(Boolean) : [];
+  var first = pinned.concat(pool.filter(function (a) { return a.always && pinned.indexOf(a) < 0; }));
+  var rest = pool.filter(function (a) { return first.indexOf(a) < 0; });
   /* rotate: a different pair each visit */
   for (var i = rest.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = rest[i]; rest[i] = rest[j]; rest[j] = t; }
-  var show = first.concat(rest).slice(0, 3);
+  var show = first.concat(rest).slice(0, (hs && hs.max) || 3);
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
   var css = ".hads1{max-width:1100px;margin:18px auto;padding:0 16px;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif}"
     + ".hads1 .lab{font:600 10.5px ui-monospace,Menlo,monospace;letter-spacing:.14em;text-transform:uppercase;opacity:.6;margin:0 0 6px}"
-    + ".hads1 .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}"
+    + ".hads1 .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}"
     + ".hads1 a{display:flex;align-items:center;gap:12px;border-radius:12px;padding:10px 12px;text-decoration:none;border:2px solid var(--acc);background:var(--bg);color:var(--fg)}"
     + ".hads1 img{width:46px;height:46px;border-radius:10px;flex:0 0 auto;background:#fff;object-fit:contain}"
     + ".hads1 b{display:block;font-size:15px}.hads1 small{display:block;font-size:12.5px;line-height:1.35;opacity:.85}"
