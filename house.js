@@ -15,7 +15,19 @@
     { key: "shellmkt",  host: "shellmkt.com",   href: "https://shellmkt.com/",             logo: "https://shellmkt.com/apple-touch-icon.png",    name: "Shell Market",  words: "Shell companies trading: who is the shell.", bg: "#11161b", fg: "#ecebe6", acc: "#e0a63a" },
     { key: "newsweed",  host: "newsweed.com",   href: "https://newsweed.com/",             logo: "https://newsweed.com/apple-touch-icon.png",    name: "Newsweed",      words: "Real news.", bg: "#f7f6f1", fg: "#1d2470", acc: "#00a651" },
     { key: "wisesleuth", host: "wisesleuth.com", href: "https://wisesleuth.com/",          logo: "https://wisesleuth.com/apple-touch-icon.png",  name: "Wise Sleuth",   words: "The research club.", bg: "#000000", fg: "#ffffff", acc: "#764a24" },
-    { key: "adhotbox",  host: "adhotbox.com",   href: "https://adhotbox.com/advertise.html", logo: "https://adhotbox.com/apple-touch-icon.png",  name: "AdHotBox",      words: "Your ad here, from $20. Local businesses, local sites.", bg: "#F2F4F8", fg: "#0C1220", acc: "#FF4A00" }
+    { key: "adhotbox",  host: "adhotbox.com",   href: "https://adhotbox.com/advertise.html", logo: "https://adhotbox.com/apple-touch-icon.png",  name: "AdHotBox",      words: "Your ad here, from $20. Local businesses, local sites.", bg: "#F2F4F8", fg: "#0C1220", acc: "#FF4A00" },
+    /* house-1f (15 Nov 2026, Mark: "every site we have should be advertised through newsweed especially wallstdomains and all others").
+       Logos are each site's own icon; colours read from each site's own stylesheet. Not here (Mark's call): nejmehvstheriva.com (the court site). */
+    { key: "wallstdomains", host: "wallstdomains.com", href: "https://wallstdomains.com/", logo: "https://wallstdomains.com/apple-touch-icon.png", name: "Wall St Domains", words: "List your domain or completed project. No commission, just $15 per month.",   /* Mark 15 Nov: "wallstdomains.com List No commission/just $15 per month completed projects too" */ bg: "#0f172a", fg: "#ffffff", acc: "#e8b230" },
+    { key: "triggeredshort", host: "triggeredshort.com", href: "https://triggeredshort.com/", logo: "https://triggeredshort.com/favicon.png", name: "Triggered Short", words: "The theory: warrants, good news, and the shares that meet the buyers.", bg: "#fbfaf6", fg: "#1a1a17", acc: "#b8321f" },
+    { key: "jobcreation", host: "jobcreation.us", href: "https://jobcreation.us/", logo: "https://jobcreation.us/apple-touch-icon.png", name: "JobCreation.us", words: "The Foundation for Job Creation.", bg: "#ffffff", fg: "#1b1f23", acc: "#1f4e79" },
+    { key: "achplug", host: "achplug.com", href: "https://achplug.com/", logo: "https://achplug.com/apple-touch-icon.png", name: "ACHplug", words: "Collect payments by ACH, straight from the bank.", bg: "#F7F9F6", fg: "#17251F", acc: "#1E6B4E" },
+    { key: "realroofers", host: "realroofers.com", href: "https://realroofers.com/", logo: "https://realroofers.com/apple-touch-icon.png", name: "Real Roofers", words: "Roof repairs.", bg: "#EAF5FF", fg: "#1D2A31", acc: "#E07B24" },
+    { key: "magkinetics", host: "magkinetics.com", href: "https://magkinetics.com/", logo: "https://magkinetics.com/apple-touch-icon.png", name: "MagKinetics", words: "Electricity from moving traffic.", bg: "#f6f8f5", fg: "#13221a", acc: "#2f8f2a" },
+    { key: "stockfraudaudit", host: "stockfraudaudit.com", href: "https://stockfraudaudit.com/", logo: "https://stockfraudaudit.com/apple-touch-icon.png", name: "Stock Fraud Audit", words: "Stock loss forensic review: dilution, broker problems, pump and dump.", bg: "#070b10", fg: "#e8edf2", acc: "#16c784" },
+    { key: "nycfraudaudit", host: "nycfraudaudit.com", href: "https://nycfraudaudit.com/", logo: "https://nycfraudaudit.com/apple-touch-icon.png", name: "NYC Fraud Audit", words: "Forensic accountant, New York City and New York.", bg: "#fbfaf7", fg: "#17202a", acc: "#a8741d" },
+    { key: "vegasforensicaudit", host: "vegasforensicaudit.com", href: "https://vegasforensicaudit.com/", logo: "https://vegasforensicaudit.com/apple-touch-icon.png", name: "Vegas Forensic Audit", words: "Forensic accountant, Las Vegas and Nevada.", bg: "#fbfaf7", fg: "#17202a", acc: "#1f4e79" },
+    { key: "marknejmeh", host: "marknejmeh.com", href: "https://marknejmeh.com/", logo: "https://marknejmeh.com/apple-touch-icon.png", name: "Mark Nejmeh", words: "Inventor, builder, and founder of these sites.", bg: "#f6f4ef", fg: "#1b1f23", acc: "#a3361f" }
   ];
   /* ?house_as=site.com previews the strip as that site would show it (for checking a page before it is pushed) */
   var here = ((location.search.match(/[?&]house_as=([a-z0-9.\-]+)/) || [])[1] || location.hostname).replace(/^www\./, "");
@@ -25,7 +37,9 @@
     "triggeredshort.com": { first: ["warrantwire", "8k10q", "shellmkt"], max: 4, words: {   /* + Mark: "shellmkt ads as well" */
       warrantwire: "Find out who is using a triggered short with Warrant Wire.",
       "8k10q": "Find out what the filings really say with 8K10Q.",
-      shellmkt: "Find out which shell companies are trading with Shell Market." } }
+      shellmkt: "Find out which shell companies are trading with Shell Market." } },
+    /* Mark: "every site we have should be advertised through newsweed especially wallstdomains and all others" */
+    "newsweed.com": { first: ["wallstdomains"], max: 4, words: {} }
   };
   var hs = HOST[here] || null;
   var pool = ADS.filter(function (a) { return here.indexOf(a.host) < 0; }).map(function (a) {
@@ -77,7 +91,8 @@
     + ".hin b{display:block;font-size:16.5px;line-height:1.3}.hin small{display:block;font-size:14px;line-height:1.4;opacity:.85}"
     + ".hin .go{margin-left:auto;font-weight:800;color:var(--acc);white-space:nowrap;font-size:14px}";
   function houseInline(box, i) {
-    var a = order[i % order.length]; if (!a) return;
+    /* the in-between spaces carry on where the strip stopped, so a page shows as many different sites as it has spaces */
+    var a = order[(i + (document.querySelector(".hads1") ? show.length : 0)) % order.length]; if (!a) return;
     box.innerHTML = '<p class="lab">Advertisement &middot; via AdHotBox</p><a href="' + a.href + '" style="--bg:' + a.bg + ';--fg:' + a.fg + ';--acc:' + a.acc + '"><img src="' + a.logo + '" alt="' + esc(a.name) + ' logo" width="54" height="54"><span><b>' + esc(a.name) + '</b><small>' + esc(a.words) + '</small></span><span class="go">Visit &rarr;</span></a>';
   }
   function paidInline(box, ad) {
@@ -93,7 +108,30 @@
     var beacon = function () { try { var u = API + "?log=1&e=imp&" + q; if (navigator.sendBeacon) navigator.sendBeacon(u); else fetch(u, { mode: "no-cors", keepalive: true }); } catch (e) {} };
     if (window.IntersectionObserver) { var io = new IntersectionObserver(function (en) { if (en[0] && en[0].isIntersecting) { beacon(); io.disconnect(); } }, { threshold: 0.5 }); io.observe(link); } else beacon();
   }
+  /* house-1e (15 Nov 2026) - AUTO PLACEMENT for sites whose pages are many and varied.
+     Mark: "newsweed should have all our ads everywhere" / "throughout every section".
+     A host listed here gets an ad space after every Nth section (or every Nth long paragraph on a story page),
+     never in the header, menu or footer, never two in a row, at most `max` a page. */
+  var AUTO = {
+    "newsweed.com": { sel: "main section.block, main .block, section.block", every: 2, paras: 4, max: 8 }
+  };
+  function autoPlace() {
+    var cfg = AUTO[here]; if (!cfg) return;
+    var bad = "header,nav,footer,[data-house-inline],.hads1,.hin,form";
+    var inBad = function (el) { try { return !!el.closest(bad); } catch (e) { return false; } };
+    var blocks = Array.prototype.filter.call(document.querySelectorAll(cfg.sel), function (b) { return !inBad(b) && !b.querySelector(".block"); });
+    var made = 0, n = 0;
+    var put = function (after) { var d = document.createElement("div"); d.setAttribute("data-house-inline", ""); after.parentNode.insertBefore(d, after.nextSibling); made++; };
+    if (blocks.length >= 3) {
+      blocks.forEach(function (b, i) { if (made >= cfg.max || i === blocks.length - 1) return; if ((i + 1) % cfg.every === 0) put(b); });
+      return;
+    }
+    /* a story page: after every few long paragraphs */
+    var ps = Array.prototype.filter.call(document.querySelectorAll("article p, main p"), function (p) { return !inBad(p) && (p.textContent || "").trim().split(/\s+/).length >= 25; });
+    ps.forEach(function (p, i) { if (made >= cfg.max || i === ps.length - 1) return; n++; if (n % cfg.paras === 0) put(p); });
+  }
   var drawInline = function () {
+    autoPlace();
     var slots = document.querySelectorAll("[data-house-inline]"); if (!slots.length) return;
     var st = document.createElement("style"); st.textContent = css2; document.head.appendChild(st);
     Array.prototype.forEach.call(slots, function (box, i) {
