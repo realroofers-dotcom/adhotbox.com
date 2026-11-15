@@ -57,5 +57,54 @@
     var slot = document.querySelector("[data-house-ads]"), foot = document.querySelector("footer");
     if (slot) slot.appendChild(box); else if (foot && foot.parentNode) foot.parentNode.insertBefore(box, foot); else document.body.appendChild(box);
   };
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", draw); else draw();
+  /* ============================================================
+     house-1d (15 Nov 2026) - ADS BETWEEN THE PARAGRAPHS, PAID FIRST.
+     Mark: "they should blend in between paragraphs as well if we ever get paid ads how do we program that in?"
+     A page puts <div data-house-inline></div> between its sections. Each one asks the AdHotBox server
+     (the same one box.js uses) for a paid placement booked for this site. A paid ad shows, labelled
+     "Sponsor"; the click and the view go through the server so they are counted and billed.
+     No paid ad (or the server is down) -> one of our own logo ads, a different one in each slot.
+     How a paid ad gets here: advertiser pays on adhotbox.com/advertise -> campaign in ab_campaigns
+     -> Mark approves it for his sites -> it fills these slots by itself. Nothing to change on the page.
+     ============================================================ */
+  var API = "https://adhotbox.realroofers.workers.dev";
+  var order = first.concat(rest);
+  var css2 = ".hin{margin:26px 0;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif}"
+    + ".hin .lab{font:600 10px ui-monospace,Menlo,monospace;letter-spacing:.14em;text-transform:uppercase;opacity:.55;margin:0 0 5px}"
+    + ".hin a{display:flex;align-items:center;gap:14px;border-radius:12px;padding:12px 16px;text-decoration:none;border:2px solid var(--acc);background:var(--bg);color:var(--fg)}"
+    + ".hin img{width:54px;height:54px;border-radius:10px;flex:0 0 auto;background:#fff;object-fit:contain}"
+    + ".hin img.wide{width:120px;height:auto;max-height:80px;border-radius:6px}"
+    + ".hin b{display:block;font-size:16.5px;line-height:1.3}.hin small{display:block;font-size:14px;line-height:1.4;opacity:.85}"
+    + ".hin .go{margin-left:auto;font-weight:800;color:var(--acc);white-space:nowrap;font-size:14px}";
+  function houseInline(box, i) {
+    var a = order[i % order.length]; if (!a) return;
+    box.innerHTML = '<p class="lab">Advertisement &middot; via AdHotBox</p><a href="' + a.href + '" style="--bg:' + a.bg + ';--fg:' + a.fg + ';--acc:' + a.acc + '"><img src="' + a.logo + '" alt="' + esc(a.name) + ' logo" width="54" height="54"><span><b>' + esc(a.name) + '</b><small>' + esc(a.words) + '</small></span><span class="go">Visit &rarr;</span></a>';
+  }
+  function paidInline(box, ad) {
+    var q = "c=" + encodeURIComponent(ad.code) + "&site=" + encodeURIComponent(here) + "&shape=inline";
+    var acc = ad.accent || "#8a8b80";
+    box.innerHTML = '<p class="lab">Sponsor &middot; via AdHotBox</p><a rel="noopener sponsored" href="' + API + '?go=1&' + q + '" style="--bg:' + (ad.bg || "#fff") + ';--fg:#1a1a17;--acc:' + esc(acc) + '">'
+      + (ad.image ? '<img class="wide" src="' + esc(ad.image) + '" alt="' + esc(ad.alt || "") + '">' : '')
+      + '<span><b>' + esc(ad.head || "") + '</b>' + (ad.body ? '<small>' + esc(ad.body) + '</small>' : '') + '</span>'
+      + '<span class="go">' + esc(ad.cta || "Visit") + ' &rarr;</span></a>'
+      + (ad.paidfor ? '<p class="lab" style="margin-top:5px">Paid for by ' + esc(ad.paidfor) + '</p>' : '');
+    /* the view is counted once, when half the ad is on screen */
+    var link = box.querySelector("a");
+    var beacon = function () { try { var u = API + "?log=1&e=imp&" + q; if (navigator.sendBeacon) navigator.sendBeacon(u); else fetch(u, { mode: "no-cors", keepalive: true }); } catch (e) {} };
+    if (window.IntersectionObserver) { var io = new IntersectionObserver(function (en) { if (en[0] && en[0].isIntersecting) { beacon(); io.disconnect(); } }, { threshold: 0.5 }); io.observe(link); } else beacon();
+  }
+  var drawInline = function () {
+    var slots = document.querySelectorAll("[data-house-inline]"); if (!slots.length) return;
+    var st = document.createElement("style"); st.textContent = css2; document.head.appendChild(st);
+    Array.prototype.forEach.call(slots, function (box, i) {
+      box.className = (box.className ? box.className + " " : "") + "hin"; box.setAttribute("aria-label", "Advertisement");
+      houseInline(box, i);   /* shown at once; replaced if a paid placement answers */
+      fetch(API + "?serve=1&site=" + encodeURIComponent(here) + "&shape=inline")
+        .then(function (r) { return r.json(); })
+        .then(function (d) { var ad = d && d.ok && d.ads && d.ads[0]; if (ad && ad.kind !== "house" && ad.kind !== "demo") paidInline(box, ad); })
+        .catch(function () {});
+    });
+  };
+  var both = function () { draw(); drawInline(); };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", both); else both();
 })();
