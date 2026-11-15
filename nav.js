@@ -16,6 +16,7 @@
 var LINKS = [
   { href: "/",               label: "The network" },
   { href: "/advertise.html", label: "Advertise" },
+  { href: "/advertisers.html", label: "Our advertisers" },   /* 15 Nov 2026, Mark: "list our advertisers showing all our logos" */
   { href: "/local.html",     label: "📍 Local sites" },
   { href: "/start.html",     label: "Start here", cta: true },
   { href: "/join.html",      label: "Carry ads" },

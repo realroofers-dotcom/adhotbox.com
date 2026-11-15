@@ -30,6 +30,9 @@
     { key: "marknejmeh", host: "marknejmeh.com", href: "https://marknejmeh.com/", logo: "https://marknejmeh.com/apple-touch-icon.png", name: "Mark Nejmeh", words: "Inventor, builder, and founder of these sites.", bg: "#f6f4ef", fg: "#1b1f23", acc: "#a3361f" }
   ];
   /* ?house_as=site.com previews the strip as that site would show it (for checking a page before it is pushed) */
+  /* house-1i (15 Nov 2026, Mark: "on adhotbox we should list our advertisers showing all our logos"): the one list,
+     read by adhotbox.com's advertiser wall (window.HouseAds.list) - a new advertiser added here shows on the wall too. */
+  window.HouseAds = { list: ADS.slice() };
   var here = ((location.search.match(/[?&]house_as=([a-z0-9.\-]+)/) || [])[1] || location.hostname).replace(/^www\./, "");
   /* house-1c (15 Nov 2026): a host can put chosen ads first, in its own words. Mark: "advertisements for the other
      sites belong on triggeredshort.com: find out who is using a triggered short with warrantwire" / "8k10q ads as well". */

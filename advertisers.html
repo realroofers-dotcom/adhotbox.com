@@ -1,0 +1,67 @@
+<!-- BUILT 2026-11-15 · advertisers-1a · THE ADVERTISER WALL. Mark 15 Nov 2026: "on adhotbox we should list our advertisers
+     showing all our logos". Every logo comes from the ONE ad list in house.js (window.HouseAds.list), the same list that
+     runs the ads on every site - add an advertiser there and it appears here and across the network. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Our advertisers — AdHotBox</title>
+<meta name="description" content="Who advertises on AdHotBox, and where those ads run: every advertiser's logo, and the sites that carry them.">
+<link rel="canonical" href="https://adhotbox.com/advertisers.html">
+<meta property="og:title" content="Our advertisers — AdHotBox">
+<meta property="og:url" content="https://adhotbox.com/advertisers.html">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+:root{--ink:#0C1220;--paper:#fff;--wash:#F2F4F8;--rule:#D5DAE4;--muted:#5A6478;--hot:#FF4A00;--navy:#00208B}
+*{box-sizing:border-box}body{margin:0;background:var(--wash);color:var(--ink);font:17px/1.55 -apple-system,Segoe UI,Helvetica,Arial,sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+.top{background:var(--ink);color:#fff;padding:44px 0 36px}
+.top h1{font:900 clamp(32px,5vw,50px)/1.05 Rubik,system-ui,sans-serif;margin:0 0 10px;letter-spacing:-.02em}.top h1 i{font-style:normal;color:var(--hot)}
+.top p{color:#C9D1E2;max-width:62ch;margin:0}
+.eyebrow{font:700 12px ui-monospace,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--hot);margin:34px 0 10px}
+.wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.tile{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;border-radius:14px;padding:22px 16px 18px;text-decoration:none;border:2px solid var(--acc);background:var(--bg);color:var(--fg);transition:transform .12s}
+.tile:hover{transform:translateY(-2px)}
+.tile img{width:84px;height:84px;border-radius:16px;background:#fff;object-fit:contain;box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.tile b{font:700 18px Rubik,system-ui,sans-serif}.tile small{font-size:14px;line-height:1.4;opacity:.85}
+.tile .host{font:600 11.5px ui-monospace,Menlo,monospace;letter-spacing:.04em;color:var(--acc)}
+.join{display:grid;grid-template-columns:1.2fr 1fr;gap:18px;margin:34px 0 50px}
+.box{background:#fff;border:1px solid var(--rule);border-radius:14px;padding:20px 22px}
+.box h2{font:700 22px Rubik,system-ui,sans-serif;margin:0 0 6px}.box p{margin:0 0 12px;color:var(--muted)}
+.btn{display:inline-block;background:var(--hot);color:#180B05;font:700 16px Rubik,system-ui,sans-serif;padding:11px 18px;border-radius:10px;text-decoration:none}
+.btn.o{background:#fff;color:var(--ink);border:2px solid var(--ink)}
+@media(max-width:760px){.join{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="ahb-nav"></div>
+<div class="top"><div class="wrap">
+  <h1>Our <i>advertisers</i>.</h1>
+  <p>Every business and site advertising on the AdHotBox network, with its own logo. Tap one to visit. Each of these ads runs across the network, on sites that chose to carry it.</p>
+</div></div>
+<div class="wrap">
+  <p class="eyebrow">On the network now</p>
+  <div class="wall" id="wall"><p>Loading the logos&hellip;</p></div>
+  <div class="join">
+    <div class="box"><h2>Put your logo here.</h2><p>From $20 a month a site for words or a picture, $50 for a 45-second video. Month to month, no contract. Pick a town, or pick a subject.</p><a class="btn" href="/advertise.html">Advertise &rarr;</a></div>
+    <div class="box"><h2>Carry these ads on your site.</h2><p>Earn on every placement that runs, every month. You approve each advertiser yourself.</p><a class="btn o" href="/start.html">Start here &rarr;</a></div>
+  </div>
+</div>
+<script src="/nav.js"></script>
+<script src="/house.js"></script>
+<script>
+(function () {
+  var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+  var list = (window.HouseAds && window.HouseAds.list) || [];
+  document.getElementById("wall").innerHTML = list.map(function (a) {
+    return '<a class="tile" href="' + esc(a.href) + '" style="--bg:' + esc(a.bg) + ';--fg:' + esc(a.fg) + ';--acc:' + esc(a.acc) + '">'
+      + '<img src="' + esc(a.logo) + '" alt="' + esc(a.name) + ' logo" width="84" height="84" loading="lazy">'
+      + '<b>' + esc(a.name) + '</b><small>' + esc(a.words) + '</small><span class="host">' + esc(a.host) + '</span></a>';
+  }).join("") || "<p>The wall is being built.</p>";
+})();
+</script>
+</body>
+</html>
