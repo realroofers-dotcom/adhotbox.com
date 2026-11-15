@@ -15,10 +15,10 @@
     { key: "shellmkt",  host: "shellmkt.com",   href: "https://shellmkt.com/",             logo: "https://shellmkt.com/apple-touch-icon.png",    name: "Shell Market",  words: "Shell companies trading: who is the shell.", bg: "#11161b", fg: "#ecebe6", acc: "#e0a63a" },
     { key: "newsweed",  host: "newsweed.com",   href: "https://newsweed.com/",             logo: "https://newsweed.com/apple-touch-icon.png",    name: "Newsweed",      words: "Real news.", bg: "#f7f6f1", fg: "#1d2470", acc: "#00a651" },
     { key: "wisesleuth", host: "wisesleuth.com", href: "https://wisesleuth.com/",          logo: "https://wisesleuth.com/apple-touch-icon.png",  name: "Wise Sleuth",   words: "The research club.", bg: "#000000", fg: "#ffffff", acc: "#764a24" },
-    { key: "adhotbox",  host: "adhotbox.com",   href: "https://adhotbox.com/advertise.html", logo: "https://adhotbox.com/apple-touch-icon.png",  name: "AdHotBox",      words: "Your ad here, from $20. Local businesses, local sites.", bg: "#F2F4F8", fg: "#0C1220", acc: "#FF4A00" },
+    { key: "adhotbox",  host: "adhotbox.com",   href: "https://adhotbox.com/advertise.html", logo: "https://adhotbox.com/apple-touch-icon.png",  name: "AdHotBox",      words: "Your ad here, from $20. Local businesses, local sites.", bg: "#F2F4F8", fg: "#0C1220", acc: "#FF4A00", always: true },
     /* house-1f (15 Nov 2026, Mark: "every site we have should be advertised through newsweed especially wallstdomains and all others").
        Logos are each site's own icon; colours read from each site's own stylesheet. Not here (Mark's call): nejmehvstheriva.com (the court site). */
-    { key: "wallstdomains", host: "wallstdomains.com", href: "https://wallstdomains.com/", logo: "https://wallstdomains.com/apple-touch-icon.png", name: "Wall St Domains", words: "List your domain or completed project. No commission, just $15 per month.",   /* Mark 15 Nov: "wallstdomains.com List No commission/just $15 per month completed projects too" */ bg: "#0f172a", fg: "#ffffff", acc: "#e8b230" },
+    { key: "wallstdomains", host: "wallstdomains.com", href: "https://wallstdomains.com/", logo: "https://wallstdomains.com/apple-touch-icon.png", always: true, name: "Wall St Domains", words: "List your domain or completed project. No commission, just $15 per month.",   /* Mark 15 Nov: "wallstdomains.com List No commission/just $15 per month completed projects too" */ bg: "#0f172a", fg: "#ffffff", acc: "#e8b230" },
     { key: "triggeredshort", host: "triggeredshort.com", href: "https://triggeredshort.com/", logo: "https://triggeredshort.com/favicon.png", name: "Triggered Short", words: "The theory: warrants, good news, and the shares that meet the buyers.", bg: "#fbfaf6", fg: "#1a1a17", acc: "#b8321f" },
     { key: "jobcreation", host: "jobcreation.us", href: "https://jobcreation.us/", logo: "https://jobcreation.us/apple-touch-icon.png", name: "JobCreation.us", words: "The Foundation for Job Creation.", bg: "#ffffff", fg: "#1b1f23", acc: "#1f4e79" },
     { key: "achplug", host: "achplug.com", href: "https://achplug.com/", logo: "https://achplug.com/apple-touch-icon.png", name: "ACHplug", words: "Collect payments by ACH, straight from the bank.", bg: "#F7F9F6", fg: "#17251F", acc: "#1E6B4E" },
@@ -34,7 +34,7 @@
   /* house-1c (15 Nov 2026): a host can put chosen ads first, in its own words. Mark: "advertisements for the other
      sites belong on triggeredshort.com: find out who is using a triggered short with warrantwire" / "8k10q ads as well". */
   var HOST = {
-    "triggeredshort.com": { first: ["warrantwire", "8k10q", "shellmkt"], max: 4, words: {   /* + Mark: "shellmkt ads as well" */
+    "triggeredshort.com": { first: ["warrantwire", "8k10q", "shellmkt"], max: 6, words: {   /* + Mark: "shellmkt ads as well" */
       warrantwire: "Find out who is using a triggered short with Warrant Wire.",
       "8k10q": "Find out what the filings really say with 8K10Q.",
       shellmkt: "Find out which shell companies are trading with Shell Market." } },
@@ -52,7 +52,9 @@
   var rest = pool.filter(function (a) { return first.indexOf(a) < 0; });
   /* rotate: a different pair each visit */
   for (var i = rest.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = rest[i]; rest[i] = rest[j]; rest[j] = t; }
-  var show = first.concat(rest).slice(0, (hs && hs.max) || 3);
+  /* house-1h (15 Nov 2026, Mark: "do we have every ad in these especially adhotbox and wall st domains. adhotbox should be on
+     every page"): AdHotBox and Wall St Domains are always on (like Gigapoo); the strip holds 4, so one more rotates. */
+  var show = first.concat(rest).slice(0, (hs && hs.max) || 4);
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
   var css = ".hads1{max-width:1100px;margin:18px auto;padding:0 16px;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif}"
     + ".hads1 .lab{font:600 10.5px ui-monospace,Menlo,monospace;letter-spacing:.14em;text-transform:uppercase;opacity:.6;margin:0 0 6px}"
