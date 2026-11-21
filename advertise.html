@@ -338,6 +338,8 @@ footer a{color:var(--muted)}
 var API = "https://adhotbox.realroofers.workers.dev";
 var PAY = "https://pay.warrantwire.com";
 function v(id){ return (document.getElementById(id).value || "").trim(); }
+/* src-1a: remember the channel code for this visit, even if the visitor clicks around first */
+try { var s0 = new URLSearchParams(location.search).get("src"); if (s0) sessionStorage.setItem("ab_src", s0); } catch (err) {}
 /* pay for a placement: the button opens Stripe's page through the pay desk;
    the campaign code, if any, travels as ref and the money lands on it */
 document.querySelectorAll(".paybtn").forEach(function (a) {
@@ -345,6 +347,9 @@ document.querySelectorAll(".paybtn").forEach(function (a) {
     e.preventDefault();
     var p = new URLSearchParams({ go: a.getAttribute("data-sku"), on: "ab", collect_email: "1" });
     var code = v("paycode"); if (code) p.set("ref", code);
+    /* src-1a (2026-11-21): the channel that brought this buyer (?src= on the link: VEGAS-FLYER, GOOGLE, FB, DEV-...) */
+    var src = ""; try { src = new URLSearchParams(location.search).get("src") || sessionStorage.getItem("ab_src") || ""; } catch (err) {}
+    if (src) p.set("src", src.replace(/[^A-Za-z0-9_-]/g, "").slice(0, 40));
     location.href = PAY + "/?" + p.toString();
   });
 });
