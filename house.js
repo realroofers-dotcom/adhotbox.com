@@ -34,6 +34,19 @@
      read by adhotbox.com's advertiser wall (window.HouseAds.list) - a new advertiser added here shows on the wall too. */
   /* house-1k (15 Nov 2026, Mark: "make sure all ads say what the company does"): every line says what the business
      does, taken from what its own site says. */
+  /* holiday-1a (2026-11-21, Mark: "create a special holiday add for wallstdomains that goes on all our sites" / "we will be
+     running a free listing for 6 months ... we call it a black friday sale for the holidays make it very holiday like" /
+     "the sale runs till jan 2 2027"): until the end of Jan 2, 2027 (Central time) the Wall St Domains ad becomes the
+     holiday-sale ad - red and green, gold border, first in every strip - and goes back to its plain self after. */
+  var HOLIDAY_END = Date.parse("2027-01-03T06:00:00Z");
+  if (Date.now() < HOLIDAY_END) ADS.forEach(function (a) {
+    if (a.key !== "wallstdomains") return;
+    a.name = "Wall St Domains · Black Friday Holiday Sale";
+    a.words = "🎄 List your domain FREE for 6 months. No commission. Then $15 a month. Ends Jan 2 ❄️";
+    a.href = "https://wallstdomains.com/list-domain";
+    a.bg = "linear-gradient(135deg,#b3001b 0%,#7a0012 48%,#0b5d1e 100%)"; a.fg = "#ffffff"; a.acc = "#f5c542";
+    a.holiday = true; a.always = true;
+  });
   window.HouseAds = { list: ADS.slice() };
   var here = ((location.search.match(/[?&]house_as=([a-z0-9.\-]+)/) || [])[1] || location.hostname).replace(/^www\./, "");
   /* house-1c (15 Nov 2026): a host can put chosen ads first, in its own words. Mark: "advertisements for the other
@@ -59,6 +72,8 @@
   });
   var pinned = hs ? hs.first.map(function (k) { return pool.filter(function (a) { return a.key === k; })[0]; }).filter(Boolean) : [];
   var first = pinned.concat(pool.filter(function (a) { return a.always && pinned.indexOf(a) < 0; }));
+  /* holiday-1a: the holiday-sale ad leads every strip while the sale runs */
+  first.sort(function (x, y) { return (y.holiday ? 1 : 0) - (x.holiday ? 1 : 0); });
   var rest = pool.filter(function (a) { return first.indexOf(a) < 0; });
   /* rotate: a different pair each visit */
   for (var i = rest.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = rest[i]; rest[i] = rest[j]; rest[j] = t; }
@@ -72,13 +87,19 @@
     + ".hads1 a{display:flex;align-items:center;gap:12px;border-radius:12px;padding:10px 12px;text-decoration:none;border:2px solid var(--acc);background:var(--bg);color:var(--fg)}"
     + ".hads1 img{width:46px;height:46px;border-radius:10px;flex:0 0 auto;background:#fff;object-fit:contain}"
     + ".hads1 b{display:block;font-size:15px}.hads1 small{display:block;font-size:12.5px;line-height:1.35;opacity:.85}"
-    + ".hads1 .go{margin-left:auto;font-weight:800;color:var(--acc)}";
+    + ".hads1 .go{margin-left:auto;font-weight:800;color:var(--acc)}"
+    /* holiday-1a: the holiday ad - gold glow and a light snowfall, still for anyone who asks for less motion */
+    + ".hol{position:relative;overflow:hidden;box-shadow:0 0 0 3px rgba(245,197,66,.35)}"
+    + ".hol:after{content:'\\2744  \\2745  \\2746  \\2744  \\2745';position:absolute;right:8px;top:-2px;font-size:12px;letter-spacing:6px;color:rgba(255,255,255,.55);animation:hsnow 6s linear infinite;pointer-events:none}"
+    + "@keyframes hsnow{0%{transform:translateY(-6px)}100%{transform:translateY(60px)}}"
+    + "@media (prefers-reduced-motion:reduce){.hol:after{animation:none}}"
+    + ".hol small{opacity:1}";
   var draw = function () {
     if (!show.length || document.querySelector(".hads1")) return;
     var st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
     var box = document.createElement("aside"); box.className = "hads1"; box.setAttribute("aria-label", "Advertisement");
     box.innerHTML = '<p class="lab">Advertisement &middot; via AdHotBox</p><div class="row">' + show.map(function (a) {
-      return '<a href="' + a.href + '" style="--bg:' + a.bg + ';--fg:' + a.fg + ';--acc:' + a.acc + '"><img src="' + a.logo + '" alt="' + esc(a.name) + ' logo" width="46" height="46"><span><b>' + esc(a.name) + '</b><small>' + esc(a.words) + '</small></span><span class="go">&rarr;</span></a>';
+      return '<a' + (a.holiday ? ' class="hol"' : '') + ' href="' + a.href + '" style="--bg:' + a.bg + ';--fg:' + a.fg + ';--acc:' + a.acc + '"><img src="' + a.logo + '" alt="' + esc(a.name) + ' logo" width="46" height="46"><span><b>' + esc(a.name) + '</b><small>' + esc(a.words) + '</small></span><span class="go">&rarr;</span></a>';
     }).join("") + '</div>';
     var slot = document.querySelector("[data-house-ads]"), foot = document.querySelector("footer");
     if (slot) slot.appendChild(box); else if (foot && foot.parentNode) foot.parentNode.insertBefore(box, foot); else document.body.appendChild(box);
@@ -101,11 +122,16 @@
     + ".hin img{width:54px;height:54px;border-radius:10px;flex:0 0 auto;background:#fff;object-fit:contain}"
     + ".hin img.wide{width:120px;height:auto;max-height:80px;border-radius:6px}"
     + ".hin b{display:block;font-size:16.5px;line-height:1.3}.hin small{display:block;font-size:14px;line-height:1.4;opacity:.85}"
-    + ".hin .go{margin-left:auto;font-weight:800;color:var(--acc);white-space:nowrap;font-size:14px}";
+    + ".hin .go{margin-left:auto;font-weight:800;color:var(--acc);white-space:nowrap;font-size:14px}"
+    + ".hin .hol{position:relative;overflow:hidden;box-shadow:0 0 0 3px rgba(245,197,66,.35)}"   /* holiday-1a */
+    + ".hin .hol:after{content:'\\2744  \\2745  \\2746  \\2744  \\2745  \\2746';position:absolute;right:10px;top:-2px;font-size:13px;letter-spacing:7px;color:rgba(255,255,255,.55);animation:hsnow2 6s linear infinite;pointer-events:none}"
+    + "@keyframes hsnow2{0%{transform:translateY(-6px)}100%{transform:translateY(70px)}}"
+    + "@media (prefers-reduced-motion:reduce){.hin .hol:after{animation:none}}"
+    + "@media (max-width:520px){.hin a{flex-wrap:wrap}.hin .go{margin-left:0}}";
   function houseInline(box, i) {
     /* the in-between spaces carry on where the strip stopped, so a page shows as many different sites as it has spaces */
     var a = order[(i + (document.querySelector(".hads1") ? show.length : 0)) % order.length]; if (!a) return;
-    box.innerHTML = '<p class="lab">Advertisement &middot; via AdHotBox</p><a href="' + a.href + '" style="--bg:' + a.bg + ';--fg:' + a.fg + ';--acc:' + a.acc + '"><img src="' + a.logo + '" alt="' + esc(a.name) + ' logo" width="54" height="54"><span><b>' + esc(a.name) + '</b><small>' + esc(a.words) + '</small></span><span class="go">Visit &rarr;</span></a>';
+    box.innerHTML = '<p class="lab">Advertisement &middot; via AdHotBox</p><a' + (a.holiday ? ' class="hol"' : '') + ' href="' + a.href + '" style="--bg:' + a.bg + ';--fg:' + a.fg + ';--acc:' + a.acc + '"><img src="' + a.logo + '" alt="' + esc(a.name) + ' logo" width="54" height="54"><span><b>' + esc(a.name) + '</b><small>' + esc(a.words) + '</small></span><span class="go">Visit &rarr;</span></a>';
   }
   function paidInline(box, ad) {
     var q = "c=" + encodeURIComponent(ad.code) + "&site=" + encodeURIComponent(here) + "&shape=inline";
