@@ -493,6 +493,10 @@ function advNew(){
       + '<label><span>Two lines under it</span><textarea id="bd" rows="3" oninput="live()" '
       + 'placeholder="Thirty years on roofs in Passaic County. Free estimate, and we '
       + 'show up when we say.">' + esc(d.body) + '</textarea></label>'
+      /* link-1a (21 Nov 2026, Mark: "text ads, and pic icons with link on click"): where a click on the ad goes */
+      + '<label><span>Where a click goes</span><input id="lk" value="' + esc(d.link || "")
+      + '" placeholder="yourbusiness.com, you@email.com or 702-555-1234"><small>Your website, '
+      + 'an email, or a phone number to call. Every ad is checked for size and content before it runs.</small></label>'
       + '<div id="pv"></div>'
       + '<button class="b-1 wide" style="margin-top:20px" onclick="step(3)">Next</button>';
   }
@@ -762,7 +766,7 @@ function step(n){
       return;
     }
   }
-  if (S.step === 2) { if (el("h")) d.head = el("h").value; if (el("bd")) d.body = el("bd").value; }
+  if (S.step === 2) { if (el("h")) d.head = el("h").value; if (el("bd")) d.body = el("bd").value; if (el("lk")) d.link = el("lk").value.trim(); }
   var t = el("tot"); if (t) t.remove();
   S.step = n; advNew();
 }
@@ -792,6 +796,8 @@ function submitAd(){
     apply:"advertiser", name: d.what || "New advertiser",
     contact: S.email, email: S.email,
     note: "HEAD: " + d.head + " | BODY: " + d.body
+        + " | LINK: " + (d.link || "(none given)")
+        + (function(){ try { var s = sessionStorage.getItem("ab_src") || (new URLSearchParams(location.search)).get("src"); return s ? " | SRC: " + s : ""; } catch(e){ return ""; } })()
         + " | TOWNS: " + d.towns.join(", ")
         + " | SITES: " + d.sites.map(function(x){ return x.domain; }).join(", ")
         + " | PLACEMENTS: " + d.sites.length
