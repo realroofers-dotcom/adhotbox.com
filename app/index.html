@@ -494,9 +494,11 @@ function advNew(){
       + 'placeholder="Thirty years on roofs in Passaic County. Free estimate, and we '
       + 'show up when we say.">' + esc(d.body) + '</textarea></label>'
       /* link-1a (21 Nov 2026, Mark: "text ads, and pic icons with link on click"): where a click on the ad goes */
-      + '<label><span>Where a click goes</span><input id="lk" value="' + esc(d.link || "")
-      + '" placeholder="yourbusiness.com, you@email.com or 702-555-1234"><small>Your website, '
-      + 'an email, or a phone number to call. Every ad is checked for size and content before it runs.</small></label>'
+      + '<label><span>Your website (where a click goes)</span><input id="lk" value="' + esc(d.link || "")
+      + '" placeholder="yourbusiness.com"></label>'
+      + '<label><span>Phone or email to call you</span><input id="cta" value="' + esc(d.cta || "")
+      + '" placeholder="702-555-1234 or you@email.com"><small>Fill one or both. '
+      + 'Every ad is checked for size and content before it runs.</small></label>'
       + '<div id="pv"></div>'
       + '<button class="b-1 wide" style="margin-top:20px" onclick="step(3)">Next</button>';
   }
@@ -766,7 +768,7 @@ function step(n){
       return;
     }
   }
-  if (S.step === 2) { if (el("h")) d.head = el("h").value; if (el("bd")) d.body = el("bd").value; if (el("lk")) d.link = el("lk").value.trim(); }
+  if (S.step === 2) { if (el("h")) d.head = el("h").value; if (el("bd")) d.body = el("bd").value; if (el("lk")) d.link = el("lk").value.trim(); if (el("cta")) d.cta = el("cta").value.trim(); }
   var t = el("tot"); if (t) t.remove();
   S.step = n; advNew();
 }
@@ -797,6 +799,7 @@ function submitAd(){
     contact: S.email, email: S.email,
     note: "HEAD: " + d.head + " | BODY: " + d.body
         + " | LINK: " + (d.link || "(none given)")
+        + " | CALL: " + (d.cta || "(none given)")
         + (function(){ try { var s = sessionStorage.getItem("ab_src") || (new URLSearchParams(location.search)).get("src"); return s ? " | SRC: " + s : ""; } catch(e){ return ""; } })()
         + " | TOWNS: " + d.towns.join(", ")
         + " | SITES: " + d.sites.map(function(x){ return x.domain; }).join(", ")
