@@ -67,9 +67,7 @@
     /* house-1m (26 Nov 2026, Mark: "consider this a sister site for finance because money is the motivator always" /
        "wisesleuths should advertise 8k10q and warrantwire"). WiseSleuth is anonymous both sides, so it never shows the
        ads that carry the owner's name or telephone (marknejmeh, lasvegasroofrepair, realroofers). */
-    "wisesleuth.com": { first: ["8k10q", "warrantwire"], max: 5, never: ["marknejmeh", "lasvegasroofrepair", "realroofers"], words: {
-      "8k10q": "Can you figure out a filing? Read any SEC filing in plain English with 8K10Q.",
-      warrantwire: "Who gets rich on the warrants? Find out with Warrant Wire." } }
+    "wisesleuth.com": { first: [], max: 4, never: ["marknejmeh", "lasvegasroofrepair", "realroofers", "8k10q", "warrantwire"], words: {} }   /* Mark: "does not need big it needs a logo and a link behind it" - 8K10Q + Warrant Wire are small linked logos in every WiseSleuth footer instead */
   };
   /* house-1j (15 Nov 2026, Mark: "why would we have a gigapoo ad with the info on a stockholder meeting when gigapoo is so
      much more"): Gigapoo says what it is everywhere; only on the finance sites does it point to the stockholder meetings. */
