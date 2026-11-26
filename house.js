@@ -14,7 +14,7 @@
     { key: "8k10q",     host: "8k10q.com",      href: "https://8k10q.com/",                logo: "https://8k10q.com/apple-touch-icon.png",       name: "8K10Q",         words: "Any SEC filing read in plain English: who got paid, the money, what the board did.", bg: "#00208B", fg: "#ffffff", acc: "#FF4A00" },
     { key: "shellmkt",  host: "shellmkt.com",   href: "https://shellmkt.com/",             logo: "https://shellmkt.com/apple-touch-icon.png",    name: "Shell Market",  words: "Shell companies that still trade: their cash, their value, and who is behind them.", bg: "#11161b", fg: "#ecebe6", acc: "#e0a63a" },
     { key: "newsweed",  host: "newsweed.com",   href: "https://newsweed.com/",             logo: "https://newsweed.com/apple-touch-icon.png",    name: "Newsweed",      words: "Daily news from every state, reported with respect for all.", bg: "#f7f6f1", fg: "#1d2470", acc: "#00a651" },
-    { key: "wisesleuth", host: "wisesleuth.com", href: "https://wisesleuth.com/",          logo: "https://wisesleuth.com/apple-touch-icon.png",  name: "Wise Sleuth",   words: "Hire a wise mind to work out a hard problem, or get paid to be one.", bg: "#000000", fg: "#ffffff", acc: "#764a24" },
+    { key: "wisesleuth", host: "wisesleuth.com", href: "https://wisesleuth.com/",          logo: "https://wisesleuth.com/apple-touch-icon.png",  name: "WiseSleuth",   words: "Can you figure this out? A mind collection site for everyone. Anonymous, both sides.",   /* Mark 26 Nov 2026: one word; the mantra */ bg: "#000000", fg: "#ffffff", acc: "#764a24" },
     { key: "adhotbox",  host: "adhotbox.com",   href: "https://adhotbox.com/advertise.html", logo: "https://adhotbox.com/apple-touch-icon.png",  name: "AdHotBox",      words: "Low-cost ads on local websites, from $20 a month. Pick a town or a subject.", bg: "#F2F4F8", fg: "#0C1220", acc: "#FF4A00", always: true },
     /* house-1f (15 Nov 2026, Mark: "every site we have should be advertised through newsweed especially wallstdomains and all others").
        Logos are each site's own icon; colours read from each site's own stylesheet. Not here (Mark's call): nejmehvstheriva.com (the court site). */
@@ -63,14 +63,20 @@
       "8k10q": "Find out what the filings really say with 8K10Q.",
       shellmkt: "Find out which shell companies are trading with Shell Market." } },
     /* Mark: "every site we have should be advertised through newsweed especially wallstdomains and all others" */
-    "newsweed.com": { first: ["wallstdomains"], max: 4, words: {} }
+    "newsweed.com": { first: ["wallstdomains"], max: 4, words: {} },
+    /* house-1m (26 Nov 2026, Mark: "consider this a sister site for finance because money is the motivator always" /
+       "wisesleuths should advertise 8k10q and warrantwire"). WiseSleuth is anonymous both sides, so it never shows the
+       ads that carry the owner's name or telephone (marknejmeh, lasvegasroofrepair, realroofers). */
+    "wisesleuth.com": { first: ["8k10q", "warrantwire"], max: 5, never: ["marknejmeh", "lasvegasroofrepair", "realroofers"], words: {
+      "8k10q": "Can you figure out a filing? Read any SEC filing in plain English with 8K10Q.",
+      warrantwire: "Who gets rich on the warrants? Find out with Warrant Wire." } }
   };
   /* house-1j (15 Nov 2026, Mark: "why would we have a gigapoo ad with the info on a stockholder meeting when gigapoo is so
      much more"): Gigapoo says what it is everywhere; only on the finance sites does it point to the stockholder meetings. */
-  var FINANCE = ["8k10q.com", "warrantwire.com", "shellmkt.com", "triggeredshort.com", "stockfraudaudit.com", "nycfraudaudit.com", "vegasforensicaudit.com"];
+  var FINANCE = ["8k10q.com", "warrantwire.com", "shellmkt.com", "triggeredshort.com", "stockfraudaudit.com", "nycfraudaudit.com", "vegasforensicaudit.com", "wisesleuth.com"];
   var MEET = { words: "Every stockholder meeting, with directions. Meet other owners there.", href: "https://gigapoo.com/meetings.html" };
   var hs = HOST[here] || null;
-  var pool = ADS.filter(function (a) { return here.indexOf(a.host) < 0; }).map(function (a) {
+  var pool = ADS.filter(function (a) { return here.indexOf(a.host) < 0 && !(hs && hs.never && hs.never.indexOf(a.key) > -1); }).map(function (a) {
     var c = {}; for (var k in a) c[k] = a[k];
     if (hs && hs.words[a.key]) c.words = hs.words[a.key];
     if (a.key === "gigapoo" && FINANCE.indexOf(here) > -1) { c.words = MEET.words; c.href = MEET.href; }
